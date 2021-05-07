@@ -2,6 +2,7 @@
 module soc_system (
 	button_pio_external_connection_export,
 	clk_clk,
+	custom_leds_0_leds_new_signal,
 	dipsw_pio_external_connection_export,
 	hps_0_f2h_cold_reset_req_reset_n,
 	hps_0_f2h_debug_reset_req_reset_n,
@@ -72,11 +73,11 @@ module soc_system (
 	memory_mem_odt,
 	memory_mem_dm,
 	memory_oct_rzqin,
-	reset_reset_n,
-	custom_leds_0_leds_new_signal);	
+	reset_reset_n);	
 
 	input	[3:0]	button_pio_external_connection_export;
 	input		clk_clk;
+	output	[7:0]	custom_leds_0_leds_new_signal;
 	input	[3:0]	dipsw_pio_external_connection_export;
 	input		hps_0_f2h_cold_reset_req_reset_n;
 	input		hps_0_f2h_debug_reset_req_reset_n;
@@ -148,5 +149,4 @@ module soc_system (
 	output	[3:0]	memory_mem_dm;
 	input		memory_oct_rzqin;
 	input		reset_reset_n;
-	output	[7:0]	custom_leds_0_leds_new_signal;
 endmodule
