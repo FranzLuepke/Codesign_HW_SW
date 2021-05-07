@@ -4,6 +4,7 @@
 *.bak
 *.cmp
 *.done
+*.dtb
 *.dts
 *.eqn
 *.hex
