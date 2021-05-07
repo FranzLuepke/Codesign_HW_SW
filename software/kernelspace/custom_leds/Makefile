@@ -1,4 +1,4 @@
-KDIR ?= ../linux-socfpga
+KDIR ?= $(KERNEL_PATH)
 
 default:
 	$(MAKE) -C $(KDIR) ARCH=arm M=$(CURDIR)
