@@ -4,6 +4,7 @@
 *.bak
 *.cmp
 *.done
+*.dts
 *.eqn
 *.hex
 *.html
@@ -13,10 +14,12 @@
 *.pin
 *.pof
 *.ptf.*
+*.rbf
 *.qar
 *.qarlog
 *.qws
 *.rpt
+*.sld
 *.smsg
 *.sof
 *.sopc_builder
