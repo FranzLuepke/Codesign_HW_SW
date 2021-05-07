@@ -262,7 +262,7 @@ module soc_system (
 		.irq        (irq_mapper_receiver1_irq)                    //                 irq.irq
 	);
 
-	new_component custom_leds_0 (
+	custom_leds custom_leds_0 (
 		.clk              (clk_clk),                                          //  clock.clk
 		.reset            (rst_controller_reset_out_reset),                   //  reset.reset
 		.avs_s0_address   (mm_interconnect_0_custom_leds_0_avs_s0_address),   // avs_s0.address
