@@ -44,10 +44,10 @@
 
 module soc_system_mm_interconnect_0_router_003_default_decode
   #(
-     parameter DEFAULT_CHANNEL = 2,
+     parameter DEFAULT_CHANNEL = 3,
                DEFAULT_WR_CHANNEL = -1,
                DEFAULT_RD_CHANNEL = -1,
-               DEFAULT_DESTID = 4 
+               DEFAULT_DESTID = 2 
    )
   (output [104 - 102 : 0] default_destination_id,
    output [7-1 : 0] default_wr_channel,
@@ -135,7 +135,7 @@ module soc_system_mm_interconnect_0_router_003
     // during address decoding
     // -------------------------------------------------------
     localparam PAD0 = log2ceil(64'h10008 - 64'h10000); 
-    localparam PAD1 = log2ceil(64'h10050 - 64'h10040); 
+    localparam PAD1 = log2ceil(64'h10010 - 64'h10008); 
     localparam PAD2 = log2ceil(64'h10090 - 64'h10080); 
     localparam PAD3 = log2ceil(64'h100d0 - 64'h100c0); 
     localparam PAD4 = log2ceil(64'h20008 - 64'h20000); 
@@ -199,20 +199,20 @@ module soc_system_mm_interconnect_0_router_003
 
     // ( 0x10000 .. 0x10008 )
     if ( {address[RG:PAD0],{PAD0{1'b0}}} == 18'h10000  && read_transaction  ) begin
-            src_channel = 7'b00010;
+            src_channel = 7'b00100;
             src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 6;
     end
 
-    // ( 0x10040 .. 0x10050 )
-    if ( {address[RG:PAD1],{PAD1{1'b0}}} == 18'h10040   ) begin
-            src_channel = 7'b00100;
-            src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 4;
+    // ( 0x10008 .. 0x10010 )
+    if ( {address[RG:PAD1],{PAD1{1'b0}}} == 18'h10008   ) begin
+            src_channel = 7'b00010;
+            src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 1;
     end
 
     // ( 0x10080 .. 0x10090 )
     if ( {address[RG:PAD2],{PAD2{1'b0}}} == 18'h10080   ) begin
             src_channel = 7'b01000;
-            src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 1;
+            src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 2;
     end
 
     // ( 0x100c0 .. 0x100d0 )
@@ -224,7 +224,7 @@ module soc_system_mm_interconnect_0_router_003
     // ( 0x20000 .. 0x20008 )
     if ( {address[RG:PAD4],{PAD4{1'b0}}} == 18'h20000   ) begin
             src_channel = 7'b00001;
-            src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 3;
+            src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 4;
     end
 
 end

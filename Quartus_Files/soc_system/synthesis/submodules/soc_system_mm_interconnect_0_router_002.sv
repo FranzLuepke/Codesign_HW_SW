@@ -136,7 +136,7 @@ module soc_system_mm_interconnect_0_router_002
     // -------------------------------------------------------
     localparam PAD0 = log2ceil(64'h10000 - 64'h0); 
     localparam PAD1 = log2ceil(64'h10008 - 64'h10000); 
-    localparam PAD2 = log2ceil(64'h10050 - 64'h10040); 
+    localparam PAD2 = log2ceil(64'h10010 - 64'h10008); 
     localparam PAD3 = log2ceil(64'h10090 - 64'h10080); 
     localparam PAD4 = log2ceil(64'h100d0 - 64'h100c0); 
     localparam PAD5 = log2ceil(64'h20008 - 64'h20000); 
@@ -207,20 +207,20 @@ module soc_system_mm_interconnect_0_router_002
 
     // ( 0x10000 .. 0x10008 )
     if ( {address[RG:PAD1],{PAD1{1'b0}}} == 18'h10000  && read_transaction  ) begin
-            src_channel = 7'b0001000;
+            src_channel = 7'b0010000;
             src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 6;
     end
 
-    // ( 0x10040 .. 0x10050 )
-    if ( {address[RG:PAD2],{PAD2{1'b0}}} == 18'h10040   ) begin
-            src_channel = 7'b0010000;
-            src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 4;
+    // ( 0x10008 .. 0x10010 )
+    if ( {address[RG:PAD2],{PAD2{1'b0}}} == 18'h10008   ) begin
+            src_channel = 7'b0001000;
+            src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 1;
     end
 
     // ( 0x10080 .. 0x10090 )
     if ( {address[RG:PAD3],{PAD3{1'b0}}} == 18'h10080   ) begin
             src_channel = 7'b0100000;
-            src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 1;
+            src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 2;
     end
 
     // ( 0x100c0 .. 0x100d0 )
@@ -232,13 +232,13 @@ module soc_system_mm_interconnect_0_router_002
     // ( 0x20000 .. 0x20008 )
     if ( {address[RG:PAD5],{PAD5{1'b0}}} == 18'h20000   ) begin
             src_channel = 7'b0000010;
-            src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 3;
+            src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 4;
     end
 
     // ( 0x30000 .. 0x30008 )
     if ( {address[RG:PAD6],{PAD6{1'b0}}} == 18'h30000  && read_transaction  ) begin
             src_channel = 7'b0000100;
-            src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 2;
+            src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 3;
     end
 
 end
