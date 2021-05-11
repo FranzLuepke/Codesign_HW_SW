@@ -137,8 +137,10 @@ module ghrd
 	// PWM data
 	wire [7:0] PWM_Data_1, PWM_Data_2, PWM_Data_3, PWM_Data_4, PWM_Data_5, PWM_Data_6;
 	// PID
-	wire [7:0] RPM_L, RPM_R;
-	wire [1:0] Dir_L, Dir_R;
+	wire [7:0] RPM_L = 0;
+	wire [7:0] RPM_R = 0;
+	wire [1:0] Dir_L = 0;
+	wire [1:0] Dir_R = 0;
 	// Enable
 	wire En_1, En_2, En_3, En_4, En_5, En_6;
 	wire [7:0] RPM_Enable;
@@ -308,14 +310,14 @@ module ghrd
 	// ********** Custom Robocol modules **********
 	// --- Debouncers ---
 	// MOTOR 1
-	Debouncer Deb1_MotA(FPGA_CLK1_50, !KEY[0], GPIO_0[4],  Deb1_A);
-	Debouncer Deb1_MotB(FPGA_CLK1_50, !KEY[0], GPIO_0[5],  Deb1_B);
+	Debouncer Deb1_MotA(FPGA_CLK1_50, !KEY[0], GPIO_0[0],  Deb1_A);
+	Debouncer Deb1_MotB(FPGA_CLK1_50, !KEY[0], GPIO_0[1],  Deb1_B);
 	// MOTOR 2
 	Debouncer Deb2_MotA(FPGA_CLK1_50, !KEY[0], GPIO_0[2],  Deb2_A);
 	Debouncer Deb2_MotB(FPGA_CLK1_50, !KEY[0], GPIO_0[3],  Deb2_B);
 	// MOTOR 3
-	Debouncer Deb3_MotA(FPGA_CLK1_50, !KEY[0], GPIO_0[0],  Deb3_A);
-	Debouncer Deb3_MotB(FPGA_CLK1_50, !KEY[0], GPIO_0[1],  Deb3_B);
+	Debouncer Deb3_MotA(FPGA_CLK1_50, !KEY[0], GPIO_0[4],  Deb3_A);
+	Debouncer Deb3_MotB(FPGA_CLK1_50, !KEY[0], GPIO_0[5],  Deb3_B);
 	// MOTOR 4
 	Debouncer Deb4_MotA(FPGA_CLK1_50, !KEY[0], GPIO_0[6],  Deb4_A);
 	Debouncer Deb4_MotB(FPGA_CLK1_50, !KEY[0], GPIO_0[7],  Deb4_B);
@@ -360,4 +362,12 @@ module ghrd
 	Motors_Enable motors_enable(FPGA_CLK1_50, RPM_Enable, Dir_Enable, En_1, En_2, En_3, En_4, En_5, En_6);
 	// --- Currents ---
 	ADC_Interface ADC_MODULE(FPGA_CLK1_50, ADC_CONVST, ADC_SCK, ADC_SDI, ADC_SDO, {GPIO_1[33], GPIO_1[31], GPIO_1[30]}, CH0, CH1, CH2, CH3, CH4, CH5, CH6, CH7, CH8, CH9, CH10, CH11, CH12);
+	// ********** Custom Robocol assigns **********
+	// Enable signals assign to GPIO
+	assign GPIO_0[30] = En_1;
+	assign GPIO_0[31] = En_2;
+	assign GPIO_0[32] = En_3;
+	assign GPIO_0[33] = En_4;
+	assign GPIO_0[34] = En_5;
+	assign GPIO_0[35] = En_6;
 endmodule
