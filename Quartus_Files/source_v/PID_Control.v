@@ -20,7 +20,7 @@ module PID_Control(Prescaler_clk, Setpoint, RPM_Measured, Dir_A, Dir_B, PWM_Comm
 		if((K_P*(Setpoint-RPM_Measured)+K_I*Integral_Error)/100 >= 249) // Upper saturation
 			PWM_Command <= 249;
 		else
-			if((K_P*(Setpoint-RPM_Measured)+K_I*Integral_Error)/100 <= -249 // Lower saturation
+			if((K_P*(Setpoint-RPM_Measured)+K_I*Integral_Error)/100 <= -249) // Lower saturation
 				PWM_Command <= 249;
 			else
 				if(Setpoint==0) // When setpoint is zero.

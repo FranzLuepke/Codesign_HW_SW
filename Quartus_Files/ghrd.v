@@ -124,7 +124,27 @@ module ghrd
 	// connection of internal logics
 	assign LED[7:1]			=	fpga_led_internal;
 	assign fpga_clk_50		=	FPGA_CLK1_50;
-	assign stm_hw_events	=	{{15{1'b0}}, SW, fpga_led_internal, fpga_debounced_buttons};
+	assign stm_hw_events		=	{{15{1'b0}}, SW, fpga_led_internal, fpga_debounced_buttons};
+	// ********** Custom Robocol regs and wires **********
+	// Encoders debounce
+	wire Deb1_A, Deb1_B, Deb2_A, Deb2_B, Deb3_A, Deb3_B, Deb4_A, Deb4_B, Deb5_A, Deb5_B, Deb6_A, Deb6_B;
+	// Prescaler
+	wire CLK_scaled;
+	// Encoder counts
+	wire signed [31:0] Count_1, Count_2, Count_3, Count_4, Count_5, Count_6;
+	// RPM
+	wire signed [15:0] RPM_Measured_1, RPM_Measured_2, RPM_Measured_3, RPM_Measured_4, RPM_Measured_5, RPM_Measured_6;
+	// PWM data
+	wire [7:0] PWM_Data_1, PWM_Data_2, PWM_Data_3, PWM_Data_4, PWM_Data_5, PWM_Data_6;
+	// PID
+	wire [7:0] RPM_L, RPM_R;
+	wire [1:0] Dir_L, Dir_R;
+	// Enable
+	wire En_1, En_2, En_3, En_4, En_5, En_6;
+	wire [7:0] RPM_Enable;
+	wire [1:0] Dir_Enable;
+	// ADC
+	wire [11:0] CH0, CH1, CH2, CH3, CH4, CH5, CH6, CH7, CH8, CH9, CH10, CH11, CH12;
 	//=======================================================
 	//  Structural coding
 	//=======================================================
@@ -285,4 +305,59 @@ module ghrd
 		// Custom components
 		.custom_leds_0_leds_new_signal			(fpga_led_internal)			//	custom_leds_0_leds.new_signal
 	);
+	// ********** Custom Robocol modules **********
+	// --- Debouncers ---
+	// MOTOR 1
+	Debouncer Deb1_MotA(FPGA_CLK1_50, !KEY[0], GPIO_0[4],  Deb1_A);
+	Debouncer Deb1_MotB(FPGA_CLK1_50, !KEY[0], GPIO_0[5],  Deb1_B);
+	// MOTOR 2
+	Debouncer Deb2_MotA(FPGA_CLK1_50, !KEY[0], GPIO_0[2],  Deb2_A);
+	Debouncer Deb2_MotB(FPGA_CLK1_50, !KEY[0], GPIO_0[3],  Deb2_B);
+	// MOTOR 3
+	Debouncer Deb3_MotA(FPGA_CLK1_50, !KEY[0], GPIO_0[0],  Deb3_A);
+	Debouncer Deb3_MotB(FPGA_CLK1_50, !KEY[0], GPIO_0[1],  Deb3_B);
+	// MOTOR 4
+	Debouncer Deb4_MotA(FPGA_CLK1_50, !KEY[0], GPIO_0[6],  Deb4_A);
+	Debouncer Deb4_MotB(FPGA_CLK1_50, !KEY[0], GPIO_0[7],  Deb4_B);
+	// MOTOR 5
+	Debouncer Deb5_MotA(FPGA_CLK1_50, !KEY[0], GPIO_0[8],  Deb5_A);
+	Debouncer Deb5_MotB(FPGA_CLK1_50, !KEY[0], GPIO_0[9],	 Deb5_B);
+	// MOTOR 6
+	Debouncer Deb6_MotA(FPGA_CLK1_50, !KEY[0], GPIO_0[10], Deb6_A);
+	Debouncer Deb6_MotB(FPGA_CLK1_50, !KEY[0], GPIO_0[11], Deb6_B);
+	// --- Encoders ---
+	Encoder Encoder_1(FPGA_CLK1_50, !KEY[0], Deb1_A, Deb1_B, Count_1);
+	Encoder Encoder_2(FPGA_CLK1_50, !KEY[0], Deb2_A, Deb2_B, Count_2);
+	Encoder Encoder_3(FPGA_CLK1_50, !KEY[0], Deb3_A, Deb3_B, Count_3);
+	Encoder Encoder_4(FPGA_CLK1_50, !KEY[0], Deb4_A, Deb4_B, Count_4);
+	Encoder Encoder_5(FPGA_CLK1_50, !KEY[0], Deb5_A, Deb5_B, Count_5);
+	Encoder Encoder_6(FPGA_CLK1_50, !KEY[0], Deb6_A, Deb6_B, Count_6);
+	// --- Prescaler ---
+	// 5 ms clock
+	Prescaler Prescaler_5ms(FPGA_CLK1_50, !KEY[0], 125000, CLK_scaled);
+	// --- RPM ---
+	RPM RPM1(CLK_scaled, Count_1, RPM_Measured_1);
+	RPM RPM2(CLK_scaled, Count_2, RPM_Measured_2);
+	RPM RPM3(CLK_scaled, Count_3, RPM_Measured_3);
+	RPM RPM4(CLK_scaled, Count_4, RPM_Measured_4);
+	RPM RPM5(CLK_scaled, Count_5, RPM_Measured_5);
+	RPM RPM6(CLK_scaled, Count_6, RPM_Measured_6);
+	// --- PID ---
+	PID_Control PID_1(CLK_scaled, $signed($signed({8'b0,RPM_L})*$signed(Dir_L)),  RPM_Measured_1, GPIO_0[18], GPIO_0[19], PWM_Data_1);
+	PID_Control PID_2(CLK_scaled, $signed($signed({8'b0,RPM_L})*$signed(Dir_L)),  RPM_Measured_2, GPIO_0[20], GPIO_0[21], PWM_Data_2);
+	PID_Control PID_3(CLK_scaled, $signed($signed({8'b0,RPM_L})*$signed(Dir_L)),  RPM_Measured_3, GPIO_0[22], GPIO_0[23], PWM_Data_3);
+	PID_Control PID_4(CLK_scaled, $signed($signed({8'b0,RPM_R})*$signed(Dir_R)), -RPM_Measured_4, GPIO_0[24], GPIO_0[25], PWM_Data_4);
+	PID_Control PID_5(CLK_scaled, $signed($signed({8'b0,RPM_R})*$signed(Dir_R)), -RPM_Measured_5, GPIO_0[26], GPIO_0[27], PWM_Data_5);
+	PID_Control PID_6(CLK_scaled, $signed($signed({8'b0,RPM_R})*$signed(Dir_R)), -RPM_Measured_6, GPIO_0[28], GPIO_0[29], PWM_Data_6);
+	// --- PWM ---
+	PWM_Generator PWM_1(FPGA_CLK1_50, !KEY[0], PWM_Data_1, GPIO_0[12]);
+	PWM_Generator PWM_2(FPGA_CLK1_50, !KEY[0], PWM_Data_2, GPIO_0[13]);
+	PWM_Generator PWM_3(FPGA_CLK1_50, !KEY[0], PWM_Data_3, GPIO_0[14]);
+	PWM_Generator PWM_4(FPGA_CLK1_50, !KEY[0], PWM_Data_4, GPIO_0[15]);
+	PWM_Generator PWM_5(FPGA_CLK1_50, !KEY[0], PWM_Data_5, GPIO_0[16]);
+	PWM_Generator PWM_6(FPGA_CLK1_50, !KEY[0], PWM_Data_6, GPIO_0[17]);
+	// --- Motors Enable ---
+	Motors_Enable motors_enable(FPGA_CLK1_50, RPM_Enable, Dir_Enable, En_1, En_2, En_3, En_4, En_5, En_6);
+	// --- Currents ---
+	ADC_Interface ADC_MODULE(FPGA_CLK1_50, ADC_CONVST, ADC_SCK, ADC_SDI, ADC_SDO, {GPIO_1[33], GPIO_1[31], GPIO_1[30]}, CH0, CH1, CH2, CH3, CH4, CH5, CH6, CH7, CH8, CH9, CH10, CH11, CH12);
 endmodule

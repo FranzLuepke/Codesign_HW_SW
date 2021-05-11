@@ -609,4 +609,14 @@ set_instance_assignment -name IO_STANDARD "SSTL-15 CLASS I" -to HPS_DDR3_DM[2] -
 set_instance_assignment -name OUTPUT_TERMINATION "SERIES 50 OHM WITH CALIBRATION" -to HPS_DDR3_DM[2] -tag __hps_sdram_p0
 set_instance_assignment -name IO_STANDARD "SSTL-15 CLASS I" -to HPS_DDR3_DM[3] -tag __hps_sdram_p0
 set_instance_assignment -name OUTPUT_TERMINATION "SERIES 50 OHM WITH CALIBRATION" -to HPS_DDR3_DM[3] -tag __hps_sdram_p0
+set_global_assignment -name VERILOG_FILE source_v/ADC_Interface.v
+set_global_assignment -name VERILOG_FILE source_v/Control_SDI.v
+set_global_assignment -name VERILOG_FILE source_v/Cycles_Counter.v
+set_global_assignment -name VERILOG_FILE source_v/Debouncer.v
+set_global_assignment -name VERILOG_FILE source_v/Encoder.v
+set_global_assignment -name VERILOG_FILE source_v/Motors_Enable.v
+set_global_assignment -name VERILOG_FILE source_v/PID_Control.v
+set_global_assignment -name VERILOG_FILE source_v/Prescaler.v
+set_global_assignment -name VERILOG_FILE source_v/PWM_Generator.v
+set_global_assignment -name VERILOG_FILE source_v/RPM.v
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

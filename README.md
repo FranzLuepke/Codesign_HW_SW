@@ -19,7 +19,8 @@ This repository includes a hardware software codesign project for the developmen
 
 ## Authors
 
-* Franz Luepke. - *Initial work* - [FranzLuepke](https://github.com/FranzLuepke)
+* Franz Luepke. - *Initial work, hardware modifications and software implementation* - [FranzLuepke](https://github.com/FranzLuepke)
+* Oscar Díaz Caballero. - *Hardware modules* - [alegis277](https://github.com/alegis277)
 
 ## License
 

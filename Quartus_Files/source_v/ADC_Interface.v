@@ -14,8 +14,8 @@ module ADC_Interface(clock, ADC_CONVST, ADC_SCK, ADC_SDI, ADC_SDO, MUX_CONTROL, 
 	wire flag;
 	wire [3:0] CH_ACTUAL;
 	// EXTERNAL MODULES
-	Prescaler P1(rst, clock, ADC_SCK, 250);
-	Cycles_Counter pos_edge_counter(rst, clock, 6100, flag);
+	Prescaler prescaler(clock, rst, 250, ADC_SCK);
+	Cycles_Counter pos_edge_counter(clock, rst, 6100, flag);
 	// PARAMETERS
 	parameter STATE_0=2'd0;
 	parameter STATE_1=2'd1;

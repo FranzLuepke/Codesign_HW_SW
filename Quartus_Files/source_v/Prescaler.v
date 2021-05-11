@@ -1,14 +1,14 @@
 // Clock prescaler
 module Prescaler(clock, reset, prescaler_value, out_clk);
 	// INPUTS AND OUTPUTS
-	input			clock;				// Clock
-	input			reset;				// Reset
-	input	[27:0]	prescaler_value;	// Edges to count
-	output			out_clk;			// Output clock
+	input				clock;					// Clock
+	input				reset;					// Reset
+	input	[27:0]	prescaler_value;		// Edges to count
+	output			out_clk;					// Output clock
 	// REGS
-	reg				actual_output = 0	// Output
+	reg				actual_output = 0;	// Output
 	// WIRES
-	wire			flag;
+	wire				flag;
 	// ASSIGNS
 	assign out_clk = actual_output;		// Output assignation
 	// EXTERNAL MODULES

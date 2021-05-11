@@ -2,10 +2,10 @@ module Cycles_Counter(clock, reset, cycles, flag);
 	// INPUTS AND OUTPUTS
 	input 			clock;			// Clock
 	input 			reset;			// Reset
-	input [27:0]	cycles;			// Number of cycles to count
-	output 			flag;			// Flag to indicate the counts ended
+	input	[27:0]	cycles;			// Number of cycles to count
+	output 			flag;				// Flag to indicate the counts ended
 	// REGS
-	reg [27:0]		count = 0;		// Actual counts
+	reg	[27:0]	count = 0;		// Actual counts
 	reg				out_reg = 0;	// Output
 	// ASSIGNS
 	assign flag = out_reg;			// Output flag assignation
