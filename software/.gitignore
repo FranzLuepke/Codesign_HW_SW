@@ -1,0 +1,65 @@
+## Only C gitignore
+# Object files
+*.ko
+*.elf
+# Linker output
+*.ilk
+*.map
+*.exp
+# Libraries
+# Shared objects (inc. Windows DLLs)
+*.so.*
+# Executables
+*.i*86
+*.x86_64
+*.hex
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+# Kernel Module Compile Results
+*.mod*
+*.cmd
+.tmp_versions/
+modules.order
+Module.symvers
+Mkfile.old
+dkms.conf
+
+## Only C++ gitignore
+# Compiled Object files
+*.slo
+# Fortran module files
+*.mod
+*.smod
+# Compiled Static libraries
+*.lai
+# Executables
+
+## C and C++ gitignore
+# Prerequisites
+*.d
+# Object files
+*.o
+*.obj
+# Precompiled Headers
+*.gch
+*.pch
+# Shared objects (inc. Windows DLLs) / Compiled Dynamic libraries
+*.dll
+*.dylib
+*.so
+# Libraries / Compiled Static libraries
+*.a
+*.la
+*.lib
+# Executables
+*.app
+*.exe
+*.out
+# Libraries / Compiled Object files
+*.lo
+
+# Binaries
+devmem_custom_leds

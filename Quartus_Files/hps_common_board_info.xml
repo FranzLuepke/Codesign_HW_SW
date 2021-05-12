@@ -105,55 +105,55 @@ these aliases allows seamless support of multiple emacs
 
 <DTAppend name="label" type="string" parentlabel="led_fpga0" val="fpga_led0"/>
 <DTAppend name="gpios" parentlabel="led_fpga0" >
-<val type="phandle">led_pio</val>
+<val type="phandle">custom_leds_0</val>
 <val type="number">0</val>
 <val type="number">1</val>
 </DTAppend>
 
 <DTAppend name="label" type="string" parentlabel="led_fpga1" val="fpga_led1"/>
 <DTAppend name="gpios" parentlabel="led_fpga1" >
-<val type="phandle">led_pio</val>
+<val type="phandle">custom_leds_0</val>
 <val type="number">1</val>
 <val type="number">1</val>
 </DTAppend>
 
 <DTAppend name="label" type="string" parentlabel="led_fpga2" val="fpga_led2"/>
 <DTAppend name="gpios" parentlabel="led_fpga2" >
-<val type="phandle">led_pio</val>
+<val type="phandle">custom_leds_0</val>
 <val type="number">2</val>
 <val type="number">1</val>
 </DTAppend>
 
 <DTAppend name="label" type="string" parentlabel="led_fpga3" val="fpga_led3"/>
 <DTAppend name="gpios" parentlabel="led_fpga3" >
-<val type="phandle">led_pio</val>
+<val type="phandle">custom_leds_0</val>
 <val type="number">3</val>
 <val type="number">1</val>
 </DTAppend>
 
 <DTAppend name="label" type="string" parentlabel="led_fpga4" val="fpga_led4"/>
 <DTAppend name="gpios" parentlabel="led_fpga4" >
-<val type="phandle">led_pio</val>
+<val type="phandle">custom_leds_0</val>
 <val type="number">4</val>
 <val type="number">1</val>
 </DTAppend>
 
 <DTAppend name="label" type="string" parentlabel="led_fpga5" val="fpga_led5"/>
 <DTAppend name="gpios" parentlabel="led_fpga5" >
-<val type="phandle">led_pio</val>
+<val type="phandle">custom_leds_0</val>
 <val type="number">5</val>
 <val type="number">1</val>
 </DTAppend>
 
 <DTAppend name="label" type="string" parentlabel="led_fpga6" val="fpga_led6"/>
 <DTAppend name="gpios" parentlabel="led_fpga6" >
-<val type="phandle">led_pio</val>
+<val type="phandle">custom_leds_0</val>
 <val type="number">6</val>
 <val type="number">1</val>
 </DTAppend>
 <DTAppend name="label" type="string" parentlabel="led_fpga7" val="fpga_led7"/>
 <DTAppend name="gpios" parentlabel="led_fpga7" >
-<val type="phandle">led_pio</val>
+<val type="phandle">custom_leds_0</val>
 <val type="number">7</val>
 <val type="number">1</val>
 </DTAppend>
