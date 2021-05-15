@@ -23,6 +23,7 @@
 *.sld
 *.smsg
 *.sof
+*.sopcinfo
 *.sopc_builder
 *.summary
 *~
@@ -31,6 +32,7 @@
 # *.sdc # I want those timing files
 
 # ignore Quartus II generated folders
+*/.qsys_edit
 */db/
 */incremental_db/
 */simulation/
