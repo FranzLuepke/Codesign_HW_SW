@@ -1,5 +1,5 @@
 KDIR ?= $(KERNEL_PATH)
-TARGET = avalon_leds
+TARGET = avalon_pwm
 HOST = 192.168.1.108
 
 default:
