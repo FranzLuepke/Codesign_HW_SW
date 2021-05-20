@@ -4,7 +4,7 @@ module avalon_pwm
 (
 	input  wire        avs_s0_address,     //	avs_s0.address
 	input  wire        avs_s0_read,        //	.read
-	output wire [31:0] avs_s0_readdata,    //	.readdata
+	output reg	[31:0] avs_s0_readdata,    //	.readdata
 	input  wire        avs_s0_write,       //	.write
 	input  wire [31:0] avs_s0_writedata,   //	.writedata
 	output wire        avs_s0_waitrequest, //	.waitrequest
