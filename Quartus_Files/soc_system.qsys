@@ -25,6 +25,22 @@
          type = "String";
       }
    }
+   element avalon_pwm_0
+   {
+      datum _sortIndex
+      {
+         value = "11";
+         type = "int";
+      }
+   }
+   element avalon_pwm_0.avs_s0
+   {
+      datum baseAddress
+      {
+         value = "65552";
+         type = "String";
+      }
+   }
    element button_pio
    {
       datum _sortIndex
@@ -186,6 +202,14 @@
          type = "String";
       }
    }
+   element soc_system
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone V";
+         type = "String";
+      }
+   }
    element sysid_qsys
    {
       datum _sortIndex
@@ -234,6 +258,11 @@
    type="conduit"
    dir="end" />
  <interface
+   name="avalon_pwm_0_pwm"
+   internal="avalon_pwm_0.pwm"
+   type="conduit"
+   dir="end" />
+ <interface
    name="button_pio_external_connection"
    internal="button_pio.external_connection"
    type="conduit"
@@ -274,6 +303,7 @@
  <interface name="memory" internal="hps_0.memory" type="conduit" dir="end" />
  <interface name="reset" internal="clk_0.clk_in_reset" type="reset" dir="end" />
  <module name="avalon_leds_0" kind="avalon_leds" version="1.0" enabled="1" />
+ <module name="avalon_pwm_0" kind="avalon_pwm" version="1.0" enabled="1" />
  <module name="button_pio" kind="altera_avalon_pio" version="19.1" enabled="1">
   <parameter name="bitClearingEdgeCapReg" value="true" />
   <parameter name="bitModifyingOutReg" value="false" />
@@ -963,6 +993,15 @@
    kind="avalon"
    version="19.1"
    start="hps_0.h2f_lw_axi_master"
+   end="avalon_pwm_0.avs_s0">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x00010010" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="19.1"
+   start="hps_0.h2f_lw_axi_master"
    end="sysid_qsys.control_slave">
   <parameter name="arbitrationPriority" value="1" />
   <parameter name="baseAddress" value="0x00010000" />
@@ -1011,6 +1050,15 @@
    end="avalon_leds_0.avs_s0">
   <parameter name="arbitrationPriority" value="1" />
   <parameter name="baseAddress" value="0x00010008" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="19.1"
+   start="fpga_only_master.master"
+   end="avalon_pwm_0.avs_s0">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x00010010" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -1082,6 +1130,11 @@
    version="19.1"
    start="clk_0.clk"
    end="intr_capturer_0.clock" />
+ <connection
+   kind="clock"
+   version="19.1"
+   start="clk_0.clk"
+   end="avalon_pwm_0.clock" />
  <connection
    kind="clock"
    version="19.1"
@@ -1179,6 +1232,11 @@
    version="19.1"
    start="clk_0.clk_reset"
    end="avalon_leds_0.reset" />
+ <connection
+   kind="reset"
+   version="19.1"
+   start="clk_0.clk_reset"
+   end="avalon_pwm_0.reset" />
  <connection
    kind="reset"
    version="19.1"
