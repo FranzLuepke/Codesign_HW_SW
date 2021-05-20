@@ -305,7 +305,8 @@ module ghrd
 		.dipsw_pio_external_connection_export	(SW),								//	dipsw_pio_external_connection.export
 		.button_pio_external_connection_export	(fpga_debounced_buttons),	// button_pio_external_connection.export
 		// Custom components
-		.avalon_leds_0_leds_new_signal			(fpga_led_internal)			//	custom_leds_0_leds.new_signal
+		.avalon_leds_0_leds_new_signal			(fpga_led_internal),							//	custom_leds_0_leds.new_signal
+		.avalon_pwm_0_pwm_new_signal           (PWM_Data_1)			//	avalon_pwm_0_pwm.new_signal
 	);
 	// ********** Custom Robocol modules **********
 	// --- Debouncers ---
@@ -345,7 +346,7 @@ module ghrd
 	RPM RPM5(CLK_scaled, Count_5, RPM_Measured_5);
 	RPM RPM6(CLK_scaled, Count_6, RPM_Measured_6);
 	// --- PID ---
-	PID_Control PID_1(CLK_scaled, $signed($signed({8'b0,RPM_L})*$signed(Dir_L)),  RPM_Measured_1, GPIO_0[18], GPIO_0[19], PWM_Data_1);
+	//PID_Control PID_1(CLK_scaled, $signed($signed({8'b0,RPM_L})*$signed(Dir_L)),  RPM_Measured_1, GPIO_0[18], GPIO_0[19], PWM_Data_1);
 	PID_Control PID_2(CLK_scaled, $signed($signed({8'b0,RPM_L})*$signed(Dir_L)),  RPM_Measured_2, GPIO_0[20], GPIO_0[21], PWM_Data_2);
 	PID_Control PID_3(CLK_scaled, $signed($signed({8'b0,RPM_L})*$signed(Dir_L)),  RPM_Measured_3, GPIO_0[22], GPIO_0[23], PWM_Data_3);
 	PID_Control PID_4(CLK_scaled, $signed($signed({8'b0,RPM_R})*$signed(Dir_R)), -RPM_Measured_4, GPIO_0[24], GPIO_0[25], PWM_Data_4);
