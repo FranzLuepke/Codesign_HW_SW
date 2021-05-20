@@ -64,7 +64,7 @@
 #define SYSID_QSYS_SPAN 8
 #define SYSID_QSYS_END 0x10007
 #define SYSID_QSYS_ID 2899645186
-#define SYSID_QSYS_TIMESTAMP 1621429762
+#define SYSID_QSYS_TIMESTAMP 1621545624
 
 /*
  * Macros for device 'avalon_leds_0', class 'avalon_leds'
@@ -76,6 +76,17 @@
 #define AVALON_LEDS_0_BASE 0x10008
 #define AVALON_LEDS_0_SPAN 8
 #define AVALON_LEDS_0_END 0x1000f
+
+/*
+ * Macros for device 'avalon_pwm_0', class 'avalon_pwm'
+ * The macros are prefixed with 'AVALON_PWM_0_'.
+ * The prefix is the slave descriptor.
+ */
+#define AVALON_PWM_0_COMPONENT_TYPE avalon_pwm
+#define AVALON_PWM_0_COMPONENT_NAME avalon_pwm_0
+#define AVALON_PWM_0_BASE 0x10010
+#define AVALON_PWM_0_SPAN 8
+#define AVALON_PWM_0_END 0x10017
 
 /*
  * Macros for device 'dipsw_pio', class 'altera_avalon_pio'
