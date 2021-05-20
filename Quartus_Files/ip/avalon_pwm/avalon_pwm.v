@@ -13,15 +13,15 @@ module avalon_pwm
 	output wire [7:0]  pwm                 //	pwm.new_signal
 );
 	// REGS
-	reg			busy		= 1'b0;
+	reg		busy						= 1'b0;
 	// ASSIGNS
-	assign avs_s0_waitrequest = busy;
+	assign	avs_s0_waitrequest	= busy;
 	// READ
 	always@(*)
 		begin
-			if(avalon_slave_read)
+			if(avs_s0_read)
 				begin
-					case(avalon_slave_address)
+					case(avs_s0_address)
 						1'b0		:	avs_s0_readdata	=	{26'b0,pwm};
 						default	:	avs_s0_readdata	=	32'b0;				
 					endcase

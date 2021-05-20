@@ -19,9 +19,9 @@ module avalon_leds
 	// READ
 	always@(*)
 		begin
-			if(avalon_slave_read)
+			if(avs_s0_read)
 				begin
-					case(avalon_slave_address)
+					case(avs_s0_address)
 						1'b0		:	avs_s0_readdata	=	{26'b0,leds};
 						default	:	avs_s0_readdata	=	32'b0;				
 					endcase
