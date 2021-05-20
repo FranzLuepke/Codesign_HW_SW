@@ -1,4 +1,6 @@
 	soc_system u0 (
+		.avalon_leds_0_leds_new_signal         (<connected-to-avalon_leds_0_leds_new_signal>),         //             avalon_leds_0_leds.new_signal
+		.avalon_pwm_0_pwm_new_signal           (<connected-to-avalon_pwm_0_pwm_new_signal>),           //               avalon_pwm_0_pwm.new_signal
 		.button_pio_external_connection_export (<connected-to-button_pio_external_connection_export>), // button_pio_external_connection.export
 		.clk_clk                               (<connected-to-clk_clk>),                               //                            clk.clk
 		.dipsw_pio_external_connection_export  (<connected-to-dipsw_pio_external_connection_export>),  //  dipsw_pio_external_connection.export
@@ -71,7 +73,6 @@
 		.memory_mem_odt                        (<connected-to-memory_mem_odt>),                        //                               .mem_odt
 		.memory_mem_dm                         (<connected-to-memory_mem_dm>),                         //                               .mem_dm
 		.memory_oct_rzqin                      (<connected-to-memory_oct_rzqin>),                      //                               .oct_rzqin
-		.reset_reset_n                         (<connected-to-reset_reset_n>),                         //                          reset.reset_n
-		.avalon_leds_0_leds_new_signal         (<connected-to-avalon_leds_0_leds_new_signal>)          //             avalon_leds_0_leds.new_signal
+		.reset_reset_n                         (<connected-to-reset_reset_n>)                          //                          reset.reset_n
 	);
 

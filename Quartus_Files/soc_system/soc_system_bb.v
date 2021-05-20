@@ -1,5 +1,7 @@
 
 module soc_system (
+	avalon_leds_0_leds_new_signal,
+	avalon_pwm_0_pwm_new_signal,
 	button_pio_external_connection_export,
 	clk_clk,
 	dipsw_pio_external_connection_export,
@@ -72,9 +74,10 @@ module soc_system (
 	memory_mem_odt,
 	memory_mem_dm,
 	memory_oct_rzqin,
-	reset_reset_n,
-	avalon_leds_0_leds_new_signal);	
+	reset_reset_n);	
 
+	output	[7:0]	avalon_leds_0_leds_new_signal;
+	output	[7:0]	avalon_pwm_0_pwm_new_signal;
 	input	[3:0]	button_pio_external_connection_export;
 	input		clk_clk;
 	input	[3:0]	dipsw_pio_external_connection_export;
@@ -148,5 +151,4 @@ module soc_system (
 	output	[3:0]	memory_mem_dm;
 	input		memory_oct_rzqin;
 	input		reset_reset_n;
-	output	[7:0]	avalon_leds_0_leds_new_signal;
 endmodule
