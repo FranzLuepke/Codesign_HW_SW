@@ -1,3 +1,6 @@
+*
+!*.*
+!*/
 ## Only C gitignore
 # Object files
 *.ko
@@ -62,4 +65,7 @@ dkms.conf
 *.lo
 
 # Binaries
-devmem_custom_leds
+# devmem_custom_leds
+
+!Makefile
+!Kbuild

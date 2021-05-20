@@ -305,7 +305,7 @@ module ghrd
 		.dipsw_pio_external_connection_export	(SW),								//	dipsw_pio_external_connection.export
 		.button_pio_external_connection_export	(fpga_debounced_buttons),	// button_pio_external_connection.export
 		// Custom components
-		.custom_leds_0_leds_new_signal			(fpga_led_internal)			//	custom_leds_0_leds.new_signal
+		.avalon_leds_0_leds_new_signal			(fpga_led_internal)			//	custom_leds_0_leds.new_signal
 	);
 	// ********** Custom Robocol modules **********
 	// --- Debouncers ---

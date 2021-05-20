@@ -9,6 +9,22 @@
    categories="System" />
  <parameter name="bonusData"><![CDATA[bonusData 
 {
+   element avalon_leds_0
+   {
+      datum _sortIndex
+      {
+         value = "10";
+         type = "int";
+      }
+   }
+   element avalon_leds_0.avs_s0
+   {
+      datum baseAddress
+      {
+         value = "65544";
+         type = "String";
+      }
+   }
    element button_pio
    {
       datum _sortIndex
@@ -36,22 +52,6 @@
       {
          value = "4";
          type = "int";
-      }
-   }
-   element custom_leds_0
-   {
-      datum _sortIndex
-      {
-         value = "10";
-         type = "int";
-      }
-   }
-   element custom_leds_0.avs_s0
-   {
-      datum baseAddress
-      {
-         value = "65544";
-         type = "String";
       }
    }
    element dipsw_pio
@@ -178,6 +178,14 @@
          type = "String";
       }
    }
+   element soc_system
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone V";
+         type = "String";
+      }
+   }
    element sysid_qsys
    {
       datum _sortIndex
@@ -221,16 +229,16 @@
  <parameter name="useTestBenchNamingPattern" value="false" />
  <instanceScript></instanceScript>
  <interface
+   name="avalon_leds_0_leds"
+   internal="avalon_leds_0.leds"
+   type="conduit"
+   dir="end" />
+ <interface
    name="button_pio_external_connection"
    internal="button_pio.external_connection"
    type="conduit"
    dir="end" />
  <interface name="clk" internal="clk_0.clk_in" type="clock" dir="end" />
- <interface
-   name="custom_leds_0_leds"
-   internal="custom_leds_0.leds"
-   type="conduit"
-   dir="end" />
  <interface
    name="dipsw_pio_external_connection"
    internal="dipsw_pio.external_connection"
@@ -265,6 +273,7 @@
  <interface name="hps_0_hps_io" internal="hps_0.hps_io" type="conduit" dir="end" />
  <interface name="memory" internal="hps_0.memory" type="conduit" dir="end" />
  <interface name="reset" internal="clk_0.clk_in_reset" type="reset" dir="end" />
+ <module name="avalon_leds_0" kind="avalon_leds" version="1.0" enabled="1" />
  <module name="button_pio" kind="altera_avalon_pio" version="19.1" enabled="1">
   <parameter name="bitClearingEdgeCapReg" value="true" />
   <parameter name="bitModifyingOutReg" value="false" />
@@ -285,7 +294,6 @@
   <parameter name="inputClockFrequency" value="0" />
   <parameter name="resetSynchronousEdges" value="NONE" />
  </module>
- <module name="custom_leds_0" kind="custom_leds" version="1.0" enabled="1" />
  <module name="dipsw_pio" kind="altera_avalon_pio" version="19.1" enabled="1">
   <parameter name="bitClearingEdgeCapReg" value="true" />
   <parameter name="bitModifyingOutReg" value="false" />
@@ -946,7 +954,7 @@
    kind="avalon"
    version="19.1"
    start="hps_0.h2f_lw_axi_master"
-   end="custom_leds_0.avs_s0">
+   end="avalon_leds_0.avs_s0">
   <parameter name="arbitrationPriority" value="1" />
   <parameter name="baseAddress" value="0x00010008" />
   <parameter name="defaultConnection" value="false" />
@@ -1000,7 +1008,7 @@
    kind="avalon"
    version="19.1"
    start="fpga_only_master.master"
-   end="custom_leds_0.avs_s0">
+   end="avalon_leds_0.avs_s0">
   <parameter name="arbitrationPriority" value="1" />
   <parameter name="baseAddress" value="0x00010008" />
   <parameter name="defaultConnection" value="false" />
@@ -1078,7 +1086,7 @@
    kind="clock"
    version="19.1"
    start="clk_0.clk"
-   end="custom_leds_0.clock" />
+   end="avalon_leds_0.clock" />
  <connection
    kind="clock"
    version="19.1"
@@ -1170,7 +1178,7 @@
    kind="reset"
    version="19.1"
    start="clk_0.clk_reset"
-   end="custom_leds_0.reset" />
+   end="avalon_leds_0.reset" />
  <connection
    kind="reset"
    version="19.1"
