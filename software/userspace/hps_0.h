@@ -64,18 +64,18 @@
 #define SYSID_QSYS_SPAN 8
 #define SYSID_QSYS_END 0x10007
 #define SYSID_QSYS_ID 2899645186
-#define SYSID_QSYS_TIMESTAMP 1620361228
+#define SYSID_QSYS_TIMESTAMP 1621429762
 
 /*
- * Macros for device 'custom_leds_0', class 'custom_leds'
- * The macros are prefixed with 'CUSTOM_LEDS_0_'.
+ * Macros for device 'avalon_leds_0', class 'avalon_leds'
+ * The macros are prefixed with 'AVALON_LEDS_0_'.
  * The prefix is the slave descriptor.
  */
-#define CUSTOM_LEDS_0_COMPONENT_TYPE custom_leds
-#define CUSTOM_LEDS_0_COMPONENT_NAME custom_leds_0
-#define CUSTOM_LEDS_0_BASE 0x10008
-#define CUSTOM_LEDS_0_SPAN 8
-#define CUSTOM_LEDS_0_END 0x1000f
+#define AVALON_LEDS_0_COMPONENT_TYPE avalon_leds
+#define AVALON_LEDS_0_COMPONENT_NAME avalon_leds_0
+#define AVALON_LEDS_0_BASE 0x10008
+#define AVALON_LEDS_0_SPAN 8
+#define AVALON_LEDS_0_END 0x1000f
 
 /*
  * Macros for device 'dipsw_pio', class 'altera_avalon_pio'
