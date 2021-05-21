@@ -6,6 +6,11 @@
 module soc_system (
 		output wire [7:0]  avalon_leds_0_leds_new_signal,         //             avalon_leds_0_leds.new_signal
 		output wire [7:0]  avalon_pwm_0_pwm_new_signal,           //               avalon_pwm_0_pwm.new_signal
+		output wire [7:0]  avalon_pwm_1_pwm_new_signal,           //               avalon_pwm_1_pwm.new_signal
+		output wire [7:0]  avalon_pwm_2_pwm_new_signal,           //               avalon_pwm_2_pwm.new_signal
+		output wire [7:0]  avalon_pwm_3_pwm_new_signal,           //               avalon_pwm_3_pwm.new_signal
+		output wire [7:0]  avalon_pwm_4_pwm_new_signal,           //               avalon_pwm_4_pwm.new_signal
+		output wire [7:0]  avalon_pwm_5_pwm_new_signal,           //               avalon_pwm_5_pwm.new_signal
 		input  wire [3:0]  button_pio_external_connection_export, // button_pio_external_connection.export
 		input  wire        clk_clk,                               //                            clk.clk
 		input  wire [3:0]  dipsw_pio_external_connection_export,  //  dipsw_pio_external_connection.export
@@ -190,6 +195,36 @@ module soc_system (
 	wire          mm_interconnect_0_avalon_pwm_0_avs_s0_read;                // mm_interconnect_0:avalon_pwm_0_avs_s0_read -> avalon_pwm_0:avs_s0_read
 	wire          mm_interconnect_0_avalon_pwm_0_avs_s0_write;               // mm_interconnect_0:avalon_pwm_0_avs_s0_write -> avalon_pwm_0:avs_s0_write
 	wire   [31:0] mm_interconnect_0_avalon_pwm_0_avs_s0_writedata;           // mm_interconnect_0:avalon_pwm_0_avs_s0_writedata -> avalon_pwm_0:avs_s0_writedata
+	wire   [31:0] mm_interconnect_0_avalon_pwm_1_avs_s0_readdata;            // avalon_pwm_1:avs_s0_readdata -> mm_interconnect_0:avalon_pwm_1_avs_s0_readdata
+	wire          mm_interconnect_0_avalon_pwm_1_avs_s0_waitrequest;         // avalon_pwm_1:avs_s0_waitrequest -> mm_interconnect_0:avalon_pwm_1_avs_s0_waitrequest
+	wire    [0:0] mm_interconnect_0_avalon_pwm_1_avs_s0_address;             // mm_interconnect_0:avalon_pwm_1_avs_s0_address -> avalon_pwm_1:avs_s0_address
+	wire          mm_interconnect_0_avalon_pwm_1_avs_s0_read;                // mm_interconnect_0:avalon_pwm_1_avs_s0_read -> avalon_pwm_1:avs_s0_read
+	wire          mm_interconnect_0_avalon_pwm_1_avs_s0_write;               // mm_interconnect_0:avalon_pwm_1_avs_s0_write -> avalon_pwm_1:avs_s0_write
+	wire   [31:0] mm_interconnect_0_avalon_pwm_1_avs_s0_writedata;           // mm_interconnect_0:avalon_pwm_1_avs_s0_writedata -> avalon_pwm_1:avs_s0_writedata
+	wire   [31:0] mm_interconnect_0_avalon_pwm_2_avs_s0_readdata;            // avalon_pwm_2:avs_s0_readdata -> mm_interconnect_0:avalon_pwm_2_avs_s0_readdata
+	wire          mm_interconnect_0_avalon_pwm_2_avs_s0_waitrequest;         // avalon_pwm_2:avs_s0_waitrequest -> mm_interconnect_0:avalon_pwm_2_avs_s0_waitrequest
+	wire    [0:0] mm_interconnect_0_avalon_pwm_2_avs_s0_address;             // mm_interconnect_0:avalon_pwm_2_avs_s0_address -> avalon_pwm_2:avs_s0_address
+	wire          mm_interconnect_0_avalon_pwm_2_avs_s0_read;                // mm_interconnect_0:avalon_pwm_2_avs_s0_read -> avalon_pwm_2:avs_s0_read
+	wire          mm_interconnect_0_avalon_pwm_2_avs_s0_write;               // mm_interconnect_0:avalon_pwm_2_avs_s0_write -> avalon_pwm_2:avs_s0_write
+	wire   [31:0] mm_interconnect_0_avalon_pwm_2_avs_s0_writedata;           // mm_interconnect_0:avalon_pwm_2_avs_s0_writedata -> avalon_pwm_2:avs_s0_writedata
+	wire   [31:0] mm_interconnect_0_avalon_pwm_3_avs_s0_readdata;            // avalon_pwm_3:avs_s0_readdata -> mm_interconnect_0:avalon_pwm_3_avs_s0_readdata
+	wire          mm_interconnect_0_avalon_pwm_3_avs_s0_waitrequest;         // avalon_pwm_3:avs_s0_waitrequest -> mm_interconnect_0:avalon_pwm_3_avs_s0_waitrequest
+	wire    [0:0] mm_interconnect_0_avalon_pwm_3_avs_s0_address;             // mm_interconnect_0:avalon_pwm_3_avs_s0_address -> avalon_pwm_3:avs_s0_address
+	wire          mm_interconnect_0_avalon_pwm_3_avs_s0_read;                // mm_interconnect_0:avalon_pwm_3_avs_s0_read -> avalon_pwm_3:avs_s0_read
+	wire          mm_interconnect_0_avalon_pwm_3_avs_s0_write;               // mm_interconnect_0:avalon_pwm_3_avs_s0_write -> avalon_pwm_3:avs_s0_write
+	wire   [31:0] mm_interconnect_0_avalon_pwm_3_avs_s0_writedata;           // mm_interconnect_0:avalon_pwm_3_avs_s0_writedata -> avalon_pwm_3:avs_s0_writedata
+	wire   [31:0] mm_interconnect_0_avalon_pwm_4_avs_s0_readdata;            // avalon_pwm_4:avs_s0_readdata -> mm_interconnect_0:avalon_pwm_4_avs_s0_readdata
+	wire          mm_interconnect_0_avalon_pwm_4_avs_s0_waitrequest;         // avalon_pwm_4:avs_s0_waitrequest -> mm_interconnect_0:avalon_pwm_4_avs_s0_waitrequest
+	wire    [0:0] mm_interconnect_0_avalon_pwm_4_avs_s0_address;             // mm_interconnect_0:avalon_pwm_4_avs_s0_address -> avalon_pwm_4:avs_s0_address
+	wire          mm_interconnect_0_avalon_pwm_4_avs_s0_read;                // mm_interconnect_0:avalon_pwm_4_avs_s0_read -> avalon_pwm_4:avs_s0_read
+	wire          mm_interconnect_0_avalon_pwm_4_avs_s0_write;               // mm_interconnect_0:avalon_pwm_4_avs_s0_write -> avalon_pwm_4:avs_s0_write
+	wire   [31:0] mm_interconnect_0_avalon_pwm_4_avs_s0_writedata;           // mm_interconnect_0:avalon_pwm_4_avs_s0_writedata -> avalon_pwm_4:avs_s0_writedata
+	wire   [31:0] mm_interconnect_0_avalon_pwm_5_avs_s0_readdata;            // avalon_pwm_5:avs_s0_readdata -> mm_interconnect_0:avalon_pwm_5_avs_s0_readdata
+	wire          mm_interconnect_0_avalon_pwm_5_avs_s0_waitrequest;         // avalon_pwm_5:avs_s0_waitrequest -> mm_interconnect_0:avalon_pwm_5_avs_s0_waitrequest
+	wire    [0:0] mm_interconnect_0_avalon_pwm_5_avs_s0_address;             // mm_interconnect_0:avalon_pwm_5_avs_s0_address -> avalon_pwm_5:avs_s0_address
+	wire          mm_interconnect_0_avalon_pwm_5_avs_s0_read;                // mm_interconnect_0:avalon_pwm_5_avs_s0_read -> avalon_pwm_5:avs_s0_read
+	wire          mm_interconnect_0_avalon_pwm_5_avs_s0_write;               // mm_interconnect_0:avalon_pwm_5_avs_s0_write -> avalon_pwm_5:avs_s0_write
+	wire   [31:0] mm_interconnect_0_avalon_pwm_5_avs_s0_writedata;           // mm_interconnect_0:avalon_pwm_5_avs_s0_writedata -> avalon_pwm_5:avs_s0_writedata
 	wire   [31:0] mm_interconnect_0_sysid_qsys_control_slave_readdata;       // sysid_qsys:readdata -> mm_interconnect_0:sysid_qsys_control_slave_readdata
 	wire    [0:0] mm_interconnect_0_sysid_qsys_control_slave_address;        // mm_interconnect_0:sysid_qsys_control_slave_address -> sysid_qsys:address
 	wire          mm_interconnect_0_dipsw_pio_s1_chipselect;                 // mm_interconnect_0:dipsw_pio_s1_chipselect -> dipsw_pio:chipselect
@@ -254,7 +289,7 @@ module soc_system (
 	wire          irq_mapper_receiver1_irq;                                  // button_pio:irq -> [irq_mapper:receiver1_irq, irq_mapper_002:receiver1_irq]
 	wire          irq_mapper_receiver2_irq;                                  // dipsw_pio:irq -> [irq_mapper:receiver2_irq, irq_mapper_002:receiver2_irq]
 	wire          irq_mapper_receiver0_irq;                                  // jtag_uart:av_irq -> [irq_mapper:receiver0_irq, irq_mapper_002:receiver0_irq]
-	wire          rst_controller_reset_out_reset;                            // rst_controller:reset_out -> [avalon_leds_0:reset_reset, avalon_pwm_0:reset_reset, button_pio:reset_n, dipsw_pio:reset_n, intr_capturer_0:rst_n, irq_mapper_002:reset, jtag_uart:rst_n, mm_interconnect_0:fpga_only_master_clk_reset_reset_bridge_in_reset_reset, mm_interconnect_0:onchip_memory2_0_reset1_reset_bridge_in_reset_reset, mm_interconnect_1:hps_only_master_clk_reset_reset_bridge_in_reset_reset, mm_interconnect_1:hps_only_master_master_translator_reset_reset_bridge_in_reset_reset, onchip_memory2_0:reset, rst_translator:in_reset, sysid_qsys:reset_n]
+	wire          rst_controller_reset_out_reset;                            // rst_controller:reset_out -> [avalon_leds_0:reset_reset, avalon_pwm_0:reset_reset, avalon_pwm_1:reset_reset, avalon_pwm_2:reset_reset, avalon_pwm_3:reset_reset, avalon_pwm_4:reset_reset, avalon_pwm_5:reset_reset, button_pio:reset_n, dipsw_pio:reset_n, intr_capturer_0:rst_n, irq_mapper_002:reset, jtag_uart:rst_n, mm_interconnect_0:fpga_only_master_clk_reset_reset_bridge_in_reset_reset, mm_interconnect_0:onchip_memory2_0_reset1_reset_bridge_in_reset_reset, mm_interconnect_1:hps_only_master_clk_reset_reset_bridge_in_reset_reset, mm_interconnect_1:hps_only_master_master_translator_reset_reset_bridge_in_reset_reset, onchip_memory2_0:reset, rst_translator:in_reset, sysid_qsys:reset_n]
 	wire          rst_controller_reset_out_reset_req;                        // rst_controller:reset_req -> [onchip_memory2_0:reset_req, rst_translator:reset_req_in]
 	wire          rst_controller_001_reset_out_reset;                        // rst_controller_001:reset_out -> [mm_interconnect_0:hps_0_h2f_axi_master_agent_clk_reset_reset_bridge_in_reset_reset, mm_interconnect_1:hps_0_f2h_axi_slave_agent_reset_sink_reset_bridge_in_reset_reset]
 
@@ -280,6 +315,66 @@ module soc_system (
 		.clock_clk          (clk_clk),                                           //  clock.clk
 		.reset_reset        (rst_controller_reset_out_reset),                    //  reset.reset
 		.pwm                (avalon_pwm_0_pwm_new_signal)                        //    pwm.new_signal
+	);
+
+	avalon_pwm avalon_pwm_1 (
+		.avs_s0_address     (mm_interconnect_0_avalon_pwm_1_avs_s0_address),     // avs_s0.address
+		.avs_s0_read        (mm_interconnect_0_avalon_pwm_1_avs_s0_read),        //       .read
+		.avs_s0_readdata    (mm_interconnect_0_avalon_pwm_1_avs_s0_readdata),    //       .readdata
+		.avs_s0_write       (mm_interconnect_0_avalon_pwm_1_avs_s0_write),       //       .write
+		.avs_s0_writedata   (mm_interconnect_0_avalon_pwm_1_avs_s0_writedata),   //       .writedata
+		.avs_s0_waitrequest (mm_interconnect_0_avalon_pwm_1_avs_s0_waitrequest), //       .waitrequest
+		.clock_clk          (clk_clk),                                           //  clock.clk
+		.reset_reset        (rst_controller_reset_out_reset),                    //  reset.reset
+		.pwm                (avalon_pwm_1_pwm_new_signal)                        //    pwm.new_signal
+	);
+
+	avalon_pwm avalon_pwm_2 (
+		.avs_s0_address     (mm_interconnect_0_avalon_pwm_2_avs_s0_address),     // avs_s0.address
+		.avs_s0_read        (mm_interconnect_0_avalon_pwm_2_avs_s0_read),        //       .read
+		.avs_s0_readdata    (mm_interconnect_0_avalon_pwm_2_avs_s0_readdata),    //       .readdata
+		.avs_s0_write       (mm_interconnect_0_avalon_pwm_2_avs_s0_write),       //       .write
+		.avs_s0_writedata   (mm_interconnect_0_avalon_pwm_2_avs_s0_writedata),   //       .writedata
+		.avs_s0_waitrequest (mm_interconnect_0_avalon_pwm_2_avs_s0_waitrequest), //       .waitrequest
+		.clock_clk          (clk_clk),                                           //  clock.clk
+		.reset_reset        (rst_controller_reset_out_reset),                    //  reset.reset
+		.pwm                (avalon_pwm_2_pwm_new_signal)                        //    pwm.new_signal
+	);
+
+	avalon_pwm avalon_pwm_3 (
+		.avs_s0_address     (mm_interconnect_0_avalon_pwm_3_avs_s0_address),     // avs_s0.address
+		.avs_s0_read        (mm_interconnect_0_avalon_pwm_3_avs_s0_read),        //       .read
+		.avs_s0_readdata    (mm_interconnect_0_avalon_pwm_3_avs_s0_readdata),    //       .readdata
+		.avs_s0_write       (mm_interconnect_0_avalon_pwm_3_avs_s0_write),       //       .write
+		.avs_s0_writedata   (mm_interconnect_0_avalon_pwm_3_avs_s0_writedata),   //       .writedata
+		.avs_s0_waitrequest (mm_interconnect_0_avalon_pwm_3_avs_s0_waitrequest), //       .waitrequest
+		.clock_clk          (clk_clk),                                           //  clock.clk
+		.reset_reset        (rst_controller_reset_out_reset),                    //  reset.reset
+		.pwm                (avalon_pwm_3_pwm_new_signal)                        //    pwm.new_signal
+	);
+
+	avalon_pwm avalon_pwm_4 (
+		.avs_s0_address     (mm_interconnect_0_avalon_pwm_4_avs_s0_address),     // avs_s0.address
+		.avs_s0_read        (mm_interconnect_0_avalon_pwm_4_avs_s0_read),        //       .read
+		.avs_s0_readdata    (mm_interconnect_0_avalon_pwm_4_avs_s0_readdata),    //       .readdata
+		.avs_s0_write       (mm_interconnect_0_avalon_pwm_4_avs_s0_write),       //       .write
+		.avs_s0_writedata   (mm_interconnect_0_avalon_pwm_4_avs_s0_writedata),   //       .writedata
+		.avs_s0_waitrequest (mm_interconnect_0_avalon_pwm_4_avs_s0_waitrequest), //       .waitrequest
+		.clock_clk          (clk_clk),                                           //  clock.clk
+		.reset_reset        (rst_controller_reset_out_reset),                    //  reset.reset
+		.pwm                (avalon_pwm_4_pwm_new_signal)                        //    pwm.new_signal
+	);
+
+	avalon_pwm avalon_pwm_5 (
+		.avs_s0_address     (mm_interconnect_0_avalon_pwm_5_avs_s0_address),     // avs_s0.address
+		.avs_s0_read        (mm_interconnect_0_avalon_pwm_5_avs_s0_read),        //       .read
+		.avs_s0_readdata    (mm_interconnect_0_avalon_pwm_5_avs_s0_readdata),    //       .readdata
+		.avs_s0_write       (mm_interconnect_0_avalon_pwm_5_avs_s0_write),       //       .write
+		.avs_s0_writedata   (mm_interconnect_0_avalon_pwm_5_avs_s0_writedata),   //       .writedata
+		.avs_s0_waitrequest (mm_interconnect_0_avalon_pwm_5_avs_s0_waitrequest), //       .waitrequest
+		.clock_clk          (clk_clk),                                           //  clock.clk
+		.reset_reset        (rst_controller_reset_out_reset),                    //  reset.reset
+		.pwm                (avalon_pwm_5_pwm_new_signal)                        //    pwm.new_signal
 	);
 
 	soc_system_button_pio button_pio (
@@ -674,6 +769,36 @@ module soc_system (
 		.avalon_pwm_0_avs_s0_readdata                                     (mm_interconnect_0_avalon_pwm_0_avs_s0_readdata),            //                                                           .readdata
 		.avalon_pwm_0_avs_s0_writedata                                    (mm_interconnect_0_avalon_pwm_0_avs_s0_writedata),           //                                                           .writedata
 		.avalon_pwm_0_avs_s0_waitrequest                                  (mm_interconnect_0_avalon_pwm_0_avs_s0_waitrequest),         //                                                           .waitrequest
+		.avalon_pwm_1_avs_s0_address                                      (mm_interconnect_0_avalon_pwm_1_avs_s0_address),             //                                        avalon_pwm_1_avs_s0.address
+		.avalon_pwm_1_avs_s0_write                                        (mm_interconnect_0_avalon_pwm_1_avs_s0_write),               //                                                           .write
+		.avalon_pwm_1_avs_s0_read                                         (mm_interconnect_0_avalon_pwm_1_avs_s0_read),                //                                                           .read
+		.avalon_pwm_1_avs_s0_readdata                                     (mm_interconnect_0_avalon_pwm_1_avs_s0_readdata),            //                                                           .readdata
+		.avalon_pwm_1_avs_s0_writedata                                    (mm_interconnect_0_avalon_pwm_1_avs_s0_writedata),           //                                                           .writedata
+		.avalon_pwm_1_avs_s0_waitrequest                                  (mm_interconnect_0_avalon_pwm_1_avs_s0_waitrequest),         //                                                           .waitrequest
+		.avalon_pwm_2_avs_s0_address                                      (mm_interconnect_0_avalon_pwm_2_avs_s0_address),             //                                        avalon_pwm_2_avs_s0.address
+		.avalon_pwm_2_avs_s0_write                                        (mm_interconnect_0_avalon_pwm_2_avs_s0_write),               //                                                           .write
+		.avalon_pwm_2_avs_s0_read                                         (mm_interconnect_0_avalon_pwm_2_avs_s0_read),                //                                                           .read
+		.avalon_pwm_2_avs_s0_readdata                                     (mm_interconnect_0_avalon_pwm_2_avs_s0_readdata),            //                                                           .readdata
+		.avalon_pwm_2_avs_s0_writedata                                    (mm_interconnect_0_avalon_pwm_2_avs_s0_writedata),           //                                                           .writedata
+		.avalon_pwm_2_avs_s0_waitrequest                                  (mm_interconnect_0_avalon_pwm_2_avs_s0_waitrequest),         //                                                           .waitrequest
+		.avalon_pwm_3_avs_s0_address                                      (mm_interconnect_0_avalon_pwm_3_avs_s0_address),             //                                        avalon_pwm_3_avs_s0.address
+		.avalon_pwm_3_avs_s0_write                                        (mm_interconnect_0_avalon_pwm_3_avs_s0_write),               //                                                           .write
+		.avalon_pwm_3_avs_s0_read                                         (mm_interconnect_0_avalon_pwm_3_avs_s0_read),                //                                                           .read
+		.avalon_pwm_3_avs_s0_readdata                                     (mm_interconnect_0_avalon_pwm_3_avs_s0_readdata),            //                                                           .readdata
+		.avalon_pwm_3_avs_s0_writedata                                    (mm_interconnect_0_avalon_pwm_3_avs_s0_writedata),           //                                                           .writedata
+		.avalon_pwm_3_avs_s0_waitrequest                                  (mm_interconnect_0_avalon_pwm_3_avs_s0_waitrequest),         //                                                           .waitrequest
+		.avalon_pwm_4_avs_s0_address                                      (mm_interconnect_0_avalon_pwm_4_avs_s0_address),             //                                        avalon_pwm_4_avs_s0.address
+		.avalon_pwm_4_avs_s0_write                                        (mm_interconnect_0_avalon_pwm_4_avs_s0_write),               //                                                           .write
+		.avalon_pwm_4_avs_s0_read                                         (mm_interconnect_0_avalon_pwm_4_avs_s0_read),                //                                                           .read
+		.avalon_pwm_4_avs_s0_readdata                                     (mm_interconnect_0_avalon_pwm_4_avs_s0_readdata),            //                                                           .readdata
+		.avalon_pwm_4_avs_s0_writedata                                    (mm_interconnect_0_avalon_pwm_4_avs_s0_writedata),           //                                                           .writedata
+		.avalon_pwm_4_avs_s0_waitrequest                                  (mm_interconnect_0_avalon_pwm_4_avs_s0_waitrequest),         //                                                           .waitrequest
+		.avalon_pwm_5_avs_s0_address                                      (mm_interconnect_0_avalon_pwm_5_avs_s0_address),             //                                        avalon_pwm_5_avs_s0.address
+		.avalon_pwm_5_avs_s0_write                                        (mm_interconnect_0_avalon_pwm_5_avs_s0_write),               //                                                           .write
+		.avalon_pwm_5_avs_s0_read                                         (mm_interconnect_0_avalon_pwm_5_avs_s0_read),                //                                                           .read
+		.avalon_pwm_5_avs_s0_readdata                                     (mm_interconnect_0_avalon_pwm_5_avs_s0_readdata),            //                                                           .readdata
+		.avalon_pwm_5_avs_s0_writedata                                    (mm_interconnect_0_avalon_pwm_5_avs_s0_writedata),           //                                                           .writedata
+		.avalon_pwm_5_avs_s0_waitrequest                                  (mm_interconnect_0_avalon_pwm_5_avs_s0_waitrequest),         //                                                           .waitrequest
 		.button_pio_s1_address                                            (mm_interconnect_0_button_pio_s1_address),                   //                                              button_pio_s1.address
 		.button_pio_s1_write                                              (mm_interconnect_0_button_pio_s1_write),                     //                                                           .write
 		.button_pio_s1_readdata                                           (mm_interconnect_0_button_pio_s1_readdata),                  //                                                           .readdata
