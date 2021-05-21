@@ -44,4 +44,3 @@ To use this kernel module you must have the kernel headers necessary for your ke
 * To clean the compiled files use:
 > > `make clean`
 * To ask for help use:
-> > `make help`

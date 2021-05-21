@@ -4,4 +4,13 @@ Files to communicate with FPGA synthetized hardware using the *mem* device locat
 
 ## Custom LEDs
 
-Userspace app that comunicates with the LEDs connected to the FPGA in the DE0 Nano SoC development board. For more documentation read the README.md file inside the custom_leds folder.
+Userspace app that comunicates with the LEDs connected to the FPGA in the DE0 Nano SoC development board. 
+For more documentation read the README.md file inside the custom_leds folder.
+
+## Avalon LEDs
+
+Userspace app that comunicates with the LEDs connected to the FPGA in the DE0 Nano SoC development board. For more documentation read the README.md file inside the avalon_leds folder.
+
+## Avalon PWM
+
+Userspace app that comunicates with the PWM module in the FPGA. For more documentation read the README.md file inside the avalon_pwm folder.

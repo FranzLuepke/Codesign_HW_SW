@@ -4,7 +4,7 @@ module avalon_leds
 (
 	input  wire        avs_s0_address,     //	avs_s0.address
 	input  wire        avs_s0_read,        //	.read
-	output wire [31:0] avs_s0_readdata,    //	.readdata
+	output reg	[31:0] avs_s0_readdata,    //	.readdata
 	input  wire        avs_s0_write,       //	.write
 	input  wire [31:0] avs_s0_writedata,   //	.writedata
 	output wire        avs_s0_waitrequest, //	.waitrequest
@@ -19,9 +19,9 @@ module avalon_leds
 	// READ
 	always@(*)
 		begin
-			if(avalon_slave_read)
+			if(avs_s0_read)
 				begin
-					case(avalon_slave_address)
+					case(avs_s0_address)
 						1'b0		:	avs_s0_readdata	=	{26'b0,leds};
 						default	:	avs_s0_readdata	=	32'b0;				
 					endcase
