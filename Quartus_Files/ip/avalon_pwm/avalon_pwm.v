@@ -10,7 +10,7 @@ module avalon_pwm
 	output wire        avs_s0_waitrequest, //	.waitrequest
 	input  wire        clock_clk,          //	clock.clk
 	input  wire        reset_reset,        //	reset.reset
-	output wire [7:0]  pwm                 //	pwm.new_signal
+	output reg	[7:0]  pwm                 //	pwm.new_signal
 );
 	// REGS
 	reg		busy						= 1'b0;
