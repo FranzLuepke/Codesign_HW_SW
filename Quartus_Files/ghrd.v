@@ -305,8 +305,13 @@ module ghrd
 		.dipsw_pio_external_connection_export	(SW),								//	dipsw_pio_external_connection.export
 		.button_pio_external_connection_export	(fpga_debounced_buttons),	// button_pio_external_connection.export
 		// Custom components
-		.avalon_leds_0_leds_new_signal			(fpga_led_internal),							//	custom_leds_0_leds.new_signal
-		.avalon_pwm_0_pwm_new_signal           (PWM_Data_1)			//	avalon_pwm_0_pwm.new_signal
+		.avalon_leds_0_leds_new_signal			(fpga_led_internal),			//	custom_leds_0_leds.new_signal
+		.avalon_pwm_0_pwm_new_signal           (PWM_Data_1),					//	avalon_pwm_0_pwm.new_signal
+		.avalon_pwm_1_pwm_new_signal           (PWM_Data_2),					//	avalon_pwm_1_pwm.new_signal
+		.avalon_pwm_2_pwm_new_signal           (PWM_Data_3),					//	avalon_pwm_2_pwm.new_signal
+		.avalon_pwm_3_pwm_new_signal           (PWM_Data_4),					//	avalon_pwm_3_pwm.new_signal
+		.avalon_pwm_4_pwm_new_signal           (PWM_Data_5),					//	avalon_pwm_4_pwm.new_signal
+		.avalon_pwm_5_pwm_new_signal           (PWM_Data_6)					//	avalon_pwm_5_pwm.new_signal
 	);
 	// ********** Custom Robocol modules **********
 	// --- Debouncers ---
@@ -347,11 +352,11 @@ module ghrd
 	RPM RPM6(CLK_scaled, Count_6, RPM_Measured_6);
 	// --- PID ---
 	//PID_Control PID_1(CLK_scaled, $signed($signed({8'b0,RPM_L})*$signed(Dir_L)),  RPM_Measured_1, GPIO_0[18], GPIO_0[19], PWM_Data_1);
-	PID_Control PID_2(CLK_scaled, $signed($signed({8'b0,RPM_L})*$signed(Dir_L)),  RPM_Measured_2, GPIO_0[20], GPIO_0[21], PWM_Data_2);
-	PID_Control PID_3(CLK_scaled, $signed($signed({8'b0,RPM_L})*$signed(Dir_L)),  RPM_Measured_3, GPIO_0[22], GPIO_0[23], PWM_Data_3);
-	PID_Control PID_4(CLK_scaled, $signed($signed({8'b0,RPM_R})*$signed(Dir_R)), -RPM_Measured_4, GPIO_0[24], GPIO_0[25], PWM_Data_4);
-	PID_Control PID_5(CLK_scaled, $signed($signed({8'b0,RPM_R})*$signed(Dir_R)), -RPM_Measured_5, GPIO_0[26], GPIO_0[27], PWM_Data_5);
-	PID_Control PID_6(CLK_scaled, $signed($signed({8'b0,RPM_R})*$signed(Dir_R)), -RPM_Measured_6, GPIO_0[28], GPIO_0[29], PWM_Data_6);
+	//PID_Control PID_2(CLK_scaled, $signed($signed({8'b0,RPM_L})*$signed(Dir_L)),  RPM_Measured_2, GPIO_0[20], GPIO_0[21], PWM_Data_2);
+	//PID_Control PID_3(CLK_scaled, $signed($signed({8'b0,RPM_L})*$signed(Dir_L)),  RPM_Measured_3, GPIO_0[22], GPIO_0[23], PWM_Data_3);
+	//PID_Control PID_4(CLK_scaled, $signed($signed({8'b0,RPM_R})*$signed(Dir_R)), -RPM_Measured_4, GPIO_0[24], GPIO_0[25], PWM_Data_4);
+	//PID_Control PID_5(CLK_scaled, $signed($signed({8'b0,RPM_R})*$signed(Dir_R)), -RPM_Measured_5, GPIO_0[26], GPIO_0[27], PWM_Data_5);
+	//PID_Control PID_6(CLK_scaled, $signed($signed({8'b0,RPM_R})*$signed(Dir_R)), -RPM_Measured_6, GPIO_0[28], GPIO_0[29], PWM_Data_6);
 	// --- PWM ---
 	PWM_Generator PWM_1(FPGA_CLK1_50, !KEY[0], PWM_Data_1, GPIO_0[12]);
 	PWM_Generator PWM_2(FPGA_CLK1_50, !KEY[0], PWM_Data_2, GPIO_0[13]);
