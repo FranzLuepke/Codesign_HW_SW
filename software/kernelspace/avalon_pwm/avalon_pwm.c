@@ -5,6 +5,9 @@
 #include <linux/fs.h>
 #include <linux/types.h>
 #include <linux/uaccess.h>
+// Variables
+static int number_devices = 0;
+static char *arr[] = { "avalon_pwm_0", "avalon_pwm_1", "avalon_pwm_2", "avalon_pwm_3", "avalon_pwm_4", "avalon_pwm_5"};
 // Prototypes
 static int dev_open(struct inode *, struct file *);
 static int dev_release(struct inode *, struct file *);
@@ -74,6 +77,7 @@ static int pwm_probe(struct platform_device *pdev)
     int ret_val = -EBUSY;
     struct avalon_pwm_dev *dev;
     struct resource *r = 0;
+    number_devices += 1;
     pr_info(" pwm_probe: enter\n");
     // Get the memory resources for this PWM device
     r = platform_get_resource(pdev, IORESOURCE_MEM, 0);
@@ -93,9 +97,10 @@ static int pwm_probe(struct platform_device *pdev)
     // Puts PWM in 0 value (access the 0th register in the avalon PWM module)
     dev->pwm_value = 0x00;
     iowrite32(dev->pwm_value, dev->regs);
+    pr_info(" pwm_probe: Registering %s device.\n", arr[number_devices-1]);
     // Initialize the misc device (this is used to create a character file in userspace)
     dev->miscdev.minor = MISC_DYNAMIC_MINOR;    // Dynamically choose a minor number
-    dev->miscdev.name = "avalon_pwm";
+    dev->miscdev.name = arr[number_devices-1];
     dev->miscdev.fops = &avalon_pwm_fops;
     ret_val = misc_register(&dev->miscdev);
     if(ret_val != 0)
