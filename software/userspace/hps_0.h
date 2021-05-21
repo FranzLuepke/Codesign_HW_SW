@@ -64,18 +64,62 @@
 #define SYSID_QSYS_SPAN 8
 #define SYSID_QSYS_END 0x10007
 #define SYSID_QSYS_ID 2899645186
-#define SYSID_QSYS_TIMESTAMP 1621545624
+#define SYSID_QSYS_TIMESTAMP 1621552282
 
 /*
- * Macros for device 'avalon_leds_0', class 'avalon_leds'
- * The macros are prefixed with 'AVALON_LEDS_0_'.
+ * Macros for device 'avalon_pwm_5', class 'avalon_pwm'
+ * The macros are prefixed with 'AVALON_PWM_5_'.
  * The prefix is the slave descriptor.
  */
-#define AVALON_LEDS_0_COMPONENT_TYPE avalon_leds
-#define AVALON_LEDS_0_COMPONENT_NAME avalon_leds_0
-#define AVALON_LEDS_0_BASE 0x10008
-#define AVALON_LEDS_0_SPAN 8
-#define AVALON_LEDS_0_END 0x1000f
+#define AVALON_PWM_5_COMPONENT_TYPE avalon_pwm
+#define AVALON_PWM_5_COMPONENT_NAME avalon_pwm_5
+#define AVALON_PWM_5_BASE 0x10008
+#define AVALON_PWM_5_SPAN 8
+#define AVALON_PWM_5_END 0x1000f
+
+/*
+ * Macros for device 'avalon_pwm_4', class 'avalon_pwm'
+ * The macros are prefixed with 'AVALON_PWM_4_'.
+ * The prefix is the slave descriptor.
+ */
+#define AVALON_PWM_4_COMPONENT_TYPE avalon_pwm
+#define AVALON_PWM_4_COMPONENT_NAME avalon_pwm_4
+#define AVALON_PWM_4_BASE 0x10010
+#define AVALON_PWM_4_SPAN 8
+#define AVALON_PWM_4_END 0x10017
+
+/*
+ * Macros for device 'avalon_pwm_3', class 'avalon_pwm'
+ * The macros are prefixed with 'AVALON_PWM_3_'.
+ * The prefix is the slave descriptor.
+ */
+#define AVALON_PWM_3_COMPONENT_TYPE avalon_pwm
+#define AVALON_PWM_3_COMPONENT_NAME avalon_pwm_3
+#define AVALON_PWM_3_BASE 0x10018
+#define AVALON_PWM_3_SPAN 8
+#define AVALON_PWM_3_END 0x1001f
+
+/*
+ * Macros for device 'avalon_pwm_2', class 'avalon_pwm'
+ * The macros are prefixed with 'AVALON_PWM_2_'.
+ * The prefix is the slave descriptor.
+ */
+#define AVALON_PWM_2_COMPONENT_TYPE avalon_pwm
+#define AVALON_PWM_2_COMPONENT_NAME avalon_pwm_2
+#define AVALON_PWM_2_BASE 0x10020
+#define AVALON_PWM_2_SPAN 8
+#define AVALON_PWM_2_END 0x10027
+
+/*
+ * Macros for device 'avalon_pwm_1', class 'avalon_pwm'
+ * The macros are prefixed with 'AVALON_PWM_1_'.
+ * The prefix is the slave descriptor.
+ */
+#define AVALON_PWM_1_COMPONENT_TYPE avalon_pwm
+#define AVALON_PWM_1_COMPONENT_NAME avalon_pwm_1
+#define AVALON_PWM_1_BASE 0x10028
+#define AVALON_PWM_1_SPAN 8
+#define AVALON_PWM_1_END 0x1002f
 
 /*
  * Macros for device 'avalon_pwm_0', class 'avalon_pwm'
@@ -84,9 +128,20 @@
  */
 #define AVALON_PWM_0_COMPONENT_TYPE avalon_pwm
 #define AVALON_PWM_0_COMPONENT_NAME avalon_pwm_0
-#define AVALON_PWM_0_BASE 0x10010
+#define AVALON_PWM_0_BASE 0x10030
 #define AVALON_PWM_0_SPAN 8
-#define AVALON_PWM_0_END 0x10017
+#define AVALON_PWM_0_END 0x10037
+
+/*
+ * Macros for device 'avalon_leds_0', class 'avalon_leds'
+ * The macros are prefixed with 'AVALON_LEDS_0_'.
+ * The prefix is the slave descriptor.
+ */
+#define AVALON_LEDS_0_COMPONENT_TYPE avalon_leds
+#define AVALON_LEDS_0_COMPONENT_NAME avalon_leds_0
+#define AVALON_LEDS_0_BASE 0x10038
+#define AVALON_LEDS_0_SPAN 8
+#define AVALON_LEDS_0_END 0x1003f
 
 /*
  * Macros for device 'dipsw_pio', class 'altera_avalon_pio'

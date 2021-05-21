@@ -13,7 +13,12 @@
 int main(int argc, char ** argv)
 {
 	void * lw_bridge_map = 0;
-	uint32_t * pwm_map = 0;
+	uint32_t * pwm_0_map = 0;
+	uint32_t * pwm_1_map = 0;
+	uint32_t * pwm_2_map = 0;
+	uint32_t * pwm_3_map = 0;
+	uint32_t * pwm_4_map = 0;
+	uint32_t * pwm_5_map = 0;
 	int devmem_fd = 0;
 	int result = 0;
 	int pwm_value = 0;
@@ -41,10 +46,20 @@ int main(int argc, char ** argv)
 		exit(EXIT_FAILURE);
 	}
 	// Set the pwm_map to the correct offset within the RAM (AVALON_PWM_0_BASE is from "hps_0.h")
-	pwm_map = (uint32_t*)(lw_bridge_map + AVALON_PWM_0_BASE);
+	pwm_0_map = (uint32_t*)(lw_bridge_map + AVALON_PWM_0_BASE);
+	pwm_1_map = (uint32_t*)(lw_bridge_map + AVALON_PWM_1_BASE);
+	pwm_2_map = (uint32_t*)(lw_bridge_map + AVALON_PWM_2_BASE);
+	pwm_3_map = (uint32_t*)(lw_bridge_map + AVALON_PWM_3_BASE);
+	pwm_4_map = (uint32_t*)(lw_bridge_map + AVALON_PWM_4_BASE);
+	pwm_5_map = (uint32_t*)(lw_bridge_map + AVALON_PWM_5_BASE);
 	// Blink the LED ten times
 	printf(" PWM: %d\n", pwm_value);
-	*pwm_map = pwm_value;
+	*pwm_0_map = pwm_value;
+	*pwm_1_map = pwm_value;
+	*pwm_2_map = pwm_value;
+	*pwm_3_map = pwm_value;
+	*pwm_4_map = pwm_value;
+	*pwm_5_map = pwm_value;
 	// for(int i = 0; i < pwm_value; ++i)
 	// {
 	// 	// Turn all LEDs on
