@@ -17,12 +17,12 @@ module avalon_pwm
 	// ASSIGNS
 	assign	avs_s0_waitrequest	= busy;
 	// READ
-	always@(*)
+	always@(avs_s0_read)
 		begin
 			if(avs_s0_read)
 				begin
 					case(avs_s0_address)
-						1'b0		:	avs_s0_readdata	=	{26'b0,pwm};
+						1'b0		:	avs_s0_readdata	=	{24'b0,pwm};
 						default	:	avs_s0_readdata	=	32'b0;				
 					endcase
 				end
