@@ -52,25 +52,13 @@ int main(int argc, char ** argv)
 	pwm_3_map = (uint32_t*)(lw_bridge_map + AVALON_PWM_3_BASE);
 	pwm_4_map = (uint32_t*)(lw_bridge_map + AVALON_PWM_4_BASE);
 	pwm_5_map = (uint32_t*)(lw_bridge_map + AVALON_PWM_5_BASE);
-	// Blink the LED ten times
-	printf(" PWM: %d\n", pwm_value);
+	printf(" Changing all PWM outputs to: %d\n", pwm_value);
 	*pwm_0_map = pwm_value;
 	*pwm_1_map = pwm_value;
 	*pwm_2_map = pwm_value;
 	*pwm_3_map = pwm_value;
 	*pwm_4_map = pwm_value;
 	*pwm_5_map = pwm_value;
-	// for(int i = 0; i < pwm_value; ++i)
-	// {
-	// 	// Turn all LEDs on
-		
-	// 	// Wait half a second
-	// 	usleep(500000);
-	// 	// Turn all the LEDS off
-	// 	*pwm_map = 0x00;
-	// 	// Wait half a second
-	// 	usleep(500000);
-	// }
 	printf("Done!\n");
 	// Unmap everything and close the /dev/mem file descriptor
 	result = munmap(lw_bridge_map, HPS_TO_FPGA_LW_SPAN); 

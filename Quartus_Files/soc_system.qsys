@@ -9,6 +9,102 @@
    categories="System" />
  <parameter name="bonusData"><![CDATA[bonusData 
 {
+   element avalon_encoder_0
+   {
+      datum _sortIndex
+      {
+         value = "17";
+         type = "int";
+      }
+   }
+   element avalon_encoder_0.avs_s0
+   {
+      datum baseAddress
+      {
+         value = "65584";
+         type = "String";
+      }
+   }
+   element avalon_encoder_1
+   {
+      datum _sortIndex
+      {
+         value = "18";
+         type = "int";
+      }
+   }
+   element avalon_encoder_1.avs_s0
+   {
+      datum baseAddress
+      {
+         value = "65576";
+         type = "String";
+      }
+   }
+   element avalon_encoder_2
+   {
+      datum _sortIndex
+      {
+         value = "19";
+         type = "int";
+      }
+   }
+   element avalon_encoder_2.avs_s0
+   {
+      datum baseAddress
+      {
+         value = "65568";
+         type = "String";
+      }
+   }
+   element avalon_encoder_3
+   {
+      datum _sortIndex
+      {
+         value = "20";
+         type = "int";
+      }
+   }
+   element avalon_encoder_3.avs_s0
+   {
+      datum baseAddress
+      {
+         value = "65560";
+         type = "String";
+      }
+   }
+   element avalon_encoder_4
+   {
+      datum _sortIndex
+      {
+         value = "21";
+         type = "int";
+      }
+   }
+   element avalon_encoder_4.avs_s0
+   {
+      datum baseAddress
+      {
+         value = "65552";
+         type = "String";
+      }
+   }
+   element avalon_encoder_5
+   {
+      datum _sortIndex
+      {
+         value = "22";
+         type = "int";
+      }
+   }
+   element avalon_encoder_5.avs_s0
+   {
+      datum baseAddress
+      {
+         value = "65544";
+         type = "String";
+      }
+   }
    element avalon_leds_0
    {
       datum _sortIndex
@@ -21,7 +117,7 @@
    {
       datum baseAddress
       {
-         value = "65592";
+         value = "65640";
          type = "String";
       }
    }
@@ -37,7 +133,7 @@
    {
       datum baseAddress
       {
-         value = "65584";
+         value = "65632";
          type = "String";
       }
    }
@@ -53,7 +149,7 @@
    {
       datum baseAddress
       {
-         value = "65576";
+         value = "65624";
          type = "String";
       }
    }
@@ -69,7 +165,7 @@
    {
       datum baseAddress
       {
-         value = "65568";
+         value = "65616";
          type = "String";
       }
    }
@@ -85,7 +181,7 @@
    {
       datum baseAddress
       {
-         value = "65560";
+         value = "65608";
          type = "String";
       }
    }
@@ -101,7 +197,7 @@
    {
       datum baseAddress
       {
-         value = "65552";
+         value = "65600";
          type = "String";
       }
    }
@@ -117,7 +213,7 @@
    {
       datum baseAddress
       {
-         value = "65544";
+         value = "65592";
          type = "String";
       }
    }
@@ -333,6 +429,36 @@
  <parameter name="useTestBenchNamingPattern" value="false" />
  <instanceScript></instanceScript>
  <interface
+   name="avalon_encoder_0_count"
+   internal="avalon_encoder_0.count"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="avalon_encoder_1_count"
+   internal="avalon_encoder_1.count"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="avalon_encoder_2_count"
+   internal="avalon_encoder_2.count"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="avalon_encoder_3_count"
+   internal="avalon_encoder_3.count"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="avalon_encoder_4_count"
+   internal="avalon_encoder_4.count"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="avalon_encoder_5_count"
+   internal="avalon_encoder_5.count"
+   type="conduit"
+   dir="end" />
+ <interface
    name="avalon_leds_0_leds"
    internal="avalon_leds_0.leds"
    type="conduit"
@@ -407,6 +533,36 @@
  <interface name="hps_0_hps_io" internal="hps_0.hps_io" type="conduit" dir="end" />
  <interface name="memory" internal="hps_0.memory" type="conduit" dir="end" />
  <interface name="reset" internal="clk_0.clk_in_reset" type="reset" dir="end" />
+ <module
+   name="avalon_encoder_0"
+   kind="avalon_encoder"
+   version="1.0"
+   enabled="1" />
+ <module
+   name="avalon_encoder_1"
+   kind="avalon_encoder"
+   version="1.0"
+   enabled="1" />
+ <module
+   name="avalon_encoder_2"
+   kind="avalon_encoder"
+   version="1.0"
+   enabled="1" />
+ <module
+   name="avalon_encoder_3"
+   kind="avalon_encoder"
+   version="1.0"
+   enabled="1" />
+ <module
+   name="avalon_encoder_4"
+   kind="avalon_encoder"
+   version="1.0"
+   enabled="1" />
+ <module
+   name="avalon_encoder_5"
+   kind="avalon_encoder"
+   version="1.0"
+   enabled="1" />
  <module name="avalon_leds_0" kind="avalon_leds" version="1.0" enabled="1" />
  <module name="avalon_pwm_0" kind="avalon_pwm" version="1.0" enabled="1" />
  <module name="avalon_pwm_1" kind="avalon_pwm" version="1.0" enabled="1" />
@@ -1096,7 +1252,7 @@
    start="hps_0.h2f_lw_axi_master"
    end="avalon_leds_0.avs_s0">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x00010038" />
+  <parameter name="baseAddress" value="0x00010068" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -1105,7 +1261,7 @@
    start="hps_0.h2f_lw_axi_master"
    end="avalon_pwm_0.avs_s0">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x00010030" />
+  <parameter name="baseAddress" value="0x00010060" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -1114,7 +1270,7 @@
    start="hps_0.h2f_lw_axi_master"
    end="avalon_pwm_1.avs_s0">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x00010028" />
+  <parameter name="baseAddress" value="0x00010058" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -1123,7 +1279,7 @@
    start="hps_0.h2f_lw_axi_master"
    end="avalon_pwm_2.avs_s0">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x00010020" />
+  <parameter name="baseAddress" value="0x00010050" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -1132,7 +1288,7 @@
    start="hps_0.h2f_lw_axi_master"
    end="avalon_pwm_3.avs_s0">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x00010018" />
+  <parameter name="baseAddress" value="0x00010048" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -1141,7 +1297,7 @@
    start="hps_0.h2f_lw_axi_master"
    end="avalon_pwm_4.avs_s0">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x00010010" />
+  <parameter name="baseAddress" value="0x00010040" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -1149,6 +1305,60 @@
    version="19.1"
    start="hps_0.h2f_lw_axi_master"
    end="avalon_pwm_5.avs_s0">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x00010038" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="19.1"
+   start="hps_0.h2f_lw_axi_master"
+   end="avalon_encoder_0.avs_s0">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x00010030" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="19.1"
+   start="hps_0.h2f_lw_axi_master"
+   end="avalon_encoder_1.avs_s0">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x00010028" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="19.1"
+   start="hps_0.h2f_lw_axi_master"
+   end="avalon_encoder_2.avs_s0">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x00010020" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="19.1"
+   start="hps_0.h2f_lw_axi_master"
+   end="avalon_encoder_3.avs_s0">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x00010018" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="19.1"
+   start="hps_0.h2f_lw_axi_master"
+   end="avalon_encoder_4.avs_s0">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x00010010" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="19.1"
+   start="hps_0.h2f_lw_axi_master"
+   end="avalon_encoder_5.avs_s0">
   <parameter name="arbitrationPriority" value="1" />
   <parameter name="baseAddress" value="0x00010008" />
   <parameter name="defaultConnection" value="false" />
@@ -1204,7 +1414,7 @@
    start="fpga_only_master.master"
    end="avalon_leds_0.avs_s0">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x00010038" />
+  <parameter name="baseAddress" value="0x00010068" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -1213,7 +1423,7 @@
    start="fpga_only_master.master"
    end="avalon_pwm_0.avs_s0">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x00010030" />
+  <parameter name="baseAddress" value="0x00010060" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -1222,7 +1432,7 @@
    start="fpga_only_master.master"
    end="avalon_pwm_1.avs_s0">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x00010028" />
+  <parameter name="baseAddress" value="0x00010058" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -1231,7 +1441,7 @@
    start="fpga_only_master.master"
    end="avalon_pwm_2.avs_s0">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x00010020" />
+  <parameter name="baseAddress" value="0x00010050" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -1240,7 +1450,7 @@
    start="fpga_only_master.master"
    end="avalon_pwm_3.avs_s0">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x00010018" />
+  <parameter name="baseAddress" value="0x00010048" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -1249,7 +1459,7 @@
    start="fpga_only_master.master"
    end="avalon_pwm_4.avs_s0">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x00010010" />
+  <parameter name="baseAddress" value="0x00010040" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -1257,6 +1467,60 @@
    version="19.1"
    start="fpga_only_master.master"
    end="avalon_pwm_5.avs_s0">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x00010038" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="19.1"
+   start="fpga_only_master.master"
+   end="avalon_encoder_0.avs_s0">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x00010030" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="19.1"
+   start="fpga_only_master.master"
+   end="avalon_encoder_1.avs_s0">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x00010028" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="19.1"
+   start="fpga_only_master.master"
+   end="avalon_encoder_2.avs_s0">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x00010020" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="19.1"
+   start="fpga_only_master.master"
+   end="avalon_encoder_3.avs_s0">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x00010018" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="19.1"
+   start="fpga_only_master.master"
+   end="avalon_encoder_4.avs_s0">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x00010010" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="19.1"
+   start="fpga_only_master.master"
+   end="avalon_encoder_5.avs_s0">
   <parameter name="arbitrationPriority" value="1" />
   <parameter name="baseAddress" value="0x00010008" />
   <parameter name="defaultConnection" value="false" />
@@ -1365,6 +1629,36 @@
    version="19.1"
    start="clk_0.clk"
    end="avalon_pwm_5.clock" />
+ <connection
+   kind="clock"
+   version="19.1"
+   start="clk_0.clk"
+   end="avalon_encoder_0.clock" />
+ <connection
+   kind="clock"
+   version="19.1"
+   start="clk_0.clk"
+   end="avalon_encoder_1.clock" />
+ <connection
+   kind="clock"
+   version="19.1"
+   start="clk_0.clk"
+   end="avalon_encoder_2.clock" />
+ <connection
+   kind="clock"
+   version="19.1"
+   start="clk_0.clk"
+   end="avalon_encoder_3.clock" />
+ <connection
+   kind="clock"
+   version="19.1"
+   start="clk_0.clk"
+   end="avalon_encoder_4.clock" />
+ <connection
+   kind="clock"
+   version="19.1"
+   start="clk_0.clk"
+   end="avalon_encoder_5.clock" />
  <connection
    kind="clock"
    version="19.1"
@@ -1487,6 +1781,36 @@
    version="19.1"
    start="clk_0.clk_reset"
    end="avalon_pwm_5.reset" />
+ <connection
+   kind="reset"
+   version="19.1"
+   start="clk_0.clk_reset"
+   end="avalon_encoder_0.reset" />
+ <connection
+   kind="reset"
+   version="19.1"
+   start="clk_0.clk_reset"
+   end="avalon_encoder_1.reset" />
+ <connection
+   kind="reset"
+   version="19.1"
+   start="clk_0.clk_reset"
+   end="avalon_encoder_2.reset" />
+ <connection
+   kind="reset"
+   version="19.1"
+   start="clk_0.clk_reset"
+   end="avalon_encoder_3.reset" />
+ <connection
+   kind="reset"
+   version="19.1"
+   start="clk_0.clk_reset"
+   end="avalon_encoder_5.reset" />
+ <connection
+   kind="reset"
+   version="19.1"
+   start="clk_0.clk_reset"
+   end="avalon_encoder_4.reset" />
  <connection
    kind="reset"
    version="19.1"

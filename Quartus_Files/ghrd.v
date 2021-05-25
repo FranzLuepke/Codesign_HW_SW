@@ -137,10 +137,10 @@ module ghrd
 	// PWM data
 	wire [7:0] PWM_Data_1, PWM_Data_2, PWM_Data_3, PWM_Data_4, PWM_Data_5, PWM_Data_6;
 	// PID
-	wire [7:0] RPM_L = 0;
-	wire [7:0] RPM_R = 0;
-	wire [1:0] Dir_L = 0;
-	wire [1:0] Dir_R = 0;
+//	wire [7:0] RPM_L = 0;
+//	wire [7:0] RPM_R = 0;
+//	wire [1:0] Dir_L = 0;
+//	wire [1:0] Dir_R = 0;
 	// Enable
 	wire En_1, En_2, En_3, En_4, En_5, En_6;
 	wire [7:0] RPM_Enable;
@@ -306,12 +306,20 @@ module ghrd
 		.button_pio_external_connection_export	(fpga_debounced_buttons),	// button_pio_external_connection.export
 		// Custom components
 		.avalon_leds_0_leds_new_signal			(fpga_led_internal),			//	custom_leds_0_leds.new_signal
+		// PWM signals
 		.avalon_pwm_0_pwm_new_signal           (PWM_Data_1),					//	avalon_pwm_0_pwm.new_signal
 		.avalon_pwm_1_pwm_new_signal           (PWM_Data_2),					//	avalon_pwm_1_pwm.new_signal
 		.avalon_pwm_2_pwm_new_signal           (PWM_Data_3),					//	avalon_pwm_2_pwm.new_signal
 		.avalon_pwm_3_pwm_new_signal           (PWM_Data_4),					//	avalon_pwm_3_pwm.new_signal
 		.avalon_pwm_4_pwm_new_signal           (PWM_Data_5),					//	avalon_pwm_4_pwm.new_signal
-		.avalon_pwm_5_pwm_new_signal           (PWM_Data_6)					//	avalon_pwm_5_pwm.new_signal
+		.avalon_pwm_5_pwm_new_signal           (PWM_Data_6),					//	avalon_pwm_5_pwm.new_signal
+		// Encoder signals
+		.avalon_encoder_0_count_new_signal     (Count_1),						//	avalon_encoder_0_count.new_signal
+		.avalon_encoder_1_count_new_signal     (Count_2),						//	avalon_encoder_1_count.new_signal
+		.avalon_encoder_2_count_new_signal     (Count_3),						//	avalon_encoder_2_count.new_signal
+		.avalon_encoder_3_count_new_signal     (Count_4),						//	avalon_encoder_3_count.new_signal
+		.avalon_encoder_4_count_new_signal     (Count_5),						//	avalon_encoder_4_count.new_signal
+		.avalon_encoder_5_count_new_signal     (Count_6)						//	avalon_encoder_5_count.new_signal
 	);
 	// ********** Custom Robocol modules **********
 	// --- Debouncers ---
