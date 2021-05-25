@@ -207,6 +207,6 @@ module_init(leds_init);
 module_exit(leds_exit);
 // Define information about this kernel module
 MODULE_LICENSE("GPL");
-MODULE_AUTHOR("Devon Andrade <devon.andrade@oit.edu>");
+MODULE_AUTHOR("Franz Luepke <fk.luepke146@uniandes.edu.co>");
 MODULE_DESCRIPTION("Exposes a character device to user space that lets users turn LEDs on and off");
 MODULE_VERSION("1.0");

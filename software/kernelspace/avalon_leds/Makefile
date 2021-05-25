@@ -10,5 +10,6 @@ clean:
 
 help:
 	$(MAKE) -C $(KDIR) ARCH=arm M=$(CURDIR) help
+
 install:
 	scp $(TARGET).ko root@${HOST}:/root/$(TARGET)
