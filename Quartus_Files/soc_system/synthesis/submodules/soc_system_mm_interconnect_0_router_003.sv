@@ -206,7 +206,7 @@ module soc_system_mm_interconnect_0_router_003
     // ( 0x10008 .. 0x10010 )
     if ( {address[RG:PAD1],{PAD1{1'b0}}} == 18'h10008   ) begin
             src_channel = 7'b00010;
-            src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 1;
+            src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 0;
     end
 
     // ( 0x10080 .. 0x10090 )
@@ -218,7 +218,7 @@ module soc_system_mm_interconnect_0_router_003
     // ( 0x100c0 .. 0x100d0 )
     if ( {address[RG:PAD3],{PAD3{1'b0}}} == 18'h100c0   ) begin
             src_channel = 7'b10000;
-            src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 0;
+            src_data[PKT_DEST_ID_H:PKT_DEST_ID_L] = 1;
     end
 
     // ( 0x20000 .. 0x20008 )
