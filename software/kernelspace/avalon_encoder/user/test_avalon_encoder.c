@@ -1,11 +1,11 @@
 /**
- * @file   test_avalon_pwm.c
+ * @file   test_avalon_encoder.c
  * @author Franz Luepke
  * @date   8 March 2021
  * @version 0.1
- * @brief  A Linux user space program that communicates with the avalon_pwm.c LKM. It passes a
+ * @brief  A Linux user space program that communicates with the avalon_encoder.c LKM. It passes a
  * int to the LKM and the PWM change with this number. For this example to work the device
- * must be called /dev/avalon_pwm_x.
+ * must be called /dev/avalon_encoder_x.
 */
 #include<stdio.h>
 #include<stdlib.h>
@@ -15,7 +15,7 @@
 #include<unistd.h>
 // DEFINITIONS
 #define DEVICES 6			// Number of devices of the same type
-#define BUFFER_LENGTH 256	// The buffer length (crude but fine)
+#define BUFFER_LENGTH 100	// The buffer length (crude but fine)
 #define LOOP_DELAY 10000	// Delay in us
 // STATIC CHARS
 static char receive[BUFFER_LENGTH];	// The receive buffer from the LKM
@@ -31,7 +31,7 @@ int main()
 	printf("  Open devices...\n");
 	for (int i = 0; i < DEVICES; ++i)
 	{
-		char dev_path[BUFFER_LENGTH] = "/dev/avalon_pwm_";
+		char dev_path[BUFFER_LENGTH] = "/dev/avalon_encoder_";
 		sprintf(buffer, "%d", i);
 		strcat(dev_path, buffer);
 		// path = dev[i];
@@ -56,18 +56,13 @@ int main()
 		printf("   The received message is: ");
 		for (int i = 0; i < DEVICES; ++i)
 		{
-			ret[i] = read(fd[i], &receive, BUFFER_LENGTH); // Read the response from the LKM
+			ret[i] = read(fd[i], receive, BUFFER_LENGTH); // Read the response from the LKM
 			if (ret[i] < 0)
 			{
 				perror("   Failed to read the message from the device.");
 				return errno;
 			}
-			// printf("read(%d) %d bytes.", fd[i], ret[i]);
-			// c[ret[i]] = '\0';
-			// printf("[%s] ", c);
-			printf("[%d] ", receive[0]);
-			// printf("[%02x] ", receive); 
-			// printf("<0x%x>\n", receive);
+			printf("[%x] ", receive[0]);
 		}
 		printf("\r");
 		usleep(LOOP_DELAY);

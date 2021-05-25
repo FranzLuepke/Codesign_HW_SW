@@ -134,7 +134,7 @@ static ssize_t pwm_read(struct file *file, char *buffer, size_t len, loff_t *off
     pr_info(" pwm_read: enter\n");
     // Give the user the current pwm value
     success = copy_to_user(buffer, &dev->pwm_value, sizeof(dev->pwm_value));
-    pr_info(" pwm_read: value -> %u\n", &dev->pwm_value);
+    pr_info(" pwm_read: value -> %d\n", &dev->pwm_value);
     // If we failed to copy the value to userspace, display an error message
     if(success != 0)
     {
