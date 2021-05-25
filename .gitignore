@@ -36,6 +36,7 @@
 */db/
 */incremental_db/
 */simulation/
+*/soc_system/
 */timing/
 */testbench/
 */*_sim/
