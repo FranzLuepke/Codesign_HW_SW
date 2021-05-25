@@ -10,21 +10,20 @@
 
 `timescale 1 ps / 1 ps
 module avalon_control (
-		input  wire [7:0]  avs_s0_address,     //      avs_s0.address
-		input  wire        avs_s0_read,        //            .read
-		output wire [31:0] avs_s0_readdata,    //            .readdata
-		input  wire        avs_s0_write,       //            .write
-		input  wire [31:0] avs_s0_writedata,   //            .writedata
-		output wire        avs_s0_waitrequest, //            .waitrequest
-		input  wire        clock_clk,          //       clock.clk
-		input  wire        reset_reset,        //       reset.reset
-		output wire [15:0] KP,                 // PID_signals.new_signal
-		output wire [15:0] KI,                 //            .new_signal_1
-		output wire [15:0] KD,                 //            .new_signal_2
-		input  wire        Dir_A,              //            .new_signal_3
-		input  wire        Dir_B,              //            .new_signal_4
-		output wire [15:0] RPM,                //            .new_signal_5
-		input  wire [7:0]  PWM                 //            .new_signal_6
+		input  wire [7:0]  avs_s0_address,     // avs_s0.address
+		input  wire        avs_s0_read,        //       .read
+		output wire [31:0] avs_s0_readdata,    //       .readdata
+		input  wire        avs_s0_write,       //       .write
+		input  wire [31:0] avs_s0_writedata,   //       .writedata
+		output wire        avs_s0_waitrequest, //       .waitrequest
+		input  wire        clock_clk,          //  clock.clk
+		input  wire        reset_reset,        //  reset.reset
+		output wire [15:0] RPM,                //    RPM.new_signal
+		input  wire [15:0] PWM,                //    PWM.new_signal
+		output wire [15:0] KP,                 //    PID.new_signal
+		output wire [15:0] KI,                 //       .new_signal_1
+		output wire [15:0] KD,                 //       .new_signal_2
+		input  wire        DIR                 //    DIR.new_signal
 	);
 
 	// TODO: Auto-generated HDL template
