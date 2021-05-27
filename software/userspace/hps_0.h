@@ -64,7 +64,7 @@
 #define SYSID_QSYS_SPAN 8
 #define SYSID_QSYS_END 0x10007
 #define SYSID_QSYS_ID 2899645186
-#define SYSID_QSYS_TIMESTAMP 1621898466
+#define SYSID_QSYS_TIMESTAMP 1621964631
 
 /*
  * Macros for device 'avalon_encoder_5', class 'avalon_encoder'
@@ -133,72 +133,6 @@
 #define AVALON_ENCODER_0_END 0x10037
 
 /*
- * Macros for device 'avalon_pwm_5', class 'avalon_pwm'
- * The macros are prefixed with 'AVALON_PWM_5_'.
- * The prefix is the slave descriptor.
- */
-#define AVALON_PWM_5_COMPONENT_TYPE avalon_pwm
-#define AVALON_PWM_5_COMPONENT_NAME avalon_pwm_5
-#define AVALON_PWM_5_BASE 0x10038
-#define AVALON_PWM_5_SPAN 8
-#define AVALON_PWM_5_END 0x1003f
-
-/*
- * Macros for device 'avalon_pwm_4', class 'avalon_pwm'
- * The macros are prefixed with 'AVALON_PWM_4_'.
- * The prefix is the slave descriptor.
- */
-#define AVALON_PWM_4_COMPONENT_TYPE avalon_pwm
-#define AVALON_PWM_4_COMPONENT_NAME avalon_pwm_4
-#define AVALON_PWM_4_BASE 0x10040
-#define AVALON_PWM_4_SPAN 8
-#define AVALON_PWM_4_END 0x10047
-
-/*
- * Macros for device 'avalon_pwm_3', class 'avalon_pwm'
- * The macros are prefixed with 'AVALON_PWM_3_'.
- * The prefix is the slave descriptor.
- */
-#define AVALON_PWM_3_COMPONENT_TYPE avalon_pwm
-#define AVALON_PWM_3_COMPONENT_NAME avalon_pwm_3
-#define AVALON_PWM_3_BASE 0x10048
-#define AVALON_PWM_3_SPAN 8
-#define AVALON_PWM_3_END 0x1004f
-
-/*
- * Macros for device 'avalon_pwm_2', class 'avalon_pwm'
- * The macros are prefixed with 'AVALON_PWM_2_'.
- * The prefix is the slave descriptor.
- */
-#define AVALON_PWM_2_COMPONENT_TYPE avalon_pwm
-#define AVALON_PWM_2_COMPONENT_NAME avalon_pwm_2
-#define AVALON_PWM_2_BASE 0x10050
-#define AVALON_PWM_2_SPAN 8
-#define AVALON_PWM_2_END 0x10057
-
-/*
- * Macros for device 'avalon_pwm_1', class 'avalon_pwm'
- * The macros are prefixed with 'AVALON_PWM_1_'.
- * The prefix is the slave descriptor.
- */
-#define AVALON_PWM_1_COMPONENT_TYPE avalon_pwm
-#define AVALON_PWM_1_COMPONENT_NAME avalon_pwm_1
-#define AVALON_PWM_1_BASE 0x10058
-#define AVALON_PWM_1_SPAN 8
-#define AVALON_PWM_1_END 0x1005f
-
-/*
- * Macros for device 'avalon_pwm_0', class 'avalon_pwm'
- * The macros are prefixed with 'AVALON_PWM_0_'.
- * The prefix is the slave descriptor.
- */
-#define AVALON_PWM_0_COMPONENT_TYPE avalon_pwm
-#define AVALON_PWM_0_COMPONENT_NAME avalon_pwm_0
-#define AVALON_PWM_0_BASE 0x10060
-#define AVALON_PWM_0_SPAN 8
-#define AVALON_PWM_0_END 0x10067
-
-/*
  * Macros for device 'avalon_leds_0', class 'avalon_leds'
  * The macros are prefixed with 'AVALON_LEDS_0_'.
  * The prefix is the slave descriptor.
@@ -258,6 +192,72 @@
 #define BUTTON_PIO_HAS_TRI 0
 #define BUTTON_PIO_IRQ_TYPE EDGE
 #define BUTTON_PIO_RESET_VALUE 0
+
+/*
+ * Macros for device 'avalon_control_5', class 'avalon_control'
+ * The macros are prefixed with 'AVALON_CONTROL_5_'.
+ * The prefix is the slave descriptor.
+ */
+#define AVALON_CONTROL_5_COMPONENT_TYPE avalon_control
+#define AVALON_CONTROL_5_COMPONENT_NAME avalon_control_5
+#define AVALON_CONTROL_5_BASE 0x10400
+#define AVALON_CONTROL_5_SPAN 1024
+#define AVALON_CONTROL_5_END 0x107ff
+
+/*
+ * Macros for device 'avalon_control_4', class 'avalon_control'
+ * The macros are prefixed with 'AVALON_CONTROL_4_'.
+ * The prefix is the slave descriptor.
+ */
+#define AVALON_CONTROL_4_COMPONENT_TYPE avalon_control
+#define AVALON_CONTROL_4_COMPONENT_NAME avalon_control_4
+#define AVALON_CONTROL_4_BASE 0x10800
+#define AVALON_CONTROL_4_SPAN 1024
+#define AVALON_CONTROL_4_END 0x10bff
+
+/*
+ * Macros for device 'avalon_control_3', class 'avalon_control'
+ * The macros are prefixed with 'AVALON_CONTROL_3_'.
+ * The prefix is the slave descriptor.
+ */
+#define AVALON_CONTROL_3_COMPONENT_TYPE avalon_control
+#define AVALON_CONTROL_3_COMPONENT_NAME avalon_control_3
+#define AVALON_CONTROL_3_BASE 0x10c00
+#define AVALON_CONTROL_3_SPAN 1024
+#define AVALON_CONTROL_3_END 0x10fff
+
+/*
+ * Macros for device 'avalon_control_2', class 'avalon_control'
+ * The macros are prefixed with 'AVALON_CONTROL_2_'.
+ * The prefix is the slave descriptor.
+ */
+#define AVALON_CONTROL_2_COMPONENT_TYPE avalon_control
+#define AVALON_CONTROL_2_COMPONENT_NAME avalon_control_2
+#define AVALON_CONTROL_2_BASE 0x11000
+#define AVALON_CONTROL_2_SPAN 1024
+#define AVALON_CONTROL_2_END 0x113ff
+
+/*
+ * Macros for device 'avalon_control_1', class 'avalon_control'
+ * The macros are prefixed with 'AVALON_CONTROL_1_'.
+ * The prefix is the slave descriptor.
+ */
+#define AVALON_CONTROL_1_COMPONENT_TYPE avalon_control
+#define AVALON_CONTROL_1_COMPONENT_NAME avalon_control_1
+#define AVALON_CONTROL_1_BASE 0x11400
+#define AVALON_CONTROL_1_SPAN 1024
+#define AVALON_CONTROL_1_END 0x117ff
+
+/*
+ * Macros for device 'avalon_control_0', class 'avalon_control'
+ * The macros are prefixed with 'AVALON_CONTROL_0_'.
+ * The prefix is the slave descriptor.
+ */
+#define AVALON_CONTROL_0_COMPONENT_TYPE avalon_control
+#define AVALON_CONTROL_0_COMPONENT_NAME avalon_control_0
+#define AVALON_CONTROL_0_BASE 0x11800
+#define AVALON_CONTROL_0_SPAN 1024
+#define AVALON_CONTROL_0_END 0x11bff
 
 /*
  * Macros for device 'jtag_uart', class 'altera_avalon_jtag_uart'
