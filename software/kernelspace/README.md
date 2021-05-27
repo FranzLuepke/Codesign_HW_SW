@@ -14,6 +14,14 @@ Driver that comunicates with the LEDs connected to the FPGA in the DE0 Nano SoC 
 
 Driver that comunicates with the PWM modules in the FPGA. For more documentation read the README.md file inside the avalon_pwm folder.
 
+## Avalon Encoder
+
+Driver that comunicates with the the quadrature encoder modules in the FPGA. For more documentation read the README.md file inside the avalon_encoder folder.
+
+## Avalon Control
+
+Driver that comunicates with the PID controller modules in the FPGA. For more documentation read the README.md file inside the avalon_control folder.
+
 
 # How to use the drivers
 

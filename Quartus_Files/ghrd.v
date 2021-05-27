@@ -112,41 +112,42 @@ module ghrd
 	//=======================================================
 	//  REG/WIRE declarations
 	//=======================================================
-	wire			hps_fpga_reset_n;
-	wire [1:0]	fpga_debounced_buttons;
-	wire [6:0]	fpga_led_internal;
-	wire [2:0]	hps_reset_req;
-	wire			hps_cold_reset;
-	wire			hps_warm_reset;
-	wire			hps_debug_reset;
-	wire [27:0]	stm_hw_events;
-	wire			fpga_clk_50;
+	wire						hps_fpga_reset_n;
+	wire			[1:0]		fpga_debounced_buttons;
+	wire			[6:0]		fpga_led_internal;
+	wire			[2:0]		hps_reset_req;
+	wire						hps_cold_reset;
+	wire						hps_warm_reset;
+	wire						hps_debug_reset;
+	wire			[27:0]	stm_hw_events;
+	wire						fpga_clk_50;
 	// connection of internal logics
-	assign LED[7:1]			=	fpga_led_internal;
-	assign fpga_clk_50		=	FPGA_CLK1_50;
-	assign stm_hw_events		=	{{15{1'b0}}, SW, fpga_led_internal, fpga_debounced_buttons};
+	assign					LED[7:1]			=	fpga_led_internal;
+	assign					fpga_clk_50		=	FPGA_CLK1_50;
+	assign					stm_hw_events		=	{{15{1'b0}}, SW, fpga_led_internal, fpga_debounced_buttons};
 	// ********** Custom Robocol regs and wires **********
 	// Encoders debounce
-	wire Deb1_A, Deb1_B, Deb2_A, Deb2_B, Deb3_A, Deb3_B, Deb4_A, Deb4_B, Deb5_A, Deb5_B, Deb6_A, Deb6_B;
+	wire						Deb1_A, Deb1_B, Deb2_A, Deb2_B, Deb3_A, Deb3_B, Deb4_A, Deb4_B, Deb5_A, Deb5_B, Deb6_A, Deb6_B;
 	// Prescaler
-	wire CLK_scaled;
+	wire						CLK_scaled;
 	// Encoder counts
-	wire signed [31:0] Count_1, Count_2, Count_3, Count_4, Count_5, Count_6;
+	wire signed	[31:0]	Count_1, Count_2, Count_3, Count_4, Count_5, Count_6;
 	// RPM
-	wire signed [15:0] RPM_Measured_1, RPM_Measured_2, RPM_Measured_3, RPM_Measured_4, RPM_Measured_5, RPM_Measured_6;
+	wire signed	[15:0]	RPM_Measured_1, RPM_Measured_2, RPM_Measured_3, RPM_Measured_4, RPM_Measured_5, RPM_Measured_6;
 	// PWM data
-	wire [7:0] PWM_Data_1, PWM_Data_2, PWM_Data_3, PWM_Data_4, PWM_Data_5, PWM_Data_6;
+	wire			[7:0]		PWM_Data_1, PWM_Data_2, PWM_Data_3, PWM_Data_4, PWM_Data_5, PWM_Data_6;
 	// PID
-//	wire [7:0] RPM_L = 0;
-//	wire [7:0] RPM_R = 0;
-//	wire [1:0] Dir_L = 0;
-//	wire [1:0] Dir_R = 0;
+	wire			[7:0]		RPM_1,	RPM_2,	RPM_3,	RPM_4,	RPM_5,	RPM_6;
+	wire			[1:0]		DIR_1,	DIR_2,	DIR_3,	DIR_4,	DIR_5,	DIR_6;
+	wire			[16:0]	KP_1,		KP_2,		KP_3,		KP_4,		KP_5,		KP_6;
+	wire			[16:0]	KI_1,		KI_2,		KI_3,		KI_4,		KI_5,		KI_6;
+	wire			[16:0]	KD_1,		KD_2,		KD_3,		KD_4,		KD_5,		KD_6;
 	// Enable
-	wire En_1, En_2, En_3, En_4, En_5, En_6;
-	wire [7:0] RPM_Enable;
-	wire [1:0] Dir_Enable;
+	wire						En_1, En_2, En_3, En_4, En_5, En_6;
+	wire			[7:0]		RPM_Enable;
+	wire			[1:0]		Dir_Enable;
 	// ADC
-	wire [11:0] CH0, CH1, CH2, CH3, CH4, CH5, CH6, CH7, CH8, CH9, CH10, CH11, CH12;
+	wire			[11:0]	CH0, CH1, CH2, CH3, CH4, CH5, CH6, CH7, CH8, CH9, CH10, CH11, CH12;
 	//=======================================================
 	//  Structural coding
 	//=======================================================
@@ -306,21 +307,51 @@ module ghrd
 		.button_pio_external_connection_export	(fpga_debounced_buttons),	// button_pio_external_connection.export
 		// Custom components
 		.avalon_leds_0_leds_new_signal			(fpga_led_internal),			//	custom_leds_0_leds.new_signal
-		// PWM signals
-		.avalon_pwm_0_pwm_new_signal           (PWM_Data_1),					//	avalon_pwm_0_pwm.new_signal
-		.avalon_pwm_1_pwm_new_signal           (PWM_Data_2),					//	avalon_pwm_1_pwm.new_signal
-		.avalon_pwm_2_pwm_new_signal           (PWM_Data_3),					//	avalon_pwm_2_pwm.new_signal
-		.avalon_pwm_3_pwm_new_signal           (PWM_Data_4),					//	avalon_pwm_3_pwm.new_signal
-		.avalon_pwm_4_pwm_new_signal           (PWM_Data_5),					//	avalon_pwm_4_pwm.new_signal
-		.avalon_pwm_5_pwm_new_signal           (PWM_Data_6),					//	avalon_pwm_5_pwm.new_signal
 		// Encoder signals
 		.avalon_encoder_0_count_new_signal     (Count_1),						//	avalon_encoder_0_count.new_signal
 		.avalon_encoder_1_count_new_signal     (Count_2),						//	avalon_encoder_1_count.new_signal
 		.avalon_encoder_2_count_new_signal     (Count_3),						//	avalon_encoder_2_count.new_signal
 		.avalon_encoder_3_count_new_signal     (Count_4),						//	avalon_encoder_3_count.new_signal
 		.avalon_encoder_4_count_new_signal     (Count_5),						//	avalon_encoder_4_count.new_signal
-		.avalon_encoder_5_count_new_signal     (Count_6)						//	avalon_encoder_5_count.new_signal
-	);
+		.avalon_encoder_5_count_new_signal     (Count_6),						//	avalon_encoder_5_count.new_signal
+		// PID signals
+		.avalon_control_0_rpm_new_signal			(RPM_1),							//	 avalon_control_0_rpm.new_signal
+		.avalon_control_0_pwm_new_signal			(PWM_Data_1),					//	 avalon_control_0_pwm.new_signal
+		.avalon_control_0_pid_new_signal			(KP_1),							//	 avalon_control_0_pid.new_signal
+		.avalon_control_0_pid_new_signal_1		(KI_1),							//	.new_signal_1
+		.avalon_control_0_pid_new_signal_2		(KD_1),							//	.new_signal_2
+		.avalon_control_0_dir_new_signal			(DIR_1),							//	 avalon_control_0_dir.new_signal
+		.avalon_control_1_rpm_new_signal			(RPM_2),							//	 avalon_control_1_rpm.new_signal
+		.avalon_control_1_pwm_new_signal			(PWM_Data_2),					//	 avalon_control_1_pwm.new_signal
+		.avalon_control_1_pid_new_signal			(KP_2),							//	 avalon_control_1_pid.new_signal
+		.avalon_control_1_pid_new_signal_1		(KI_2),							//	.new_signal_1
+		.avalon_control_1_pid_new_signal_2		(KD_2),							//	.new_signal_2
+		.avalon_control_1_dir_new_signal			(DIR_2),							//	 avalon_control_1_dir.new_signal
+		.avalon_control_2_rpm_new_signal			(RPM_3),							//	 avalon_control_2_rpm.new_signal
+		.avalon_control_2_pwm_new_signal			(PWM_Data_3),					//	 avalon_control_2_pwm.new_signal
+		.avalon_control_2_pid_new_signal			(KP_3),							//	 avalon_control_2_pid.new_signal
+		.avalon_control_2_pid_new_signal_1		(KI_3),							//	.new_signal_1
+		.avalon_control_2_pid_new_signal_2		(KD_3),							//	.new_signal_2
+		.avalon_control_2_dir_new_signal			(DIR_3),							//	 avalon_control_2_dir.new_signal
+		.avalon_control_3_rpm_new_signal			(RPM_4),							//	 avalon_control_3_rpm.new_signal
+		.avalon_control_3_pwm_new_signal			(PWM_Data_4),					//	 avalon_control_3_pwm.new_signal
+		.avalon_control_3_pid_new_signal			(KP_4),							//	 avalon_control_3_pid.new_signal
+		.avalon_control_3_pid_new_signal_1		(KI_4),							//	.new_signal_1
+		.avalon_control_3_pid_new_signal_2		(KD_4),							//	.new_signal_2
+		.avalon_control_3_dir_new_signal			(DIR_4),							//	 avalon_control_3_dir.new_signal
+		.avalon_control_4_rpm_new_signal			(RPM_5),							//	 avalon_control_4_rpm.new_signal
+		.avalon_control_4_pwm_new_signal			(PWM_Data_5),					//	 avalon_control_4_pwm.new_signal
+		.avalon_control_4_pid_new_signal			(KP_5),							//	 avalon_control_4_pid.new_signal
+		.avalon_control_4_pid_new_signal_1		(KI_5),							//	.new_signal_1
+		.avalon_control_4_pid_new_signal_2		(KD_5),							//	.new_signal_2
+		.avalon_control_4_dir_new_signal			(DIR_5),							//	 avalon_control_4_dir.new_signal
+		.avalon_control_5_rpm_new_signal			(RPM_6),							//	 avalon_control_5_rpm.new_signal
+		.avalon_control_5_pwm_new_signal			(PWM_Data_6),					//	 avalon_control_5_pwm.new_signal
+		.avalon_control_5_pid_new_signal			(KP_6),							//	 avalon_control_5_pid.new_signal
+		.avalon_control_5_pid_new_signal_1		(KI_6),							//	.new_signal_1
+		.avalon_control_5_pid_new_signal_2		(KD_6),							//	.new_signal_2
+		.avalon_control_5_dir_new_signal			(DIR_6)							//	 avalon_control_5_dir.new_signal
+	);		
 	// ********** Custom Robocol modules **********
 	// --- Debouncers ---
 	// MOTOR 1
@@ -359,12 +390,12 @@ module ghrd
 	RPM RPM5(CLK_scaled, Count_5, RPM_Measured_5);
 	RPM RPM6(CLK_scaled, Count_6, RPM_Measured_6);
 	// --- PID ---
-	//PID_Control PID_1(CLK_scaled, $signed($signed({8'b0,RPM_L})*$signed(Dir_L)),  RPM_Measured_1, GPIO_0[18], GPIO_0[19], PWM_Data_1);
-	//PID_Control PID_2(CLK_scaled, $signed($signed({8'b0,RPM_L})*$signed(Dir_L)),  RPM_Measured_2, GPIO_0[20], GPIO_0[21], PWM_Data_2);
-	//PID_Control PID_3(CLK_scaled, $signed($signed({8'b0,RPM_L})*$signed(Dir_L)),  RPM_Measured_3, GPIO_0[22], GPIO_0[23], PWM_Data_3);
-	//PID_Control PID_4(CLK_scaled, $signed($signed({8'b0,RPM_R})*$signed(Dir_R)), -RPM_Measured_4, GPIO_0[24], GPIO_0[25], PWM_Data_4);
-	//PID_Control PID_5(CLK_scaled, $signed($signed({8'b0,RPM_R})*$signed(Dir_R)), -RPM_Measured_5, GPIO_0[26], GPIO_0[27], PWM_Data_5);
-	//PID_Control PID_6(CLK_scaled, $signed($signed({8'b0,RPM_R})*$signed(Dir_R)), -RPM_Measured_6, GPIO_0[28], GPIO_0[29], PWM_Data_6);
+	PID_Control PID_1(CLK_scaled, $signed($signed({8'b0,RPM_1})*$signed(DIR_1)),  RPM_Measured_1, GPIO_0[18], GPIO_0[19], PWM_Data_1);
+	PID_Control PID_2(CLK_scaled, $signed($signed({8'b0,RPM_2})*$signed(DIR_2)),  RPM_Measured_2, GPIO_0[20], GPIO_0[21], PWM_Data_2);
+	PID_Control PID_3(CLK_scaled, $signed($signed({8'b0,RPM_3})*$signed(DIR_3)),  RPM_Measured_3, GPIO_0[22], GPIO_0[23], PWM_Data_3);
+	PID_Control PID_4(CLK_scaled, $signed($signed({8'b0,RPM_4})*$signed(DIR_4)), -RPM_Measured_4, GPIO_0[24], GPIO_0[25], PWM_Data_4);
+	PID_Control PID_5(CLK_scaled, $signed($signed({8'b0,RPM_5})*$signed(DIR_5)), -RPM_Measured_5, GPIO_0[26], GPIO_0[27], PWM_Data_5);
+	PID_Control PID_6(CLK_scaled, $signed($signed({8'b0,RPM_6})*$signed(DIR_6)), -RPM_Measured_6, GPIO_0[28], GPIO_0[29], PWM_Data_6);
 	// --- PWM ---
 	PWM_Generator PWM_1(FPGA_CLK1_50, !KEY[0], PWM_Data_1, GPIO_0[12]);
 	PWM_Generator PWM_2(FPGA_CLK1_50, !KEY[0], PWM_Data_2, GPIO_0[13]);
