@@ -13,4 +13,12 @@ Userspace app that comunicates with the LEDs connected to the FPGA in the DE0 Na
 
 ## Avalon PWM
 
-Userspace app that comunicates with the PWM module in the FPGA. For more documentation read the README.md file inside the avalon_pwm folder.
+Userspace app that comunicates with the PWM modules in the FPGA. For more documentation read the README.md file inside the avalon_pwm folder.
+
+## Avalon Encoder
+
+Userspace app that comunicates with the quadrature encoder modules in the FPGA. For more documentation read the README.md file inside the avalon_encoder folder.
+
+## Avalon Control
+
+Userspace app that comunicates with the PID controller modules in the FPGA. For more documentation read the README.md file inside the avalon_control folder.

@@ -22,3 +22,4 @@ The custom components created in this project are the following:
 * **avalon_leds:** Allows to read and write to the LEDs integrated in the DE0 Nano SoC Development Board.
 * **avalon_pwm:** Allows to write a desired PWM as a setpoint and reads the calculated PWM.
 * **avalon_encoder:** Allows to read the quadrature encoder count.
+* **avalon_control:** Allows to send RPM setpoints, modify the PID controllers and read the output count.
