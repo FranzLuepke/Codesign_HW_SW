@@ -64,7 +64,7 @@
 #define SYSID_QSYS_SPAN 8
 #define SYSID_QSYS_END 0x10007
 #define SYSID_QSYS_ID 2899645186
-#define SYSID_QSYS_TIMESTAMP 1621964631
+#define SYSID_QSYS_TIMESTAMP 1622148929
 
 /*
  * Macros for device 'avalon_encoder_5', class 'avalon_encoder'
@@ -139,9 +139,9 @@
  */
 #define AVALON_LEDS_0_COMPONENT_TYPE avalon_leds
 #define AVALON_LEDS_0_COMPONENT_NAME avalon_leds_0
-#define AVALON_LEDS_0_BASE 0x10068
+#define AVALON_LEDS_0_BASE 0x10038
 #define AVALON_LEDS_0_SPAN 8
-#define AVALON_LEDS_0_END 0x1006f
+#define AVALON_LEDS_0_END 0x1003f
 
 /*
  * Macros for device 'dipsw_pio', class 'altera_avalon_pio'
@@ -194,15 +194,81 @@
 #define BUTTON_PIO_RESET_VALUE 0
 
 /*
+ * Macros for device 'avalon_rpm_5', class 'avalon_rpm'
+ * The macros are prefixed with 'AVALON_RPM_5_'.
+ * The prefix is the slave descriptor.
+ */
+#define AVALON_RPM_5_COMPONENT_TYPE avalon_rpm
+#define AVALON_RPM_5_COMPONENT_NAME avalon_rpm_5
+#define AVALON_RPM_5_BASE 0x10400
+#define AVALON_RPM_5_SPAN 1024
+#define AVALON_RPM_5_END 0x107ff
+
+/*
+ * Macros for device 'avalon_rpm_4', class 'avalon_rpm'
+ * The macros are prefixed with 'AVALON_RPM_4_'.
+ * The prefix is the slave descriptor.
+ */
+#define AVALON_RPM_4_COMPONENT_TYPE avalon_rpm
+#define AVALON_RPM_4_COMPONENT_NAME avalon_rpm_4
+#define AVALON_RPM_4_BASE 0x10800
+#define AVALON_RPM_4_SPAN 1024
+#define AVALON_RPM_4_END 0x10bff
+
+/*
+ * Macros for device 'avalon_rpm_3', class 'avalon_rpm'
+ * The macros are prefixed with 'AVALON_RPM_3_'.
+ * The prefix is the slave descriptor.
+ */
+#define AVALON_RPM_3_COMPONENT_TYPE avalon_rpm
+#define AVALON_RPM_3_COMPONENT_NAME avalon_rpm_3
+#define AVALON_RPM_3_BASE 0x10c00
+#define AVALON_RPM_3_SPAN 1024
+#define AVALON_RPM_3_END 0x10fff
+
+/*
+ * Macros for device 'avalon_rpm_2', class 'avalon_rpm'
+ * The macros are prefixed with 'AVALON_RPM_2_'.
+ * The prefix is the slave descriptor.
+ */
+#define AVALON_RPM_2_COMPONENT_TYPE avalon_rpm
+#define AVALON_RPM_2_COMPONENT_NAME avalon_rpm_2
+#define AVALON_RPM_2_BASE 0x11000
+#define AVALON_RPM_2_SPAN 1024
+#define AVALON_RPM_2_END 0x113ff
+
+/*
+ * Macros for device 'avalon_rpm_1', class 'avalon_rpm'
+ * The macros are prefixed with 'AVALON_RPM_1_'.
+ * The prefix is the slave descriptor.
+ */
+#define AVALON_RPM_1_COMPONENT_TYPE avalon_rpm
+#define AVALON_RPM_1_COMPONENT_NAME avalon_rpm_1
+#define AVALON_RPM_1_BASE 0x11400
+#define AVALON_RPM_1_SPAN 1024
+#define AVALON_RPM_1_END 0x117ff
+
+/*
+ * Macros for device 'avalon_rpm_0', class 'avalon_rpm'
+ * The macros are prefixed with 'AVALON_RPM_0_'.
+ * The prefix is the slave descriptor.
+ */
+#define AVALON_RPM_0_COMPONENT_TYPE avalon_rpm
+#define AVALON_RPM_0_COMPONENT_NAME avalon_rpm_0
+#define AVALON_RPM_0_BASE 0x11800
+#define AVALON_RPM_0_SPAN 1024
+#define AVALON_RPM_0_END 0x11bff
+
+/*
  * Macros for device 'avalon_control_5', class 'avalon_control'
  * The macros are prefixed with 'AVALON_CONTROL_5_'.
  * The prefix is the slave descriptor.
  */
 #define AVALON_CONTROL_5_COMPONENT_TYPE avalon_control
 #define AVALON_CONTROL_5_COMPONENT_NAME avalon_control_5
-#define AVALON_CONTROL_5_BASE 0x10400
+#define AVALON_CONTROL_5_BASE 0x11c00
 #define AVALON_CONTROL_5_SPAN 1024
-#define AVALON_CONTROL_5_END 0x107ff
+#define AVALON_CONTROL_5_END 0x11fff
 
 /*
  * Macros for device 'avalon_control_4', class 'avalon_control'
@@ -211,9 +277,9 @@
  */
 #define AVALON_CONTROL_4_COMPONENT_TYPE avalon_control
 #define AVALON_CONTROL_4_COMPONENT_NAME avalon_control_4
-#define AVALON_CONTROL_4_BASE 0x10800
+#define AVALON_CONTROL_4_BASE 0x12000
 #define AVALON_CONTROL_4_SPAN 1024
-#define AVALON_CONTROL_4_END 0x10bff
+#define AVALON_CONTROL_4_END 0x123ff
 
 /*
  * Macros for device 'avalon_control_3', class 'avalon_control'
@@ -222,9 +288,9 @@
  */
 #define AVALON_CONTROL_3_COMPONENT_TYPE avalon_control
 #define AVALON_CONTROL_3_COMPONENT_NAME avalon_control_3
-#define AVALON_CONTROL_3_BASE 0x10c00
+#define AVALON_CONTROL_3_BASE 0x12400
 #define AVALON_CONTROL_3_SPAN 1024
-#define AVALON_CONTROL_3_END 0x10fff
+#define AVALON_CONTROL_3_END 0x127ff
 
 /*
  * Macros for device 'avalon_control_2', class 'avalon_control'
@@ -233,9 +299,9 @@
  */
 #define AVALON_CONTROL_2_COMPONENT_TYPE avalon_control
 #define AVALON_CONTROL_2_COMPONENT_NAME avalon_control_2
-#define AVALON_CONTROL_2_BASE 0x11000
+#define AVALON_CONTROL_2_BASE 0x12800
 #define AVALON_CONTROL_2_SPAN 1024
-#define AVALON_CONTROL_2_END 0x113ff
+#define AVALON_CONTROL_2_END 0x12bff
 
 /*
  * Macros for device 'avalon_control_1', class 'avalon_control'
@@ -244,9 +310,9 @@
  */
 #define AVALON_CONTROL_1_COMPONENT_TYPE avalon_control
 #define AVALON_CONTROL_1_COMPONENT_NAME avalon_control_1
-#define AVALON_CONTROL_1_BASE 0x11400
+#define AVALON_CONTROL_1_BASE 0x12c00
 #define AVALON_CONTROL_1_SPAN 1024
-#define AVALON_CONTROL_1_END 0x117ff
+#define AVALON_CONTROL_1_END 0x12fff
 
 /*
  * Macros for device 'avalon_control_0', class 'avalon_control'
@@ -255,9 +321,9 @@
  */
 #define AVALON_CONTROL_0_COMPONENT_TYPE avalon_control
 #define AVALON_CONTROL_0_COMPONENT_NAME avalon_control_0
-#define AVALON_CONTROL_0_BASE 0x11800
+#define AVALON_CONTROL_0_BASE 0x13000
 #define AVALON_CONTROL_0_SPAN 1024
-#define AVALON_CONTROL_0_END 0x11bff
+#define AVALON_CONTROL_0_END 0x133ff
 
 /*
  * Macros for device 'jtag_uart', class 'altera_avalon_jtag_uart'
