@@ -134,6 +134,8 @@ module ghrd
 	wire signed	[31:0]	Count_1, Count_2, Count_3, Count_4, Count_5, Count_6;
 	// RPM
 	wire signed	[15:0]	RPM_Measured_1, RPM_Measured_2, RPM_Measured_3, RPM_Measured_4, RPM_Measured_5, RPM_Measured_6;
+	wire			[15:0]	CPR_1,	CPR_2,	CPR_3,	CPR_4,	CPR_5,	CPR_6;
+	wire			[15:0]	GH_1,		GH_2,		GH_3,		GH_4,		GH_5,		GH_6;
 	// PWM data
 	wire			[7:0]		PWM_Data_1, PWM_Data_2, PWM_Data_3, PWM_Data_4, PWM_Data_5, PWM_Data_6;
 	// PID
@@ -350,7 +352,25 @@ module ghrd
 		.avalon_control_5_pid_new_signal			(KP_6),							//	 avalon_control_5_pid.new_signal
 		.avalon_control_5_pid_new_signal_1		(KI_6),							//	.new_signal_1
 		.avalon_control_5_pid_new_signal_2		(KD_6),							//	.new_signal_2
-		.avalon_control_5_dir_new_signal			(DIR_6)							//	 avalon_control_5_dir.new_signal
+		.avalon_control_5_dir_new_signal			(DIR_6),							//	 avalon_control_5_dir.new_signal
+		.avalon_rpm_0_rpm_new_signal           (RPM_Measured_1),				//	 avalon_rpm_0_rpm.new_signal
+		.avalon_rpm_0_cpr_new_signal           (CPR_1),							//	 avalon_rpm_0_cpr.new_signal
+		.avalon_rpm_0_gearhead_new_signal      (GH_1),							//	 avalon_rpm_0_gearhead.new_signal
+		.avalon_rpm_1_rpm_new_signal           (RPM_Measured_1),				//	 avalon_rpm_1_rpm.new_signal
+		.avalon_rpm_1_cpr_new_signal           (CPR_2),							//	 avalon_rpm_1_cpr.new_signal
+		.avalon_rpm_1_gearhead_new_signal      (GH_2),							//	 avalon_rpm_1_gearhead.new_signal
+		.avalon_rpm_2_rpm_new_signal           (RPM_Measured_2),				//	 avalon_rpm_2_rpm.new_signal
+		.avalon_rpm_2_cpr_new_signal           (CPR_3),							//	 avalon_rpm_2_cpr.new_signal
+		.avalon_rpm_2_gearhead_new_signal      (GH_3),							//	 avalon_rpm_2_gearhead.new_signal
+		.avalon_rpm_3_rpm_new_signal           (RPM_Measured_3),				//	 avalon_rpm_3_rpm.new_signal
+		.avalon_rpm_3_cpr_new_signal           (CPR_4),							//	 avalon_rpm_3_cpr.new_signal
+		.avalon_rpm_3_gearhead_new_signal      (GH_4),							//	 avalon_rpm_3_gearhead.new_signal
+		.avalon_rpm_4_rpm_new_signal           (RPM_Measured_4),				//	 avalon_rpm_4_rpm.new_signal
+		.avalon_rpm_4_cpr_new_signal           (CPR_5),							//	 avalon_rpm_4_cpr.new_signal
+		.avalon_rpm_4_gearhead_new_signal      (GH_5),							//	 avalon_rpm_4_gearhead.new_signal
+		.avalon_rpm_5_rpm_new_signal           (RPM_Measured_6),				//	 avalon_rpm_5_rpm.new_signal
+		.avalon_rpm_5_cpr_new_signal           (CPR_6),							//	 avalon_rpm_5_cpr.new_signal
+		.avalon_rpm_5_gearhead_new_signal      (GH_6)							//	 avalon_rpm_5_gearhead.new_signal
 	);		
 	// ********** Custom Robocol modules **********
 	// --- Debouncers ---
