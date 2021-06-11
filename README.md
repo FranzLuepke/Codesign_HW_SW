@@ -36,3 +36,8 @@ This repository includes a hardware software codesign project for the developmen
 ## License
 
 This project is licensed under the terms of the MIT license.
+
+## Hardware-Software Codesign with DE0 Nano Soc
+
+For a detailed explanation of the codesign methodology used in this repository refer to the Wiki:
+[Codesign_HW_SW Wiki](https://github.com/FranzLuepke/Codesign_HW_SW/wiki)
