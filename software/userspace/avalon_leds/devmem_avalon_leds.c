@@ -45,17 +45,18 @@ int main(int argc, char ** argv)
 	leds_map = (uint32_t*)(lw_bridge_map + AVALON_LEDS_0_BASE);
 	// Blink the LED ten times
 	printf("Blinking LEDs %d times...\n", blink_times);
-	for(int i = 0; i < blink_times; ++i)
-	{
-		// Turn all LEDs on
-		*leds_map = 0xFF;
-		// Wait half a second
-		usleep(500000);
-		// Turn all the LEDS off
-		*leds_map = 0x00;
-		// Wait half a second
-		usleep(500000);
-	}
+	*leds_map = blink_times;
+	// for(int i = 0; i < blink_times; ++i)
+	// {
+	// 	// Turn all LEDs on
+	// 	*leds_map = 0xFF;
+	// 	// Wait half a second
+	// 	usleep(500000);
+	// 	// Turn all the LEDS off
+	// 	*leds_map = 0x00;
+	// 	// Wait half a second
+	// 	usleep(500000);
+	// }
 	printf("Done!\n");
 	// Unmap everything and close the /dev/mem file descriptor
 	result = munmap(lw_bridge_map, HPS_TO_FPGA_LW_SPAN); 

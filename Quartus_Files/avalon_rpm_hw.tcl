@@ -51,8 +51,8 @@ add_fileset_file avalon_rpm.v VERILOG PATH ip/avalon_rpm/avalon_rpm.v TOP_LEVEL_
 # 
 # module assignments
 # 
-set_module_assignment embeddedsw.dts.compatible dev,avalon-encoder
-set_module_assignment embeddedsw.dts.group encoder
+set_module_assignment embeddedsw.dts.compatible dev,avalon-rpm
+set_module_assignment embeddedsw.dts.group rpm
 set_module_assignment embeddedsw.dts.vendor dsa
 
 

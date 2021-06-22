@@ -1716,18 +1716,18 @@
    kind="avalon"
    version="19.1"
    start="hps_0.h2f_lw_axi_master"
-   end="avalon_rpm_1.avs_s0">
+   end="avalon_rpm_0.avs_s0">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x00011400" />
+  <parameter name="baseAddress" value="0x00011800" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
    kind="avalon"
    version="19.1"
    start="hps_0.h2f_lw_axi_master"
-   end="avalon_rpm_0.avs_s0">
+   end="avalon_rpm_1.avs_s0">
   <parameter name="arbitrationPriority" value="1" />
-  <parameter name="baseAddress" value="0x00011800" />
+  <parameter name="baseAddress" value="0x00011400" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
@@ -2120,22 +2120,7 @@
    kind="clock"
    version="19.1"
    start="clk_0.clk"
-   end="avalon_rpm_0.clock" />
- <connection
-   kind="clock"
-   version="19.1"
-   start="clk_0.clk"
-   end="avalon_rpm_1.clock" />
- <connection
-   kind="clock"
-   version="19.1"
-   start="clk_0.clk"
-   end="avalon_rpm_2.clock" />
- <connection
-   kind="clock"
-   version="19.1"
-   start="clk_0.clk"
-   end="avalon_rpm_3.clock" />
+   end="avalon_rpm_5.clock" />
  <connection
    kind="clock"
    version="19.1"
@@ -2145,7 +2130,22 @@
    kind="clock"
    version="19.1"
    start="clk_0.clk"
-   end="avalon_rpm_5.clock" />
+   end="avalon_rpm_3.clock" />
+ <connection
+   kind="clock"
+   version="19.1"
+   start="clk_0.clk"
+   end="avalon_rpm_2.clock" />
+ <connection
+   kind="clock"
+   version="19.1"
+   start="clk_0.clk"
+   end="avalon_rpm_1.clock" />
+ <connection
+   kind="clock"
+   version="19.1"
+   start="clk_0.clk"
+   end="avalon_rpm_0.clock" />
  <connection
    kind="clock"
    version="19.1"
@@ -2302,22 +2302,7 @@
    kind="reset"
    version="19.1"
    start="clk_0.clk_reset"
-   end="avalon_rpm_0.reset" />
- <connection
-   kind="reset"
-   version="19.1"
-   start="clk_0.clk_reset"
-   end="avalon_rpm_1.reset" />
- <connection
-   kind="reset"
-   version="19.1"
-   start="clk_0.clk_reset"
-   end="avalon_rpm_2.reset" />
- <connection
-   kind="reset"
-   version="19.1"
-   start="clk_0.clk_reset"
-   end="avalon_rpm_3.reset" />
+   end="avalon_rpm_5.reset" />
  <connection
    kind="reset"
    version="19.1"
@@ -2327,7 +2312,22 @@
    kind="reset"
    version="19.1"
    start="clk_0.clk_reset"
-   end="avalon_rpm_5.reset" />
+   end="avalon_rpm_3.reset" />
+ <connection
+   kind="reset"
+   version="19.1"
+   start="clk_0.clk_reset"
+   end="avalon_rpm_2.reset" />
+ <connection
+   kind="reset"
+   version="19.1"
+   start="clk_0.clk_reset"
+   end="avalon_rpm_1.reset" />
+ <connection
+   kind="reset"
+   version="19.1"
+   start="clk_0.clk_reset"
+   end="avalon_rpm_0.reset" />
  <connection
    kind="reset"
    version="19.1"
