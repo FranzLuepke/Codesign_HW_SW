@@ -64,7 +64,7 @@
 #define SYSID_QSYS_SPAN 8
 #define SYSID_QSYS_END 0x10007
 #define SYSID_QSYS_ID 2899645186
-#define SYSID_QSYS_TIMESTAMP 1622148929
+#define SYSID_QSYS_TIMESTAMP 1625550200
 
 /*
  * Macros for device 'avalon_encoder_5', class 'avalon_encoder'
@@ -144,29 +144,15 @@
 #define AVALON_LEDS_0_END 0x1003f
 
 /*
- * Macros for device 'dipsw_pio', class 'altera_avalon_pio'
- * The macros are prefixed with 'DIPSW_PIO_'.
+ * Macros for device 'avalon_enable_0', class 'avalon_enable'
+ * The macros are prefixed with 'AVALON_ENABLE_0_'.
  * The prefix is the slave descriptor.
  */
-#define DIPSW_PIO_COMPONENT_TYPE altera_avalon_pio
-#define DIPSW_PIO_COMPONENT_NAME dipsw_pio
-#define DIPSW_PIO_BASE 0x10080
-#define DIPSW_PIO_SPAN 16
-#define DIPSW_PIO_END 0x1008f
-#define DIPSW_PIO_IRQ 0
-#define DIPSW_PIO_BIT_CLEARING_EDGE_REGISTER 1
-#define DIPSW_PIO_BIT_MODIFYING_OUTPUT_REGISTER 0
-#define DIPSW_PIO_CAPTURE 1
-#define DIPSW_PIO_DATA_WIDTH 4
-#define DIPSW_PIO_DO_TEST_BENCH_WIRING 0
-#define DIPSW_PIO_DRIVEN_SIM_VALUE 0
-#define DIPSW_PIO_EDGE_TYPE ANY
-#define DIPSW_PIO_FREQ 50000000
-#define DIPSW_PIO_HAS_IN 1
-#define DIPSW_PIO_HAS_OUT 0
-#define DIPSW_PIO_HAS_TRI 0
-#define DIPSW_PIO_IRQ_TYPE EDGE
-#define DIPSW_PIO_RESET_VALUE 0
+#define AVALON_ENABLE_0_COMPONENT_TYPE avalon_enable
+#define AVALON_ENABLE_0_COMPONENT_NAME avalon_enable_0
+#define AVALON_ENABLE_0_BASE 0x10040
+#define AVALON_ENABLE_0_SPAN 64
+#define AVALON_ENABLE_0_END 0x1007f
 
 /*
  * Macros for device 'button_pio', class 'altera_avalon_pio'
@@ -340,6 +326,17 @@
 #define JTAG_UART_READ_THRESHOLD 8
 #define JTAG_UART_WRITE_DEPTH 64
 #define JTAG_UART_WRITE_THRESHOLD 8
+
+/*
+ * Macros for device 'avalon_dipsw_0', class 'avalon_dipsw'
+ * The macros are prefixed with 'AVALON_DIPSW_0_'.
+ * The prefix is the slave descriptor.
+ */
+#define AVALON_DIPSW_0_COMPONENT_TYPE avalon_dipsw
+#define AVALON_DIPSW_0_COMPONENT_NAME avalon_dipsw_0
+#define AVALON_DIPSW_0_BASE 0x40000
+#define AVALON_DIPSW_0_SPAN 8
+#define AVALON_DIPSW_0_END 0x40007
 
 
 #endif /* _ALTERA_HPS_0_H_ */

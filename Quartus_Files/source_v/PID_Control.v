@@ -17,20 +17,20 @@ module PID_Control(Prescaler_clk, Setpoint, RPM_Measured, Dir_A, Dir_B, PWM_Comm
 	// LOGIC
 	always @(negedge Prescaler_clk)
 	begin
-		if((K_P*(Setpoint-RPM_Measured)+K_I*Integral_Error)/100 >= 249) // Upper saturation
+		if((K_P*(Setpoint-RPM_Measured) + K_I*Integral_Error)/100 >= 249) // Upper saturation
 			PWM_Command <= 249;
 		else
-			if((K_P*(Setpoint-RPM_Measured)+K_I*Integral_Error)/100 <= -249) // Lower saturation
+			if((K_P*(Setpoint-RPM_Measured) + K_I*Integral_Error)/100 <= -249) // Lower saturation
 				PWM_Command <= 249;
 			else
 				if(Setpoint==0) // When setpoint is zero.
 					PWM_Command <= 0;
 				else
-					if((K_P*(Setpoint-RPM_Measured)+K_I*Integral_Error)/100 >= 0) // Without saturation, positive error. 
-						PWM_Command <=  (K_P*(Setpoint-RPM_Measured)+K_I*Integral_Error)/100;
+					if((K_P*(Setpoint-RPM_Measured) + K_I*Integral_Error)/100 >= 0) // Without saturation, positive error. 
+						PWM_Command <=  (K_P*(Setpoint - RPM_Measured) + K_I*Integral_Error)/100;
 					else  // Without saturation, negative error. 
-						PWM_Command <= -(K_P*(Setpoint-RPM_Measured)+K_I*Integral_Error)/100;
-		if(K_P*(Setpoint-RPM_Measured)+K_I*Integral_Error > 0 & Setpoint!=0) // If error is greater than 0, motor forward.
+						PWM_Command <= -(K_P*(Setpoint-RPM_Measured) + K_I*Integral_Error)/100;
+		if(K_P*(Setpoint-RPM_Measured) + K_I*Integral_Error > 0 & Setpoint!=0) // If error is greater than 0, motor forward.
 			begin
 				Dir_A<=1;
 				Dir_B<=0;

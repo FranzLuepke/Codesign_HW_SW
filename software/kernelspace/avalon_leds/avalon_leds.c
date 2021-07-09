@@ -127,9 +127,10 @@ static ssize_t leds_read(struct file *file, char *buffer, size_t len, loff_t *of
     */
     struct avalon_leds_dev *dev = container_of(file->private_data, struct avalon_leds_dev, miscdev);
     pr_info(" leds_read: enter\n");
+    dev->leds_value = ioread32(dev->regs);
+    pr_info(" leds_read: value -> %d\n", dev->leds_value);
     // Give the user the current led value
     success = copy_to_user(buffer, &dev->leds_value, sizeof(dev->leds_value));
-    pr_info(" leds_read: value -> %u8\n", &dev->leds_value);
     // If we failed to copy the value to userspace, display an error message
     if(success != 0)
     {

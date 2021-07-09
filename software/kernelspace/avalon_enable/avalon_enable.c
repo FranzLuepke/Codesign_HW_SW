@@ -8,7 +8,7 @@
 // Define information about this kernel module
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Franz Luepke <fk.luepke146@uniandes.edu.co>");
-MODULE_DESCRIPTION("Exposes a misc device to user space that lets users read the encoder value.");
+MODULE_DESCRIPTION("Exposes a misc device to user space that lets users enable values.");
 MODULE_VERSION("1.0");
 #define RAM_SPAN	(1024)
 #define IO_BUF_SIZE	(256)
@@ -20,15 +20,10 @@ static int number_devices = 0;
 // Drivers array
 static char *arr[] =
 {
-	"avalon_encoder_0",
-	"avalon_encoder_1",
-	"avalon_encoder_2",
-	"avalon_encoder_3",
-	"avalon_encoder_4",
-	"avalon_encoder_5"
+	"avalon_enable"
 };
 // Globals
-char name[] = "Avalon Encoder Driver";
+char name[] = "Avalon Enable Driver";
 // Prototypes
 static ssize_t dev_open(struct inode *ip, struct file *fp);
 static int dev_release(struct inode *ip, struct file *fp);
@@ -42,14 +37,14 @@ struct ip_component_dev
 {
 	struct miscdevice miscdev;
 	void __iomem *regs;
-	u32 value;
+	u8 control_value;
 	unsigned char io_buf[IO_BUF_SIZE];
 	// struct fpga_buffer **kbuf; /* FPGA writes, driver reads! */
 };
 // Specify which device tree devices this driver supports
 static struct of_device_id dev_dt_ids[] =
 {
-	{ .compatible = "dev,avalon-encoder" },
+	{ .compatible = "dev,avalon-enable" },
 	{ /* end of table */ }
 };
 // Inform the kernel about the devices this driver supports
@@ -66,7 +61,7 @@ static struct platform_driver driver_platform =
 		.of_match_table = dev_dt_ids
 	}
 };
-// The file operations that can be performed on the character file
+// The file operations that can be performed on the avalon_control character file
 static const struct file_operations dev_fops =
 {
 	.owner = THIS_MODULE,
@@ -96,6 +91,8 @@ static int dev_init(void)
 static int dev_open(struct inode *ip, struct file *fp)
 {
 	pr_info(" dev_open: %s\n", "--- DEVICE OPEN ---");
+	// pr_info("  dev_open: %s\n", "function.");
+	// pr_info(" dev_open: %s\n", "exit.");
 	return 0;
 }
 // Called whenever the kernel finds a new device that our driver can handle
@@ -106,7 +103,7 @@ static int dev_probe(struct platform_device *pdev)
 	struct resource *r = 0;
 	number_devices += 1;
 	// printk(" dev_probe: %s\n", "open");
-	// Get the memory resources for this device
+	// Get the memory resources for this Control device
 	r = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	if(r != NULL)
 	{
@@ -160,15 +157,16 @@ static ssize_t dev_read(struct file *fp, char __user *user_buffer, size_t len, l
 	int success = 0;
 	// unsigned int value = 0;
 	struct ip_component_dev *dev = container_of(fp->private_data, struct ip_component_dev, miscdev);
-	pr_info("  dev_read: open\n");
-	pr_info("   dev_read: len = %d\n", len);
+	// pr_info("  dev_read: open\n");
+	pr_info("  dev_write: READ\n");
+	// pr_info("   dev_read: len = %d\n", len);
 	pr_info("   dev_read: offset = %lld\n", *offset);
-	pr_info("   dev_read: len regs = %d\n", (int) sizeof(dev->regs));
+	// pr_info("   dev_read: len regs = %d\n", (int) sizeof(dev->regs));
 	// Get the ip_component_dev structure out of the miscdevice structure.
-	dev->value = ioread32(dev->regs + *offset);
-	pr_info("   dev_read: value = %d\n", (int) dev->value);
-	pr_info("   dev_read: %d\n", dev->miscdev.mode);
-	success = copy_to_user(user_buffer, &dev->value, sizeof(dev->value));
+	dev->control_value = ioread32(dev->regs + *offset);
+	pr_info("   dev_read: value = %d\n", (int) dev->control_value);
+	// pr_info("   dev_read: %d\n", dev->miscdev.mode);
+	success = copy_to_user(user_buffer, &dev->control_value, sizeof(dev->control_value));
 	if(success != 0)
 	{
 		pr_info("   dev_read: Failed to return current value to userspace.\n");
@@ -183,7 +181,8 @@ static loff_t dev_llseek(struct file *fp, loff_t offset, int whence)
 	// struct ip_component_dev *dev = container_of(fp->private_data, struct ip_component_dev, miscdev);
 	loff_t max_offset = RAM_SPAN;
 	loff_t next_offset;
-	pr_info("  dev_llseek: enter\n");
+	pr_info("  dev_write: SEEK\n");
+	// pr_info("  dev_llseek: enter\n");
 	pr_info("   dev_llseek: offset = %lld\n", offset);
 	pr_info("   dev_llseek: whence = %d\n", whence);
 	switch(whence)
@@ -217,10 +216,12 @@ static ssize_t dev_write(struct file *fp, const char __user *user_buffer, size_t
 {
 	int success = 0;
 	struct ip_component_dev *dev = container_of(fp->private_data, struct ip_component_dev, miscdev);
+	pr_info("  dev_write: WRITE\n");
 	pr_info("  dev_write: len = %d\n", len);
 	pr_info("  dev_write: offset = %lld\n", *offset);
 	// Get ip_component_dev structure out of the miscdevice structure.
-	success = copy_from_user(&dev->io_buf, user_buffer, sizeof(dev->io_buf));
+	success = copy_from_user(&dev->control_value, user_buffer, sizeof(dev->control_value));
+	pr_info("   dev_write: value = %d\n", dev->control_value);
 	if(success != 0)
 	{
 		pr_info("  dev_write: Failed to read value from userspace.\n");
@@ -228,7 +229,7 @@ static ssize_t dev_write(struct file *fp, const char __user *user_buffer, size_t
 	}
 	else
 	{
-		iowrite32(dev->io_buf[*offset], dev->regs);
+		iowrite32(dev->control_value, dev->regs + *offset);
 	}
 	return len;
 }
@@ -236,6 +237,8 @@ static ssize_t dev_write(struct file *fp, const char __user *user_buffer, size_t
 static int dev_release(struct inode *ip, struct file *fp)
 {
 	pr_info(" dev_release: %s\n", "enter.");
+	// pr_info("  dev_release: %s\n", "function.");
+	// pr_info(" dev_release: %s\n", "exit.");
 	pr_info(" dev_open: %s\n", "--- DEVICE RELEASE ---");
 	return 0;
 }
@@ -247,6 +250,7 @@ static int dev_remove(struct platform_device *pdev)
 	// pr_info(" dev_remove: enter\n");
 	pr_info(" dev_remove: Unregistering %s device...\n", dev->miscdev.name);
 	misc_deregister(&dev->miscdev);
+	// pr_info(" dev_remove: exit\n");
 	return 0;
 }
 // Called when the driver is removed.
