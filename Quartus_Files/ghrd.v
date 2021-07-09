@@ -141,15 +141,61 @@ module ghrd
 	// PID
 	wire			[7:0]		RPM_1,	RPM_2,	RPM_3,	RPM_4,	RPM_5,	RPM_6;
 	wire			[1:0]		DIR_1,	DIR_2,	DIR_3,	DIR_4,	DIR_5,	DIR_6;
-	wire			[16:0]	KP_1,		KP_2,		KP_3,		KP_4,		KP_5,		KP_6;
-	wire			[16:0]	KI_1,		KI_2,		KI_3,		KI_4,		KI_5,		KI_6;
-	wire			[16:0]	KD_1,		KD_2,		KD_3,		KD_4,		KD_5,		KD_6;
+	wire			[15:0]	KP_1,		KP_2,		KP_3,		KP_4,		KP_5,		KP_6;
+	wire			[15:0]	KI_1,		KI_2,		KI_3,		KI_4,		KI_5,		KI_6;
+	wire			[15:0]	KD_1,		KD_2,		KD_3,		KD_4,		KD_5,		KD_6;
 	// Enable
 	wire						En_1, En_2, En_3, En_4, En_5, En_6;
 	wire			[7:0]		RPM_Enable;
 	wire			[1:0]		Dir_Enable;
+	// Avalon Enable 
+	wire			[7:0]		motor_select;
+	wire			[7:0]		enable;
+	wire			[1:0]		state;
 	// ADC
 	wire			[11:0]	CH0, CH1, CH2, CH3, CH4, CH5, CH6, CH7, CH8, CH9, CH10, CH11, CH12;
+	// DIR signals
+	assign DIR_1 = 1'b1;
+	assign DIR_2 = 1'b1;
+	assign DIR_3 = 1'b1;
+	assign DIR_4 = 1'b1;
+	assign DIR_5 = 1'b1;
+	assign DIR_6 = 1'b1;
+	// KP signals
+	assign KP_1 = 16'd5;
+	assign KP_2 = 16'd5;
+	assign KP_3 = 16'd5;
+	assign KP_4 = 16'd5;
+	assign KP_5 = 16'd5;
+	assign KP_6 = 16'd5;
+	// KI signals
+	assign KI_1 = 16'd1;
+	assign KI_2 = 16'd1;
+	assign KI_3 = 16'd1;
+	assign KI_4 = 16'd1;
+	assign KI_5 = 16'd1;
+	assign KI_6 = 16'd1;
+	// KD signals
+	assign KD_1 = 16'd2;
+	assign KD_2 = 16'd2;
+	assign KD_3 = 16'd2;
+	assign KD_4 = 16'd2;
+	assign KD_5 = 16'd2;
+	assign KD_6 = 16'd2;
+	// CPR signals
+	assign CPR_1 = 16'd500;
+	assign CPR_2 = 16'd500;
+	assign CPR_3 = 16'd500;
+	assign CPR_4 = 16'd500;
+	assign CPR_5 = 16'd500;
+	assign CPR_6 = 16'd500;
+	// GH signals
+	assign GH_1 = 16'd192;
+	assign GH_2 = 16'd192;
+	assign GH_3 = 16'd192;
+	assign GH_4 = 16'd192;
+	assign GH_5 = 16'd192;
+	assign GH_6 = 16'd192;
 	//=======================================================
 	//  Structural coding
 	//=======================================================
@@ -223,155 +269,161 @@ module ghrd
 	soc_system u0
 	(
 		// Clock & Reset
-		.clk_clk											(FPGA_CLK1_50),				//	clk.clk
-		.reset_reset_n									(hps_fpga_reset_n),			//	reset.reset_n
+		.clk_clk												(FPGA_CLK1_50),				//	clk.clk
+		.reset_reset_n										(hps_fpga_reset_n),			//	reset.reset_n
 		// HPS ddr3
-		.memory_mem_a									(HPS_DDR3_ADDR),				//	memory.mem_a
-		.memory_mem_ba									(HPS_DDR3_BA),					//	.mem_ba
-		.memory_mem_ck									(HPS_DDR3_CK_P),				//	.mem_ck
-		.memory_mem_ck_n								(HPS_DDR3_CK_N),				//	.mem_ck_n
-		.memory_mem_cke								(HPS_DDR3_CKE),				//	.mem_cke
-		.memory_mem_cs_n								(HPS_DDR3_CS_N),				//	.mem_cs_n
-		.memory_mem_ras_n								(HPS_DDR3_RAS_N),				//	.mem_ras_n
-		.memory_mem_cas_n								(HPS_DDR3_CAS_N),				//	.mem_cas_n
-		.memory_mem_we_n								(HPS_DDR3_WE_N),				//	.mem_we_n
-		.memory_mem_reset_n							(HPS_DDR3_RESET_N),			//	.mem_reset_n
-		.memory_mem_dq									(HPS_DDR3_DQ),					//	.mem_dq
-		.memory_mem_dqs								(HPS_DDR3_DQS_P),				//	.mem_dqs
-		.memory_mem_dqs_n								(HPS_DDR3_DQS_N),				//	.mem_dqs_n
-		.memory_mem_odt								(HPS_DDR3_ODT),				//	.mem_odt
-		.memory_mem_dm									(HPS_DDR3_DM),					//	.mem_dm
-		.memory_oct_rzqin								(HPS_DDR3_RZQ),				//	.oct_rzqin                                  
+		.memory_mem_a										(HPS_DDR3_ADDR),				//	memory.mem_a
+		.memory_mem_ba										(HPS_DDR3_BA),					//	.mem_ba
+		.memory_mem_ck										(HPS_DDR3_CK_P),				//	.mem_ck
+		.memory_mem_ck_n									(HPS_DDR3_CK_N),				//	.mem_ck_n
+		.memory_mem_cke									(HPS_DDR3_CKE),				//	.mem_cke
+		.memory_mem_cs_n									(HPS_DDR3_CS_N),				//	.mem_cs_n
+		.memory_mem_ras_n									(HPS_DDR3_RAS_N),				//	.mem_ras_n
+		.memory_mem_cas_n									(HPS_DDR3_CAS_N),				//	.mem_cas_n
+		.memory_mem_we_n									(HPS_DDR3_WE_N),				//	.mem_we_n
+		.memory_mem_reset_n								(HPS_DDR3_RESET_N),			//	.mem_reset_n
+		.memory_mem_dq										(HPS_DDR3_DQ),					//	.mem_dq
+		.memory_mem_dqs									(HPS_DDR3_DQS_P),				//	.mem_dqs
+		.memory_mem_dqs_n									(HPS_DDR3_DQS_N),				//	.mem_dqs_n
+		.memory_mem_odt									(HPS_DDR3_ODT),				//	.mem_odt
+		.memory_mem_dm										(HPS_DDR3_DM),					//	.mem_dm
+		.memory_oct_rzqin									(HPS_DDR3_RZQ),				//	.oct_rzqin                                  
 		// HPS ethernet		
-		.hps_0_hps_io_hps_io_emac1_inst_TX_CLK	(HPS_ENET_GTX_CLK),			//	hps_0_hps_io.hps_io_emac1_inst_TX_CLK
-		.hps_0_hps_io_hps_io_emac1_inst_TXD0	(HPS_ENET_TX_DATA[0]),		//	.hps_io_emac1_inst_TXD0
-		.hps_0_hps_io_hps_io_emac1_inst_TXD1	(HPS_ENET_TX_DATA[1]),		//	.hps_io_emac1_inst_TXD1
-		.hps_0_hps_io_hps_io_emac1_inst_TXD2	(HPS_ENET_TX_DATA[2]),		//	.hps_io_emac1_inst_TXD2
-		.hps_0_hps_io_hps_io_emac1_inst_TXD3	(HPS_ENET_TX_DATA[3]),		//	.hps_io_emac1_inst_TXD3
-		.hps_0_hps_io_hps_io_emac1_inst_RXD0	(HPS_ENET_RX_DATA[0]),		//	.hps_io_emac1_inst_RXD0
-		.hps_0_hps_io_hps_io_emac1_inst_MDIO	(HPS_ENET_MDIO),				//	.hps_io_emac1_inst_MDIO
-		.hps_0_hps_io_hps_io_emac1_inst_MDC		(HPS_ENET_MDC),				//	.hps_io_emac1_inst_MDC
-		.hps_0_hps_io_hps_io_emac1_inst_RX_CTL	(HPS_ENET_RX_DV),				//	.hps_io_emac1_inst_RX_CTL
-		.hps_0_hps_io_hps_io_emac1_inst_TX_CTL	(HPS_ENET_TX_EN),				//	.hps_io_emac1_inst_TX_CTL
-		.hps_0_hps_io_hps_io_emac1_inst_RX_CLK	(HPS_ENET_RX_CLK),			//	.hps_io_emac1_inst_RX_CLK
-		.hps_0_hps_io_hps_io_emac1_inst_RXD1	(HPS_ENET_RX_DATA[1]),		//	.hps_io_emac1_inst_RXD1
-		.hps_0_hps_io_hps_io_emac1_inst_RXD2	(HPS_ENET_RX_DATA[2]),		//	.hps_io_emac1_inst_RXD2
-		.hps_0_hps_io_hps_io_emac1_inst_RXD3	(HPS_ENET_RX_DATA[3]),		//	.hps_io_emac1_inst_RXD3		  
+		.hps_0_hps_io_hps_io_emac1_inst_TX_CLK		(HPS_ENET_GTX_CLK),			//	hps_0_hps_io.hps_io_emac1_inst_TX_CLK
+		.hps_0_hps_io_hps_io_emac1_inst_TXD0		(HPS_ENET_TX_DATA[0]),		//	.hps_io_emac1_inst_TXD0
+		.hps_0_hps_io_hps_io_emac1_inst_TXD1		(HPS_ENET_TX_DATA[1]),		//	.hps_io_emac1_inst_TXD1
+		.hps_0_hps_io_hps_io_emac1_inst_TXD2		(HPS_ENET_TX_DATA[2]),		//	.hps_io_emac1_inst_TXD2
+		.hps_0_hps_io_hps_io_emac1_inst_TXD3		(HPS_ENET_TX_DATA[3]),		//	.hps_io_emac1_inst_TXD3
+		.hps_0_hps_io_hps_io_emac1_inst_RXD0		(HPS_ENET_RX_DATA[0]),		//	.hps_io_emac1_inst_RXD0
+		.hps_0_hps_io_hps_io_emac1_inst_MDIO		(HPS_ENET_MDIO),				//	.hps_io_emac1_inst_MDIO
+		.hps_0_hps_io_hps_io_emac1_inst_MDC			(HPS_ENET_MDC),				//	.hps_io_emac1_inst_MDC
+		.hps_0_hps_io_hps_io_emac1_inst_RX_CTL		(HPS_ENET_RX_DV),				//	.hps_io_emac1_inst_RX_CTL
+		.hps_0_hps_io_hps_io_emac1_inst_TX_CTL		(HPS_ENET_TX_EN),				//	.hps_io_emac1_inst_TX_CTL
+		.hps_0_hps_io_hps_io_emac1_inst_RX_CLK		(HPS_ENET_RX_CLK),			//	.hps_io_emac1_inst_RX_CLK
+		.hps_0_hps_io_hps_io_emac1_inst_RXD1		(HPS_ENET_RX_DATA[1]),		//	.hps_io_emac1_inst_RXD1
+		.hps_0_hps_io_hps_io_emac1_inst_RXD2		(HPS_ENET_RX_DATA[2]),		//	.hps_io_emac1_inst_RXD2
+		.hps_0_hps_io_hps_io_emac1_inst_RXD3		(HPS_ENET_RX_DATA[3]),		//	.hps_io_emac1_inst_RXD3		  
 		// HPS SD card 
-		.hps_0_hps_io_hps_io_sdio_inst_CMD		(HPS_SD_CMD),					//	.hps_io_sdio_inst_CMD
-		.hps_0_hps_io_hps_io_sdio_inst_D0		(HPS_SD_DATA[0]),				//	.hps_io_sdio_inst_D0
-		.hps_0_hps_io_hps_io_sdio_inst_D1		(HPS_SD_DATA[1]),				//	.hps_io_sdio_inst_D1
-		.hps_0_hps_io_hps_io_sdio_inst_CLK		(HPS_SD_CLK),					//	.hps_io_sdio_inst_CLK
-		.hps_0_hps_io_hps_io_sdio_inst_D2		(HPS_SD_DATA[2]),				//	.hps_io_sdio_inst_D2
-		.hps_0_hps_io_hps_io_sdio_inst_D3		(HPS_SD_DATA[3]),				//	.hps_io_sdio_inst_D3
+		.hps_0_hps_io_hps_io_sdio_inst_CMD			(HPS_SD_CMD),					//	.hps_io_sdio_inst_CMD
+		.hps_0_hps_io_hps_io_sdio_inst_D0			(HPS_SD_DATA[0]),				//	.hps_io_sdio_inst_D0
+		.hps_0_hps_io_hps_io_sdio_inst_D1			(HPS_SD_DATA[1]),				//	.hps_io_sdio_inst_D1
+		.hps_0_hps_io_hps_io_sdio_inst_CLK			(HPS_SD_CLK),					//	.hps_io_sdio_inst_CLK
+		.hps_0_hps_io_hps_io_sdio_inst_D2			(HPS_SD_DATA[2]),				//	.hps_io_sdio_inst_D2
+		.hps_0_hps_io_hps_io_sdio_inst_D3			(HPS_SD_DATA[3]),				//	.hps_io_sdio_inst_D3
 		// HPS USB 		  
-		.hps_0_hps_io_hps_io_usb1_inst_D0		(HPS_USB_DATA[0]),			//	.hps_io_usb1_inst_D0
-		.hps_0_hps_io_hps_io_usb1_inst_D1		(HPS_USB_DATA[1]),			//	.hps_io_usb1_inst_D1
-		.hps_0_hps_io_hps_io_usb1_inst_D2		(HPS_USB_DATA[2]),			//	.hps_io_usb1_inst_D2
-		.hps_0_hps_io_hps_io_usb1_inst_D3		(HPS_USB_DATA[3]),			//	.hps_io_usb1_inst_D3
-		.hps_0_hps_io_hps_io_usb1_inst_D4		(HPS_USB_DATA[4]),			//	.hps_io_usb1_inst_D4
-		.hps_0_hps_io_hps_io_usb1_inst_D5		(HPS_USB_DATA[5]),			//	.hps_io_usb1_inst_D5
-		.hps_0_hps_io_hps_io_usb1_inst_D6		(HPS_USB_DATA[6]),			//	.hps_io_usb1_inst_D6
-		.hps_0_hps_io_hps_io_usb1_inst_D7		(HPS_USB_DATA[7]),			//	.hps_io_usb1_inst_D7
-		.hps_0_hps_io_hps_io_usb1_inst_CLK		(HPS_USB_CLKOUT),				//	.hps_io_usb1_inst_CLK
-		.hps_0_hps_io_hps_io_usb1_inst_STP		(HPS_USB_STP),					//	.hps_io_usb1_inst_STP
-		.hps_0_hps_io_hps_io_usb1_inst_DIR		(HPS_USB_DIR),					//	.hps_io_usb1_inst_DIR
-		.hps_0_hps_io_hps_io_usb1_inst_NXT		(HPS_USB_NXT),					//	.hps_io_usb1_inst_NXT
+		.hps_0_hps_io_hps_io_usb1_inst_D0			(HPS_USB_DATA[0]),			//	.hps_io_usb1_inst_D0
+		.hps_0_hps_io_hps_io_usb1_inst_D1			(HPS_USB_DATA[1]),			//	.hps_io_usb1_inst_D1
+		.hps_0_hps_io_hps_io_usb1_inst_D2			(HPS_USB_DATA[2]),			//	.hps_io_usb1_inst_D2
+		.hps_0_hps_io_hps_io_usb1_inst_D3			(HPS_USB_DATA[3]),			//	.hps_io_usb1_inst_D3
+		.hps_0_hps_io_hps_io_usb1_inst_D4			(HPS_USB_DATA[4]),			//	.hps_io_usb1_inst_D4
+		.hps_0_hps_io_hps_io_usb1_inst_D5			(HPS_USB_DATA[5]),			//	.hps_io_usb1_inst_D5
+		.hps_0_hps_io_hps_io_usb1_inst_D6			(HPS_USB_DATA[6]),			//	.hps_io_usb1_inst_D6
+		.hps_0_hps_io_hps_io_usb1_inst_D7			(HPS_USB_DATA[7]),			//	.hps_io_usb1_inst_D7
+		.hps_0_hps_io_hps_io_usb1_inst_CLK			(HPS_USB_CLKOUT),				//	.hps_io_usb1_inst_CLK
+		.hps_0_hps_io_hps_io_usb1_inst_STP			(HPS_USB_STP),					//	.hps_io_usb1_inst_STP
+		.hps_0_hps_io_hps_io_usb1_inst_DIR			(HPS_USB_DIR),					//	.hps_io_usb1_inst_DIR
+		.hps_0_hps_io_hps_io_usb1_inst_NXT			(HPS_USB_NXT),					//	.hps_io_usb1_inst_NXT
 		// HPS SPI 		  
-		.hps_0_hps_io_hps_io_spim1_inst_CLK		(HPS_SPIM_CLK),				//	.hps_io_spim1_inst_CLK
-		.hps_0_hps_io_hps_io_spim1_inst_MOSI	(HPS_SPIM_MOSI),				//	.hps_io_spim1_inst_MOSI
-		.hps_0_hps_io_hps_io_spim1_inst_MISO	(HPS_SPIM_MISO),				//	.hps_io_spim1_inst_MISO
-		.hps_0_hps_io_hps_io_spim1_inst_SS0		(HPS_SPIM_SS),					//	.hps_io_spim1_inst_SS0
+		.hps_0_hps_io_hps_io_spim1_inst_CLK			(HPS_SPIM_CLK),				//	.hps_io_spim1_inst_CLK
+		.hps_0_hps_io_hps_io_spim1_inst_MOSI		(HPS_SPIM_MOSI),				//	.hps_io_spim1_inst_MOSI
+		.hps_0_hps_io_hps_io_spim1_inst_MISO		(HPS_SPIM_MISO),				//	.hps_io_spim1_inst_MISO
+		.hps_0_hps_io_hps_io_spim1_inst_SS0			(HPS_SPIM_SS),					//	.hps_io_spim1_inst_SS0
 		// HPS UART		
-		.hps_0_hps_io_hps_io_uart0_inst_RX		(HPS_UART_RX),					//	.hps_io_uart0_inst_RX
-		.hps_0_hps_io_hps_io_uart0_inst_TX		(HPS_UART_TX),					//	.hps_io_uart0_inst_TX
+		.hps_0_hps_io_hps_io_uart0_inst_RX			(HPS_UART_RX),					//	.hps_io_uart0_inst_RX
+		.hps_0_hps_io_hps_io_uart0_inst_TX			(HPS_UART_TX),					//	.hps_io_uart0_inst_TX
 		// HPS I2C1
-		.hps_0_hps_io_hps_io_i2c0_inst_SDA		(HPS_I2C0_SDAT),				//	.hps_io_i2c0_inst_SDA
-		.hps_0_hps_io_hps_io_i2c0_inst_SCL		(HPS_I2C0_SCLK),				//	.hps_io_i2c0_inst_SCL
+		.hps_0_hps_io_hps_io_i2c0_inst_SDA			(HPS_I2C0_SDAT),				//	.hps_io_i2c0_inst_SDA
+		.hps_0_hps_io_hps_io_i2c0_inst_SCL			(HPS_I2C0_SCLK),				//	.hps_io_i2c0_inst_SCL
 		// HPS I2C2
-		.hps_0_hps_io_hps_io_i2c1_inst_SDA		(HPS_I2C1_SDAT),				//	.hps_io_i2c1_inst_SDA
-		.hps_0_hps_io_hps_io_i2c1_inst_SCL		(HPS_I2C1_SCLK),				//	.hps_io_i2c1_inst_SCL
-		// GPIO 
-		.hps_0_hps_io_hps_io_gpio_inst_GPIO09  (HPS_CONV_USB_N),				//	.hps_io_gpio_inst_GPIO09
-		.hps_0_hps_io_hps_io_gpio_inst_GPIO35  (HPS_ENET_INT_N),				//	.hps_io_gpio_inst_GPIO35
-		.hps_0_hps_io_hps_io_gpio_inst_GPIO40  (HPS_LTC_GPIO),				//	.hps_io_gpio_inst_GPIO40
-		.hps_0_hps_io_hps_io_gpio_inst_GPIO53  (HPS_LED),						//	.hps_io_gpio_inst_GPIO53
-		.hps_0_hps_io_hps_io_gpio_inst_GPIO54  (HPS_KEY),						//	.hps_io_gpio_inst_GPIO54
-		.hps_0_hps_io_hps_io_gpio_inst_GPIO61  (HPS_GSENSOR_INT),			//	.hps_io_gpio_inst_GPIO61
+		.hps_0_hps_io_hps_io_i2c1_inst_SDA			(HPS_I2C1_SDAT),				//	.hps_io_i2c1_inst_SDA
+		.hps_0_hps_io_hps_io_i2c1_inst_SCL			(HPS_I2C1_SCLK),				//	.hps_io_i2c1_inst_SCL
+		// GPIO
+		.hps_0_hps_io_hps_io_gpio_inst_GPIO09  	(HPS_CONV_USB_N),				//	.hps_io_gpio_inst_GPIO09
+		.hps_0_hps_io_hps_io_gpio_inst_GPIO35  	(HPS_ENET_INT_N),				//	.hps_io_gpio_inst_GPIO35
+		.hps_0_hps_io_hps_io_gpio_inst_GPIO40  	(HPS_LTC_GPIO),				//	.hps_io_gpio_inst_GPIO40
+		.hps_0_hps_io_hps_io_gpio_inst_GPIO53  	(HPS_LED),						//	.hps_io_gpio_inst_GPIO53
+		.hps_0_hps_io_hps_io_gpio_inst_GPIO54  	(HPS_KEY),						//	.hps_io_gpio_inst_GPIO54
+		.hps_0_hps_io_hps_io_gpio_inst_GPIO61  	(HPS_GSENSOR_INT),			//	.hps_io_gpio_inst_GPIO61
 		// FPGA Partion
-		.hps_0_h2f_reset_reset_n					(hps_fpga_reset_n),			//	hps_0_h2f_reset.reset_n
-		.hps_0_f2h_cold_reset_req_reset_n		(~hps_cold_reset),			//	hps_0_f2h_cold_reset_req.reset_n
-		.hps_0_f2h_debug_reset_req_reset_n		(~hps_debug_reset),			//	hps_0_f2h_debug_reset_req.reset_n
-		.hps_0_f2h_stm_hw_events_stm_hwevents	(stm_hw_events),				//	hps_0_f2h_stm_hw_events.stm_hwevents
-		.hps_0_f2h_warm_reset_req_reset_n		(~hps_warm_reset),			//	hps_0_f2h_warm_reset_req.reset_n
+		.hps_0_h2f_reset_reset_n						(hps_fpga_reset_n),			//	hps_0_h2f_reset.reset_n
+		.hps_0_f2h_cold_reset_req_reset_n			(~hps_cold_reset),			//	hps_0_f2h_cold_reset_req.reset_n
+		.hps_0_f2h_debug_reset_req_reset_n			(~hps_debug_reset),			//	hps_0_f2h_debug_reset_req.reset_n
+		.hps_0_f2h_stm_hw_events_stm_hwevents		(stm_hw_events),				//	hps_0_f2h_stm_hw_events.stm_hwevents
+		.hps_0_f2h_warm_reset_req_reset_n			(~hps_warm_reset),			//	hps_0_f2h_warm_reset_req.reset_n
 		// User peripherals
-		.dipsw_pio_external_connection_export	(SW),								//	dipsw_pio_external_connection.export
-		.button_pio_external_connection_export	(fpga_debounced_buttons),	// button_pio_external_connection.export
+		//.dipsw_pio_external_connection_export	(SW),								//	dipsw_pio_external_connection.export
+		.button_pio_external_connection_export		(fpga_debounced_buttons),	// button_pio_external_connection.export
 		// Custom components
-		.avalon_leds_0_leds_new_signal			(fpga_led_internal),			//	custom_leds_0_leds.new_signal
+		.avalon_leds_0_leds_new_signal				(fpga_led_internal),			//	custom_leds_0_leds.new_signal
 		// Encoder signals
-		.avalon_encoder_0_count_new_signal     (Count_1),						//	avalon_encoder_0_count.new_signal
-		.avalon_encoder_1_count_new_signal     (Count_2),						//	avalon_encoder_1_count.new_signal
-		.avalon_encoder_2_count_new_signal     (Count_3),						//	avalon_encoder_2_count.new_signal
-		.avalon_encoder_3_count_new_signal     (Count_4),						//	avalon_encoder_3_count.new_signal
-		.avalon_encoder_4_count_new_signal     (Count_5),						//	avalon_encoder_4_count.new_signal
-		.avalon_encoder_5_count_new_signal     (Count_6),						//	avalon_encoder_5_count.new_signal
-		// PID signals
-		.avalon_control_0_rpm_new_signal			(RPM_1),							//	 avalon_control_0_rpm.new_signal
-		.avalon_control_0_pwm_new_signal			(PWM_Data_1),					//	 avalon_control_0_pwm.new_signal
-		.avalon_control_0_pid_new_signal			(KP_1),							//	 avalon_control_0_pid.new_signal
-		.avalon_control_0_pid_new_signal_1		(KI_1),							//	.new_signal_1
-		.avalon_control_0_pid_new_signal_2		(KD_1),							//	.new_signal_2
-		.avalon_control_0_dir_new_signal			(DIR_1),							//	 avalon_control_0_dir.new_signal
-		.avalon_control_1_rpm_new_signal			(RPM_2),							//	 avalon_control_1_rpm.new_signal
-		.avalon_control_1_pwm_new_signal			(PWM_Data_2),					//	 avalon_control_1_pwm.new_signal
-		.avalon_control_1_pid_new_signal			(KP_2),							//	 avalon_control_1_pid.new_signal
-		.avalon_control_1_pid_new_signal_1		(KI_2),							//	.new_signal_1
-		.avalon_control_1_pid_new_signal_2		(KD_2),							//	.new_signal_2
-		.avalon_control_1_dir_new_signal			(DIR_2),							//	 avalon_control_1_dir.new_signal
-		.avalon_control_2_rpm_new_signal			(RPM_3),							//	 avalon_control_2_rpm.new_signal
-		.avalon_control_2_pwm_new_signal			(PWM_Data_3),					//	 avalon_control_2_pwm.new_signal
-		.avalon_control_2_pid_new_signal			(KP_3),							//	 avalon_control_2_pid.new_signal
-		.avalon_control_2_pid_new_signal_1		(KI_3),							//	.new_signal_1
-		.avalon_control_2_pid_new_signal_2		(KD_3),							//	.new_signal_2
-		.avalon_control_2_dir_new_signal			(DIR_3),							//	 avalon_control_2_dir.new_signal
-		.avalon_control_3_rpm_new_signal			(RPM_4),							//	 avalon_control_3_rpm.new_signal
-		.avalon_control_3_pwm_new_signal			(PWM_Data_4),					//	 avalon_control_3_pwm.new_signal
-		.avalon_control_3_pid_new_signal			(KP_4),							//	 avalon_control_3_pid.new_signal
-		.avalon_control_3_pid_new_signal_1		(KI_4),							//	.new_signal_1
-		.avalon_control_3_pid_new_signal_2		(KD_4),							//	.new_signal_2
-		.avalon_control_3_dir_new_signal			(DIR_4),							//	 avalon_control_3_dir.new_signal
-		.avalon_control_4_rpm_new_signal			(RPM_5),							//	 avalon_control_4_rpm.new_signal
-		.avalon_control_4_pwm_new_signal			(PWM_Data_5),					//	 avalon_control_4_pwm.new_signal
-		.avalon_control_4_pid_new_signal			(KP_5),							//	 avalon_control_4_pid.new_signal
-		.avalon_control_4_pid_new_signal_1		(KI_5),							//	.new_signal_1
-		.avalon_control_4_pid_new_signal_2		(KD_5),							//	.new_signal_2
-		.avalon_control_4_dir_new_signal			(DIR_5),							//	 avalon_control_4_dir.new_signal
-		.avalon_control_5_rpm_new_signal			(RPM_6),							//	 avalon_control_5_rpm.new_signal
-		.avalon_control_5_pwm_new_signal			(PWM_Data_6),					//	 avalon_control_5_pwm.new_signal
-		.avalon_control_5_pid_new_signal			(KP_6),							//	 avalon_control_5_pid.new_signal
-		.avalon_control_5_pid_new_signal_1		(KI_6),							//	.new_signal_1
-		.avalon_control_5_pid_new_signal_2		(KD_6),							//	.new_signal_2
-		.avalon_control_5_dir_new_signal			(DIR_6),							//	 avalon_control_5_dir.new_signal
-		.avalon_rpm_0_rpm_new_signal           (RPM_Measured_1),				//	 avalon_rpm_0_rpm.new_signal
-		.avalon_rpm_0_cpr_new_signal           (CPR_1),							//	 avalon_rpm_0_cpr.new_signal
-		.avalon_rpm_0_gearhead_new_signal      (GH_1),							//	 avalon_rpm_0_gearhead.new_signal
-		.avalon_rpm_1_rpm_new_signal           (RPM_Measured_1),				//	 avalon_rpm_1_rpm.new_signal
-		.avalon_rpm_1_cpr_new_signal           (CPR_2),							//	 avalon_rpm_1_cpr.new_signal
-		.avalon_rpm_1_gearhead_new_signal      (GH_2),							//	 avalon_rpm_1_gearhead.new_signal
-		.avalon_rpm_2_rpm_new_signal           (RPM_Measured_2),				//	 avalon_rpm_2_rpm.new_signal
-		.avalon_rpm_2_cpr_new_signal           (CPR_3),							//	 avalon_rpm_2_cpr.new_signal
-		.avalon_rpm_2_gearhead_new_signal      (GH_3),							//	 avalon_rpm_2_gearhead.new_signal
-		.avalon_rpm_3_rpm_new_signal           (RPM_Measured_3),				//	 avalon_rpm_3_rpm.new_signal
-		.avalon_rpm_3_cpr_new_signal           (CPR_4),							//	 avalon_rpm_3_cpr.new_signal
-		.avalon_rpm_3_gearhead_new_signal      (GH_4),							//	 avalon_rpm_3_gearhead.new_signal
-		.avalon_rpm_4_rpm_new_signal           (RPM_Measured_4),				//	 avalon_rpm_4_rpm.new_signal
-		.avalon_rpm_4_cpr_new_signal           (CPR_5),							//	 avalon_rpm_4_cpr.new_signal
-		.avalon_rpm_4_gearhead_new_signal      (GH_5),							//	 avalon_rpm_4_gearhead.new_signal
-		.avalon_rpm_5_rpm_new_signal           (RPM_Measured_6),				//	 avalon_rpm_5_rpm.new_signal
-		.avalon_rpm_5_cpr_new_signal           (CPR_6),							//	 avalon_rpm_5_cpr.new_signal
-		.avalon_rpm_5_gearhead_new_signal      (GH_6)							//	 avalon_rpm_5_gearhead.new_signal
-	);		
+		.avalon_encoder_0_count_new_signal     	(Count_1),						//	avalon_encoder_0_count.new_signal
+		.avalon_encoder_1_count_new_signal     	(Count_2),						//	avalon_encoder_1_count.new_signal
+		.avalon_encoder_2_count_new_signal     	(Count_3),						//	avalon_encoder_2_count.new_signal
+		.avalon_encoder_3_count_new_signal     	(Count_4),						//	avalon_encoder_3_count.new_signal
+		.avalon_encoder_4_count_new_signal     	(Count_5),						//	avalon_encoder_4_count.new_signal
+		.avalon_encoder_5_count_new_signal     	(Count_6),						//	avalon_encoder_5_count.new_signal
+		// Control signals
+		.avalon_control_0_rpm_new_signal				(RPM_1),							//	 avalon_control_0_rpm.new_signal
+		.avalon_control_0_pwm_new_signal				(PWM_Data_1),					//	 avalon_control_0_pwm.new_signal
+		.avalon_control_0_pid_new_signal				(KP_1),							//	 avalon_control_0_pid.new_signal
+		.avalon_control_0_pid_new_signal_1			(KI_1),							//	.new_signal_1
+		.avalon_control_0_pid_new_signal_2			(KD_1),							//	.new_signal_2
+		.avalon_control_0_dir_new_signal				(DIR_1),							//	 avalon_control_0_dir.new_signal
+		.avalon_control_1_rpm_new_signal				(RPM_2),							//	 avalon_control_1_rpm.new_signal
+		.avalon_control_1_pwm_new_signal				(PWM_Data_2),					//	 avalon_control_1_pwm.new_signal
+		.avalon_control_1_pid_new_signal				(KP_2),							//	 avalon_control_1_pid.new_signal
+		.avalon_control_1_pid_new_signal_1			(KI_2),							//	.new_signal_1
+		.avalon_control_1_pid_new_signal_2			(KD_2),							//	.new_signal_2
+		.avalon_control_1_dir_new_signal				(DIR_2),							//	 avalon_control_1_dir.new_signal
+		.avalon_control_2_rpm_new_signal				(RPM_3),							//	 avalon_control_2_rpm.new_signal
+		.avalon_control_2_pwm_new_signal				(PWM_Data_3),					//	 avalon_control_2_pwm.new_signal
+		.avalon_control_2_pid_new_signal				(KP_3),							//	 avalon_control_2_pid.new_signal
+		.avalon_control_2_pid_new_signal_1			(KI_3),							//	.new_signal_1
+		.avalon_control_2_pid_new_signal_2			(KD_3),							//	.new_signal_2
+		.avalon_control_2_dir_new_signal				(DIR_3),							//	 avalon_control_2_dir.new_signal
+		.avalon_control_3_rpm_new_signal				(RPM_4),							//	 avalon_control_3_rpm.new_signal
+		.avalon_control_3_pwm_new_signal				(PWM_Data_4),					//	 avalon_control_3_pwm.new_signal
+		.avalon_control_3_pid_new_signal				(KP_4),							//	 avalon_control_3_pid.new_signal
+		.avalon_control_3_pid_new_signal_1			(KI_4),							//	.new_signal_1
+		.avalon_control_3_pid_new_signal_2			(KD_4),							//	.new_signal_2
+		.avalon_control_3_dir_new_signal				(DIR_4),							//	 avalon_control_3_dir.new_signal
+		.avalon_control_4_rpm_new_signal				(RPM_5),							//	 avalon_control_4_rpm.new_signal
+		.avalon_control_4_pwm_new_signal				(PWM_Data_5),					//	 avalon_control_4_pwm.new_signal
+		.avalon_control_4_pid_new_signal				(KP_5),							//	 avalon_control_4_pid.new_signal
+		.avalon_control_4_pid_new_signal_1			(KI_5),							//	.new_signal_1
+		.avalon_control_4_pid_new_signal_2			(KD_5),							//	.new_signal_2
+		.avalon_control_4_dir_new_signal				(DIR_5),							//	 avalon_control_4_dir.new_signal
+		.avalon_control_5_rpm_new_signal				(RPM_6),							//	 avalon_control_5_rpm.new_signal
+		.avalon_control_5_pwm_new_signal				(PWM_Data_6),					//	 avalon_control_5_pwm.new_signal
+		.avalon_control_5_pid_new_signal				(KP_6),							//	 avalon_control_5_pid.new_signal
+		.avalon_control_5_pid_new_signal_1			(KI_6),							//	.new_signal_1
+		.avalon_control_5_pid_new_signal_2			(KD_6),							//	.new_signal_2
+		.avalon_control_5_dir_new_signal				(DIR_6),							//	 avalon_control_5_dir.new_signal
+		// RPM signals
+		.avalon_rpm_0_rpm_new_signal           	(RPM_Measured_1),				//	 avalon_rpm_0_rpm.new_signal
+		.avalon_rpm_0_cpr_new_signal           	(CPR_1),							//	 avalon_rpm_0_cpr.new_signal
+		.avalon_rpm_0_gearhead_new_signal      	(GH_1),							//	 avalon_rpm_0_gearhead.new_signal
+		.avalon_rpm_1_rpm_new_signal           	(RPM_Measured_2),				//	 avalon_rpm_1_rpm.new_signal
+		.avalon_rpm_1_cpr_new_signal           	(CPR_2),							//	 avalon_rpm_1_cpr.new_signal
+		.avalon_rpm_1_gearhead_new_signal      	(GH_2),							//	 avalon_rpm_1_gearhead.new_signal
+		.avalon_rpm_2_rpm_new_signal           	(RPM_Measured_3),				//	 avalon_rpm_2_rpm.new_signal
+		.avalon_rpm_2_cpr_new_signal           	(CPR_3),							//	 avalon_rpm_2_cpr.new_signal
+		.avalon_rpm_2_gearhead_new_signal      	(GH_3),							//	 avalon_rpm_2_gearhead.new_signal
+		.avalon_rpm_3_rpm_new_signal           	(RPM_Measured_4),				//	 avalon_rpm_3_rpm.new_signal
+		.avalon_rpm_3_cpr_new_signal           	(CPR_4),							//	 avalon_rpm_3_cpr.new_signal
+		.avalon_rpm_3_gearhead_new_signal      	(GH_4),							//	 avalon_rpm_3_gearhead.new_signal
+		.avalon_rpm_4_rpm_new_signal           	(RPM_Measured_5),				//	 avalon_rpm_4_rpm.new_signal
+		.avalon_rpm_4_cpr_new_signal           	(CPR_5),							//	 avalon_rpm_4_cpr.new_signal
+		.avalon_rpm_4_gearhead_new_signal      	(GH_5),							//	 avalon_rpm_4_gearhead.new_signal
+		.avalon_rpm_5_rpm_new_signal           	(RPM_Measured_6),				//	 avalon_rpm_5_rpm.new_signal
+		.avalon_rpm_5_cpr_new_signal           	(CPR_6),							//	 avalon_rpm_5_cpr.new_signal
+		.avalon_rpm_5_gearhead_new_signal      	(GH_6),							//	 avalon_rpm_5_gearhead.new_signal
+		// Dip switch signals
+		.avalon_dipsw_0_dipsw_new_signal				(SW),								//	avalon_dipsw_0_dipsw.new_signal
+		.avalon_enable_0_motor_select_new_signal	(motor_select),				//	avalon_enable_0_motor_select.new_signal
+		.avalon_enable_0_enable_new_signal			(enable),						//	avalon_enable_0_enable.new_signal
+		.avalon_enable_0_state_new_signal			(state)							//	avalon_enable_0_state.new_signal
+	);
 	// ********** Custom Robocol modules **********
 	// --- Debouncers ---
 	// MOTOR 1
@@ -410,29 +462,39 @@ module ghrd
 	RPM RPM5(CLK_scaled, Count_5, RPM_Measured_5);
 	RPM RPM6(CLK_scaled, Count_6, RPM_Measured_6);
 	// --- PID ---
-	PID_Control PID_1(CLK_scaled, $signed($signed({8'b0,RPM_1})*$signed(DIR_1)),  RPM_Measured_1, GPIO_0[18], GPIO_0[19], PWM_Data_1);
-	PID_Control PID_2(CLK_scaled, $signed($signed({8'b0,RPM_2})*$signed(DIR_2)),  RPM_Measured_2, GPIO_0[20], GPIO_0[21], PWM_Data_2);
+	//PID_Control PID_1(CLK_scaled, $signed($signed({8'b0,RPM_1})*$signed(DIR_1)),  RPM_Measured_1, GPIO_0[18], GPIO_0[19], PWM_Data_1);
+	PID_Control PID_1(CLK_scaled, $signed($signed({8'b0,RPM_1})*$signed(DIR_1)),  RPM_Measured_1, ARDUINO_IO[2], ARDUINO_IO[4], PWM_Data_1);
+	//PID_Control PID_2(CLK_scaled, $signed($signed({8'b0,RPM_2})*$signed(DIR_2)),  RPM_Measured_2, GPIO_0[20], GPIO_0[21], PWM_Data_2);
+	PID_Control PID_2(CLK_scaled, $signed($signed({8'b0,RPM_2})*$signed(DIR_2)),  RPM_Measured_2, ARDUINO_IO[7], ARDUINO_IO[8], PWM_Data_2);
 	PID_Control PID_3(CLK_scaled, $signed($signed({8'b0,RPM_3})*$signed(DIR_3)),  RPM_Measured_3, GPIO_0[22], GPIO_0[23], PWM_Data_3);
 	PID_Control PID_4(CLK_scaled, $signed($signed({8'b0,RPM_4})*$signed(DIR_4)), -RPM_Measured_4, GPIO_0[24], GPIO_0[25], PWM_Data_4);
 	PID_Control PID_5(CLK_scaled, $signed($signed({8'b0,RPM_5})*$signed(DIR_5)), -RPM_Measured_5, GPIO_0[26], GPIO_0[27], PWM_Data_5);
 	PID_Control PID_6(CLK_scaled, $signed($signed({8'b0,RPM_6})*$signed(DIR_6)), -RPM_Measured_6, GPIO_0[28], GPIO_0[29], PWM_Data_6);
 	// --- PWM ---
-	PWM_Generator PWM_1(FPGA_CLK1_50, !KEY[0], PWM_Data_1, GPIO_0[12]);
-	PWM_Generator PWM_2(FPGA_CLK1_50, !KEY[0], PWM_Data_2, GPIO_0[13]);
+	//PWM_Generator PWM_1(FPGA_CLK1_50, !KEY[0], PWM_Data_1, GPIO_0[12]);
+	PWM_Generator PWM_1(FPGA_CLK1_50, !KEY[0], PWM_Data_1, ARDUINO_IO[9]);
+	//PWM_Generator PWM_2(FPGA_CLK1_50, !KEY[0], PWM_Data_2, GPIO_0[13]);
+	PWM_Generator PWM_2(FPGA_CLK1_50, !KEY[0], PWM_Data_2, ARDUINO_IO[10]);
 	PWM_Generator PWM_3(FPGA_CLK1_50, !KEY[0], PWM_Data_3, GPIO_0[14]);
 	PWM_Generator PWM_4(FPGA_CLK1_50, !KEY[0], PWM_Data_4, GPIO_0[15]);
 	PWM_Generator PWM_5(FPGA_CLK1_50, !KEY[0], PWM_Data_5, GPIO_0[16]);
 	PWM_Generator PWM_6(FPGA_CLK1_50, !KEY[0], PWM_Data_6, GPIO_0[17]);
 	// --- Motors Enable ---
-	Motors_Enable motors_enable(FPGA_CLK1_50, RPM_Enable, Dir_Enable, En_1, En_2, En_3, En_4, En_5, En_6);
+	Motors_Enable motors_enable(FPGA_CLK1_50, motor_select, state, En_1, En_2, En_3, En_4, En_5, En_6);
 	// --- Currents ---
 	ADC_Interface ADC_MODULE(FPGA_CLK1_50, ADC_CONVST, ADC_SCK, ADC_SDI, ADC_SDO, {GPIO_1[33], GPIO_1[31], GPIO_1[30]}, CH0, CH1, CH2, CH3, CH4, CH5, CH6, CH7, CH8, CH9, CH10, CH11, CH12);
+	
 	// ********** Custom Robocol assigns **********
 	// Enable signals assign to GPIO
-	assign GPIO_0[30] = En_1;
-	assign GPIO_0[31] = En_2;
-	assign GPIO_0[32] = En_3;
-	assign GPIO_0[33] = En_4;
-	assign GPIO_0[34] = En_5;
-	assign GPIO_0[35] = En_6;
+	//assign	GPIO_0[30]		=	En_1;
+	assign	ARDUINO_IO[6]	=	En_1;
+	//assign	GPIO_0[31]		=	En_2;
+	assign	ARDUINO_IO[12]	=	En_2;
+	assign	GPIO_0[32]		=	En_3;
+	assign	GPIO_0[33]		=	En_4;
+	assign	GPIO_0[34]		=	En_5;
+	assign	GPIO_0[35]		=	En_6;
+	// Avalon enable
+	assign	enable			=	{{2{1'b0}}, En_6, En_5, En_4, En_3, En_2, En_1};
+
 endmodule
