@@ -10,7 +10,6 @@
 // The start address and length of the Lightweight bridge
 #define HPS_TO_FPGA_LW_BASE 0xFF200000
 #define HPS_TO_FPGA_LW_SPAN 0x0020000
-
 int main(int argc, char ** argv)
 {
 	void * lw_bridge_map = 0;
