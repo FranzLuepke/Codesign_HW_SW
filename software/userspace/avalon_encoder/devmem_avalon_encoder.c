@@ -53,7 +53,7 @@ int main(int argc, char ** argv)
 	{
 		// Read encoders
 		encoder_0_value = (int) encoder_0_map[0];
-		encoder_1_value = (int) encoder_1_map[1];
+		encoder_1_value = (int) encoder_1_map[0];
 		encoder_2_value = (int) encoder_2_map[0];
 		encoder_3_value = (int) encoder_3_map[0];
 		encoder_4_value = (int) encoder_4_map[0];
