@@ -31,8 +31,8 @@ module avalon_encoder
 					if(avs_s0_read)
 						begin
 							case(avs_s0_address)
-								1'd0		:	returnvalue <= 32'h01010101;
-								default	:	returnvalue	<=	32'h0101010F;
+								1'd0		:	returnvalue <= count;
+								default	:	returnvalue	<=	32'd0;
 							endcase
 							if(waitFlag == 1)
 								begin

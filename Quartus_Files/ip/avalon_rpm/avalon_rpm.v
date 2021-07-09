@@ -23,7 +23,7 @@ module avalon_rpm
 				begin
 					case(avs_s0_address)
 						8'd0		:	avs_s0_readdata	=	{16'b0,rpm};
-						8'd1		:	avs_s0_readdata	=	{31'b0,cpr};
+						8'd1		:	avs_s0_readdata	=	{16'b0,cpr};
 						8'd2		:	avs_s0_readdata	=	{16'b0,gearhead};
 						default	:	avs_s0_readdata	=	32'b0;
 					endcase
